@@ -1,12 +1,17 @@
 import { Router } from "express";
-import { registerUser } from "../controllers/auth.controller.ts";
-import { loginUser } from "../controllers/auth.controller.ts";
+import { registerUser } from "../controllers/auth.controllers.ts";
+import { loginUser } from "../controllers/auth.controllers.ts";
 import { auth, adminOnly } from "../middlewares/auth.middleware.ts";
-import { getUsers, getUserById, updateUser, deleteUser } from "../controllers/user.controller.ts";
+import {
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "../controllers/user.controllers.ts";
 
 const router = Router();
 
-// Auth 
+// Auth
 router.post("/auth/login", loginUser);
 router.post("/auth/register", registerUser);
 

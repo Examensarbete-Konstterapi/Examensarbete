@@ -1,0 +1,39 @@
+import mongoose, { Schema, Document } from "mongoose";
+
+export interface ICourse extends Document {
+  title: string;
+  description: string;
+  category: string;
+  date: Date;
+  maxParticipants: number;
+}
+
+const CourseSchema = new Schema<ICourse>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+    },
+    maxParticipants: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
+export const CourseModel = mongoose.model<ICourse>("Course", CourseSchema);
