@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI as string);
+    await mongoose.connect(process.env.MONGO_URI as string, {
+    dbName: "konstterapiDatabase",
+  });
     console.log("MongoDB connected");
   } catch (error) {
     console.error(error);
