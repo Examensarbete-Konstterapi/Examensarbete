@@ -4,8 +4,7 @@ export interface ICourse extends Document {
   title: string;
   description: string;
   category: string;
-  date: Date;
-  maxParticipants: number;
+  price: number;
 }
 
 const CourseSchema = new Schema<ICourse>(
@@ -22,11 +21,7 @@ const CourseSchema = new Schema<ICourse>(
       type: String,
       required: true,
     },
-    date: {
-      type: Date,
-      required: true,
-    },
-    maxParticipants: {
+    price: {
       type: Number,
       required: true,
     },
