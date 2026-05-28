@@ -9,7 +9,7 @@ interface AuthUser {
   role: "admin" | "user";
 }
 
-interface AuthRequest extends Request {
+export interface AuthRequest extends Request {
   user?: AuthUser;
 }
 

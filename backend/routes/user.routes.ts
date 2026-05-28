@@ -1,12 +1,20 @@
 import { Router } from "express";
 import { registerUser } from "../controllers/auth.controller.ts";
 import { loginUser } from "../controllers/auth.controller.ts";
+import { auth, adminOnly } from "../middlewares/auth.middleware.ts";
+import { getUsers, getUserById, updateUser, deleteUser } from "../controllers/user.controller.ts";
 
 const router = Router();
 
+// Auth 
 router.post("/auth/login", loginUser);
 router.post("/auth/register", registerUser);
 
+// User
+router.get("/users", adminOnly, getUsers);
+router.get("/users/:id", auth, getUserById);
+router.put("/users/:id", auth, updateUser);
+router.delete("/users/:id", auth, deleteUser);
 // //Auth
 // router.post("/auth/register", registerUser);
 // router.post("/auth/register-admin", registerAdmin);
