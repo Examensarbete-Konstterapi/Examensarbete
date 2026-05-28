@@ -1,35 +1,45 @@
-import mongoose, {Schema, InferSchemaType} from "mongoose";
+import mongoose, { Schema, InferSchemaType, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
-const UserSchema = new Schema({
-  first_name: {
-    type: String,
-    required: true
-  },
-  last_name: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true,
-    minlength: 8
+export interface IUser extends Document {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  role: "admin" | "user";
+  comparePassword(candidate: string): Promise<boolean>;
+}
+
+const UserSchema = new Schema<IUser>(
+  {
+    first_name: {
+      type: String,
+      required: true,
     },
-  role: {
-    type: String,
-    enum: ["admin", "user"],
-    default: "user",
-    required: true
+    last_name: {
+      type: String,
+      required: true,
     },
-},
-    {
-    timestamps: true
-    }
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 8,
+    },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
 );
 
 UserSchema.pre("save", async function () {
@@ -40,12 +50,7 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.comparePassword = async function (candidate: string) {
-    return bcrypt.compare(candidate, this.password);
-}
+  return bcrypt.compare(candidate, this.password);
+};
 
-
-export type User = InferSchemaType<typeof UserSchema>;
-
-export const UserModel = mongoose.model("User", UserSchema);
-
-// export default mongoose.model("User", UserSchema);
+export const UserModel = mongoose.model<IUser>("User", UserSchema);
