@@ -88,7 +88,6 @@ export async function createCourse(req: Request, res: Response) {
   }
 }
 
-//Ska man kunna ändra datum och maxParticipants i en kurs? Eller ska det vara i sessionerna?
 export async function updateCourse(req: Request, res: Response) {
   try {
     const { id } = req.params;
@@ -114,7 +113,6 @@ export async function updateCourse(req: Request, res: Response) {
   }
 }
 
-//Bara kursen raderas nu, inte session
 export async function deleteCourse(req: Request, res: Response) {
   try {
     const { id } = req.params;
