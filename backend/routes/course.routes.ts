@@ -13,7 +13,6 @@ const router = Router();
 // Course
 router.get("/courses", getCourses);
 router.get("/courses/:id", getCourseById);
-// router.get("/courses/:id/participants", getCourseParticipantsCount);
 
 //Admin only
 router.post("/courses", auth, adminOnly, createCourse);
