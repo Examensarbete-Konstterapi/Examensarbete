@@ -3,6 +3,55 @@ import { CourseModel } from "../models/course.model.ts";
 import { SessionModel } from "../models/session.model.ts";
 import mongoose from "mongoose";
 
+export async function createSession(req: Request, res: Response) {
+  try {
+    const { courseId, date, maxParticipants } = req.body;
+
+    if (
+      !courseId ||
+      !date ||
+      maxParticipants === null ||
+      maxParticipants === undefined
+    ) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const course = await CourseModel.findById(courseId);
+
+    if (!course) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    const existingSession = await SessionModel.findOne({
+      courseId,
+      date,
+    });
+
+    if (existingSession) {
+      return res.status(400).json({
+        error: "A session for this course on the given date already exists",
+      });
+    }
+
+    if (maxParticipants < 1) {
+      return res.status(400).json({
+        error: "maxParticipants must be at least 1",
+      });
+    }
+
+    const newSession = await SessionModel.create({
+      courseId,
+      date,
+      maxParticipants,
+    });
+
+    res.status(201).json(newSession);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to create session" });
+  }
+}
+
 export async function getSessions(req: Request, res: Response) {
   try {
     const sessions = await SessionModel.find().populate("courseId", "title");
