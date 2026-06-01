@@ -79,15 +79,13 @@ export async function loginUser(req: Request, res: Response) {
       { expiresIn: "1h" },
     );
 
-    res
-      .status(200)
-      .json({
-        id: user._id,
-        name: `${user.first_name} ${user.last_name}`,
-        email: user.email,
-        role: user.role,
-        token,
-      });
+    res.status(200).json({
+      id: user._id,
+      name: `${user.first_name} ${user.last_name}`,
+      email: user.email,
+      role: user.role,
+      token,
+    });
   } catch (error) {
     res.status(500).json({ error: "Failed to login user" });
   }
