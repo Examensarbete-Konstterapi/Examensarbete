@@ -87,3 +87,50 @@ export async function createCourse(req: Request, res: Response) {
     res.status(500).json({ error: "Failed to create course" });
   }
 }
+
+//Ska man kunna ändra datum och maxParticipants i en kurs? Eller ska det vara i sessionerna?
+export async function updateCourse(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    const { title, description, category, price } = req.body;
+
+    if (!id || Array.isArray(id) || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid CourseID" });
+    }
+
+    const updatedCourse = await CourseModel.findByIdAndUpdate(
+      id,
+      { title, description, category, price },
+      { new: true },
+    );
+    if (!updatedCourse) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    res.json(updatedCourse);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update course" });
+  }
+}
+
+//Bara kursen raderas nu, inte session
+export async function deleteCourse(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+
+    if (!id || Array.isArray(id) || !mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid CourseID" });
+    }
+    const deleteCourse = await CourseModel.findByIdAndDelete(id);
+
+    if (!deleteCourse) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    res.json(deleteCourse);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete course" });
+  }
+}
