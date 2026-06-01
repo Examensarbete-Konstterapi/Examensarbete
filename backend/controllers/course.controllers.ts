@@ -122,13 +122,20 @@ export async function deleteCourse(req: Request, res: Response) {
     if (!id || Array.isArray(id) || !mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: "Invalid CourseID" });
     }
-    const deleteCourse = await CourseModel.findByIdAndDelete(id);
+    const deletedCourse = await CourseModel.findByIdAndDelete(id);
 
-    if (!deleteCourse) {
+    if (!deletedCourse) {
       return res.status(404).json({ error: "Course not found" });
     }
 
-    res.json(deleteCourse);
+    await SessionModel.deleteMany({
+      courseId: id,
+    });
+
+    res.json({
+      message: "Course and related sessions deleted",
+      course: deletedCourse,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to delete course" });
