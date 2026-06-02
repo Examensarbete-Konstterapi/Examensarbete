@@ -23,15 +23,15 @@ export default function Header() {
             height="3rem"
             viewBox="0 0 64 64"
             xmlns="http://www.w3.org/2000/svg"
-            stroke-width="3.2"
+            strokeWidth="3.2"
             stroke="#f4e8e1"
             fill="none"
           >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
               id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></g>
             <g id="SVGRepo_iconCarrier">
               <circle cx="32" cy="18.14" r="11.14"></circle>
