@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  position: fixed;
+  width: 100%;
+}
+
+.header nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.header > nav > button {
+  background-color: transparent;
+}

@@ -1,0 +1,16 @@
+.regular-button {
+  font-size: var(--font-md);
+  border: none;
+  border-radius: var(--radius-sm);
+  z-index: 1000;
+}
+
+.regular-button.md {
+  height: 4rem;
+  width: 30rem;
+}
+
+.regular-button.light {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
