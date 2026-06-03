@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../modal/Modal";
 import Login from "../../pages/login/Login";
+import Register from "../../pages/register/Register";
 import "./header.css";
 
 export default function Header() {
-  const [loginOpen, setLoginOpen] = useState(false);
+  const [modalType, setModalType] = useState<"login" | "register" | null>(null);
   return (
     <header className="header">
       <NavLink to="/">LOGGA</NavLink>
@@ -17,7 +18,7 @@ export default function Header() {
         <NavLink to="/priser">Priser</NavLink>
         <NavLink to="/kontakt">Kontakt</NavLink>
         {/* <NavLink to="/logga-in">Logga in</NavLink> */}
-        <button onClick={() => setLoginOpen(true)}>
+        <button onClick={() => setModalType("login")}>
           <svg
             width="3rem"
             height="3rem"
@@ -40,8 +41,13 @@ export default function Header() {
           </svg>
         </button>
 
-        <Modal isOpen={loginOpen} onClose={() => setLoginOpen(false)}>
-          <Login />
+        <Modal isOpen={modalType !== null} onClose={() => setModalType(null)}>
+          {modalType === "login" && (
+            <Login onSwitchToRegister={() => setModalType("register")}/>
+          )}
+          {modalType === "register" && (
+            <Register onSwitchToLogin={() => setModalType("login")} />
+          )}
         </Modal>
       </nav>
     </header>

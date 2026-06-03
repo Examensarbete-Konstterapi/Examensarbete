@@ -1,12 +1,23 @@
 import "./login.css";
 import RegularButton from "../../components/buttons/regularButton/RegularButton";
 
-export default function Login() {
+type LoginProps = {
+  onSwitchToRegister: () => void;
+}
+
+export default function Login({onSwitchToRegister}: LoginProps) {
   return (
     <section className="login">
       <h1>Logga in</h1>
       <p>
-        Är du ny på denna sida? <a href="/register">Registrera dig här</a>
+        Är du ny på denna sida? {" "} 
+        <RegularButton
+          type="button"
+          onClick={onSwitchToRegister}
+          label="Registrera dig här"
+          color="transparent"
+          size="xs"
+        />
       </p>
       <form>
         <label>

@@ -5,9 +5,25 @@
   z-index: 1000;
 }
 
+.regular-button.xs {
+  height: auto;
+  width: auto;
+  font-size: var(--font-sm);
+}
+
+.regular-button.sm {
+  height: 4rem;
+  width: 20rem;
+}
+
 .regular-button.md {
   height: 4rem;
   width: 30rem;
+}
+
+.regular-button.transparent {
+  background-color: transparent;
+  color: var(--color-secondary);
 }
 
 .regular-button.light {

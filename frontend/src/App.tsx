@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home.tsx";
 // import Login from "./pages/login/Login.tsx";
-import Register from "./pages/register/Register.tsx";
+// import Register from "./pages/register/Register.tsx";
 // import Layout from "./components/layout/Layout.tsx";
 import Header from "./components/header/Header.tsx";
 import Footer from "./components/footer/Footer.tsx";
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/logga-in" element={<Login />} /> */}
-          <Route path="/registera" element={<Register />} />
+          {/* <Route path="/registera" element={<Register />} /> */}
           <Route path="/om-mig" element={<About />} />
           <Route path="/konstterapi" element={<ArtTherapy />} />
           <Route path="/boka-tid" element={<Booking />} />

@@ -1,19 +1,39 @@
 import "./register.css";
 import RegularButton from "../../components/buttons/regularButton/RegularButton";
 
-export default function Register() {
+type RegisterProps = {
+  onSwitchToLogin: () => void;
+}
+
+export default function Register({ onSwitchToLogin }: RegisterProps) {
   return (
     <section className="register">
       <h1>Registrera dig</h1>
       <p>
-        Har du redan ett konto? <a href="/login">Logga in här</a>
+        Har du redan ett konto? {" "} 
+        <RegularButton
+          type="button"
+          onClick={onSwitchToLogin}
+          label="Logga in här"
+          color="transparent"
+          size="xs"
+        />
       </p>
       <form>
         <label>
-          E-post <input type="email" id="email" />
+          Förnamn* <input type="text" id="firstName" />
         </label>
         <label>
-          Lösenord <input type="password" id="password" />
+          Efternamn* <input type="text" id="lastName" />
+        </label>
+        <label>
+          E-post* <input type="email" id="email" />
+        </label>
+        <label>
+          Lösenord* <input type="password" id="password" />
+        </label>
+        <label>
+          Upprepa lösenord* <input type="password" id="password" />
         </label>
         <RegularButton
           onClick={() => {}}
