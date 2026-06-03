@@ -29,7 +29,7 @@ export default function Login({onSwitchToRegister}: LoginProps) {
         <RegularButton
           onClick={() => {}}
           label="Logga in"
-          color="light"
+          color="green"
           size="md"
         />
       </form>

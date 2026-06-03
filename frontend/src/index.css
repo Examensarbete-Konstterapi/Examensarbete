@@ -21,6 +21,8 @@ html {
   --color-bg: #FEF1EB;
   --color-green: #597059;
   --color-pink: #fcd0d7;
+  --color-error: #d32f2f;
+
 
 
 
@@ -32,10 +34,10 @@ html {
   
   --color-footer: #22532b;
   --color-white: #fff;
-  --color-error: #d32f2f;
   --color-success: #2e7d32;
 
   /* Fontsize */
+  --font-xs: 1.3rem;
   --font-sm: 1.6rem;
   --font-md: 2rem;
   --font-lg: 3rem;

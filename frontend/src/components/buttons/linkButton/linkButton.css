@@ -17,7 +17,7 @@
   width: 30rem;
 }
 
-.link-button.light {
+.link-button.green {
   background-color: var(--color-green);
   color: var(--color-primary);
 }

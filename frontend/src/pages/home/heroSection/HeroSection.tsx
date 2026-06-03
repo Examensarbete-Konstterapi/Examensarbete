@@ -5,7 +5,7 @@ export function HeroSection() {
   return (
     <section className="hero-section">
       <img
-        src="/public/hero.jpg"
+        src="/hero.jpg"
         alt="Hero Image"
         className="hero-image"
       />

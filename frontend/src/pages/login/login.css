@@ -24,5 +24,6 @@
   width: 30rem;
   font-size: var(--font-sm);
   border: none;
-  border-radius: var(--radius-sm);
+  border-bottom: 2px solid var(--color-green);
+  background-color: var(--color-secondary);
 }
