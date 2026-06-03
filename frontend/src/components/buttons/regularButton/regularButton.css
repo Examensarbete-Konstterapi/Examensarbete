@@ -23,10 +23,10 @@
 
 .regular-button.transparent {
   background-color: transparent;
-  color: var(--color-secondary);
+  color: var(--color-text);
 }
 
 .regular-button.light {
-  background-color: var(--color-secondary);
+  background-color: var(--color-green);
   color: var(--color-primary);
 }

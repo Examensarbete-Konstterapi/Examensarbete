@@ -3,10 +3,11 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-lg);
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
+  /* background-color: var(--color-primary); */
+  color: var(--color-green);
   position: fixed;
   width: 100%;
+  z-index: 10;
 }
 
 .header nav {

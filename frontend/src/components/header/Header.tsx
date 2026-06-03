@@ -25,7 +25,7 @@ export default function Header() {
             viewBox="0 0 64 64"
             xmlns="http://www.w3.org/2000/svg"
             strokeWidth="3.2"
-            stroke="#f4e8e1"
+            stroke="#597059"
             fill="none"
           >
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

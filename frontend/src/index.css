@@ -10,12 +10,27 @@ html {
 }
 
 :root {
-  --font-family: "Inter", sans-serif;
+  --font-family-primary: "Inter", sans-serif;
+  --font-family-secondary: "Caveat", cursive;
   /* colors */
-  --color-primary: #a53860;
-  --color-secondary: #f4e8e1;
+  /* --color-primary: #DEDBD2; */
+  /* --color-primary: #ACC3AE; */
+  /* --color-primary: #E1C0C8; */
+  /* --color-secondary: #4A5759; */
+  /* --color-secondary: #566257; */
+  --color-bg: #FEF1EB;
+  --color-green: #597059;
+  --color-pink: #fcd0d7;
+
+
+
+
+  /* Pallete */
+  --color-two: #FEE2E8;
+  --color-four: #FBF2F5;
+  --color-primary: #FBE7E6;
+  
   --color-footer: #22532b;
-  --color-text: rgb(0, 0, 0);
   --color-white: #fff;
   --color-error: #d32f2f;
   --color-success: #2e7d32;
@@ -51,10 +66,10 @@ html {
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-family-primary);
   font-size: var(--font-sm);
   color: var(--color-text);
-  background: var(--color-secondary);
+  background: var(--color-bg);
 }
 
 h1 {

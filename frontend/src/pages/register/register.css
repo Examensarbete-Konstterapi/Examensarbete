@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
   color: var(--color-secondary);
 }
 
@@ -24,5 +24,7 @@
   width: 30rem;
   font-size: var(--font-sm);
   border: none;
-  border-radius: var(--radius-sm);
+  border-bottom: 2px solid var(--color-green);
+  /* border-radius: var(--radius-sm); */
+  background-color: var(--color-secondary);
 }

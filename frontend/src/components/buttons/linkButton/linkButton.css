@@ -18,6 +18,6 @@
 }
 
 .link-button.light {
-  background-color: var(--color-secondary);
+  background-color: var(--color-green);
   color: var(--color-primary);
 }

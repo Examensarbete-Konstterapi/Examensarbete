@@ -5,7 +5,18 @@
   justify-content: center;
   height: 100vh;
   background-color: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--color-green);
+  position: relative;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* opacity: 0.5; */
 }
 
 .hero-section div {
@@ -15,6 +26,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-md);
+  z-index: 1;
 }
 
 .hero-section h1 {
@@ -22,5 +34,6 @@
 }
 
 .hero-section p {
-  font-size: var(--font-md);
+  font-size: var(--font-lg);
+  font-family: var(--font-family-secondary);
 }
