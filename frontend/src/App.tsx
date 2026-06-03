@@ -11,7 +11,7 @@ import { Booking } from "./pages/booking/Booking.tsx";
 import { Gallery } from "./pages/gallery/Gallery.tsx";
 import { Prices } from "./pages/prices/Prices.tsx";
 import { Contact } from "./pages/contact/Contact.tsx";
-import { MyPages } from "./pages/dashboard/user/myPages.tsx";
+import { MyPages } from "./pages/dashboard/user/MyPages.tsx";
 
 function App() {
   return (

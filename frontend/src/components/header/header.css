@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-lg);
-  /* background-color: var(--color-primary); */
   color: var(--color-green);
   position: fixed;
   width: 100%;
@@ -14,6 +13,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-lg);
+  font-size: var(--font-sm);
 }
 
 .header > nav > button {

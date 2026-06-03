@@ -1,7 +1,7 @@
 .regular-button {
   font-size: var(--font-md);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   z-index: 1000;
 }
 
@@ -9,7 +9,7 @@
   height: auto;
   width: auto;
   font-size: var(--font-sm);
-  padding: 3px 8px;
+  padding: 5px 10px;
 }
 
 .regular-button.xs {
