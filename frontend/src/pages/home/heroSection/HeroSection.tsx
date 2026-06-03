@@ -4,21 +4,16 @@ import LinkButton from "../../../components/buttons/linkButton/LinkButton";
 export function HeroSection() {
   return (
     <section className="hero-section">
-      <img
-        src="/hero.jpg"
-        alt="Hero Image"
-        className="hero-image"
-      />
+      <img src="/hero.jpg" alt="Hero Image" className="hero-image" />
       <div>
         <h1>Jessickas konstterapi</h1>
-        <p>
-          Kreativitet som läkande kraft
-        </p>
+        <p>Kreativitet som läkande kraft</p>
         <LinkButton
           href="/boka-tid"
           label="Boka en session"
-          color="light"
-          size="sm" />
+          color="green"
+          size="sm"
+        />
       </div>
     </section>
   );
