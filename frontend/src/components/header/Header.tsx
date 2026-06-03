@@ -4,6 +4,7 @@ import Modal from "../modal/Modal";
 import Login from "../../pages/login/Login";
 import Register from "../../pages/register/Register";
 import "./header.css";
+import RegularButton from "../buttons/regularButton/RegularButton";
 
 export default function Header() {
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
@@ -29,12 +30,19 @@ export default function Header() {
         {/* Kanske ha en knapp som öppnar en modal här */}
         {token && (
           <>
-            <NavLink to="/mina-bokningar">Mina bokningar</NavLink>
-            <NavLink to="/profil">Min profil</NavLink>
+            <NavLink to="/mina-sidor">Mina sidor</NavLink>
+            {/* <NavLink to="/profil">Min profil</NavLink> */}
           </>
         )}
         {token ? (
-          <button onClick={logout}>ut</button>
+          // <button onClick={logout}>ut</button>
+          <RegularButton
+            onClick={logout}
+            label="Andréa Stålstierna"
+            size="xxs"
+            color="green"
+            type="button"
+          />
         ) : (
           <button onClick={() => setModalType("login")}>
             <svg
