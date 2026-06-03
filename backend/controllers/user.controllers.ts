@@ -36,7 +36,7 @@ export async function getUserById(req: Request, res: Response) {
 export async function updateUser(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const { first_name, last_name, email } = req.body;
+    const { firstName, lastName, email } = req.body;
 
     if (!id || Array.isArray(id) || !mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: "Invalid UserID" });
@@ -44,8 +44,8 @@ export async function updateUser(req: Request, res: Response) {
 
     const updateData: any = {};
 
-    if (first_name) updateData.first_name = first_name;
-    if (last_name) updateData.last_name = last_name;
+    if (firstName) updateData.firstName = firstName;
+    if (lastName) updateData.lastName = lastName;
     if (email) updateData.email = email;
 
     if (Object.keys(updateData).length === 0) {
