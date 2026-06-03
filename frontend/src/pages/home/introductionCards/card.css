@@ -1,0 +1,20 @@
+.introduction-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 5rem 2.5rem;
+  text-align: center;
+  width: 350px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.introduction-card .icon {
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}

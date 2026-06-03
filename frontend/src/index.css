@@ -18,20 +18,17 @@ html {
   /* --color-primary: #E1C0C8; */
   /* --color-secondary: #4A5759; */
   /* --color-secondary: #566257; */
-  --color-bg: #FEF1EB;
+  --color-bg: #fef1eb;
   --color-green: #597059;
   --color-pink: #fcd0d7;
   --color-error: #d32f2f;
 
-
-
-
-
   /* Pallete */
-  --color-two: #FEE2E8;
-  --color-four: #FBF2F5;
-  --color-primary: #FBE7E6;
-  
+  --color-two: #fee2e8;
+  --color-three: #fff9f6;
+  --color-four: #fbf2f5;
+  --color-primary: #fbe7e6;
+
   --color-footer: #22532b;
   --color-white: #fff;
   --color-success: #2e7d32;
