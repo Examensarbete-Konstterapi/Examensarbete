@@ -27,3 +27,8 @@
   border-bottom: 2px solid var(--color-green);
   background-color: var(--color-secondary);
 }
+
+.login form span {
+  color: var(--color-error);
+  font-size: var(--font-xs);
+}
