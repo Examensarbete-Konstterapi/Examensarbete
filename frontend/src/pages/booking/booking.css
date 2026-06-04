@@ -31,7 +31,7 @@
 .booking-content .steps {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
 }
 
 .booking-content .step {
@@ -71,6 +71,10 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+}
+
+.booking-form-text {
+  margin-bottom: var(--spacing-sm);
 }
 
 .booking-form label {

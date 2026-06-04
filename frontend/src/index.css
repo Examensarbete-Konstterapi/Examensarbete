@@ -41,7 +41,7 @@ html {
   --font-sm: 1.6rem;
   --font-md: 2rem;
   --font-lg: 3rem;
-  --font-xl: 4.8rem;
+  --font-xl: 5rem;
 
   /* Spacing */
   --spacing-xs: 1rem;
@@ -83,9 +83,14 @@ h1 {
 h2 {
   font-size: var(--font-lg);
   font-weight: 500;
+  color: var(--color-green);
+  margin-bottom: var(--spacing-xs);
 }
 
 h3 {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--color-green);
   margin-bottom: var(--spacing-xs);
 }
 

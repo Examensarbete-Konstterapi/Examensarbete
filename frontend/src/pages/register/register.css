@@ -4,6 +4,7 @@
   align-items: center;
   /* background-color: var(--color-primary); */
   color: var(--color-secondary);
+  gap: var(--spacing-sm);
 }
 
 .register form {
@@ -28,7 +29,13 @@
   background-color: var(--color-secondary);
 }
 
-.register form span{
+.register form span {
   color: var(--color-error);
   font-size: var(--font-xs);
+}
+
+.spinner-container {
+  display: "flex";
+  justify-content: "center";
+  padding: "1rem";
 }

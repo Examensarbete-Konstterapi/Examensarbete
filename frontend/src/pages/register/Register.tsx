@@ -4,6 +4,8 @@ import API from "../../api/axios";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Spinner from "../../components/spinner/Spinner";
 
 type RegisterForm = {
   firstName: string;
@@ -15,11 +17,15 @@ type RegisterForm = {
 
 type RegisterProps = {
   onSwitchToLogin: () => void;
+  onClose: () => void;
 };
 
-export default function Register({ onSwitchToLogin }: RegisterProps) {
+export default function Register({ onSwitchToLogin, onClose }: RegisterProps) {
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -30,6 +36,8 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
   const password = watch("password");
 
   async function onSubmit(data: RegisterForm) {
+    setIsLoading(true);
+    setErrorMessage("");
     try {
       const response = await API.post("/auth/register", {
         firstName: data.firstName,
@@ -52,17 +60,24 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
 
+      if (onClose) onClose();
+
       navigate("/mina-sidor");
 
       console.log(response.data);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      const errorMsg =
+        error.response?.data?.message || "Registrering misslyckades";
+      setErrorMessage(errorMsg);
+      console.error("Register error:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <section className="register">
-      <h1>Registrera dig</h1>
+      <h2>Registrera dig</h2>
       <p>
         Har du redan ett konto?{" "}
         <RegularButton
@@ -73,6 +88,13 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
           size="xs"
         />
       </p>
+
+      {errorMessage && (
+        <div style={{ color: "red", marginBottom: "1rem", fontWeight: "bold" }}>
+          {errorMessage}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Förnamn*
@@ -141,12 +163,18 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
             <span>{errors.confirmPassword.message}</span>
           )}
         </label>
-        <RegularButton
-          label="Registera"
-          color="green"
-          size="md"
-          type="submit"
-        />
+        {isLoading ? (
+          <div className="spinner-container">
+            <Spinner size="md" />
+          </div>
+        ) : (
+          <RegularButton
+            label="Logga in"
+            color="green"
+            size="md"
+            type="submit"
+          />
+        )}
       </form>
     </section>
   );

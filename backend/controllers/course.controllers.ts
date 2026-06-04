@@ -48,14 +48,22 @@ export async function getCourseById(req: Request, res: Response) {
 
 export async function createCourse(req: Request, res: Response) {
   try {
-    const { title, description, category, date, price, maxParticipants } =
-      req.body;
+    const {
+      title,
+      description,
+      category,
+      date,
+      startTime,
+      price,
+      maxParticipants,
+    } = req.body;
 
     if (
       !title ||
       !description ||
       !category ||
       !date ||
+      !startTime ||
       !price ||
       !maxParticipants
     ) {
@@ -73,6 +81,7 @@ export async function createCourse(req: Request, res: Response) {
     const sessions = date.map((date: string) => ({
       courseId: newCourse._id,
       date,
+      startTime,
       maxParticipants,
     }));
 

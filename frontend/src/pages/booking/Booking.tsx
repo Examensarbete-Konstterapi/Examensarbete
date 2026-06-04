@@ -12,11 +12,14 @@ import { useForm } from "react-hook-form";
 type BookingForm = {
   courseId: string;
   sessionId: string;
+  date: string;
+  message: string;
 };
 
 type Session = {
   _id: string;
   date: string;
+  startTime: string;
   courseId: {
     _id: string;
     title: string;
@@ -37,6 +40,7 @@ export function Booking() {
   } = useForm<BookingForm>();
 
   const selectedCourseId = watch("courseId");
+  const selectedDate = watch("date");
 
   useEffect(() => {
     async function fetchSessions() {
@@ -59,6 +63,7 @@ export function Booking() {
         "/bookings",
         {
           sessionId: data.sessionId,
+          message: data.message,
         },
         {
           headers: {
@@ -80,8 +85,26 @@ export function Booking() {
     ).values(),
   );
 
-  const filteredSessions = sessions.filter(
+  // const filteredSessions = sessions.filter(
+  //   (session) => session.courseId._id === selectedCourseId,
+  // );
+
+  const filteredDates = sessions.filter(
     (session) => session.courseId._id === selectedCourseId,
+  );
+
+  const uniqueDates = [
+    ...new Set(
+      filteredDates.map((session) =>
+        new Date(session.date).toLocaleDateString("sv-SE"),
+      ),
+    ),
+  ];
+
+  const filteredTimes = sessions.filter(
+    (session) =>
+      session.courseId._id === selectedCourseId &&
+      new Date(session.date).toLocaleDateString("sv-SE") === selectedDate,
   );
 
   return (
@@ -133,12 +156,14 @@ export function Booking() {
             <div className="booking-forms">
               {!token ? (
                 <form className="booking-form">
-                  <h2>Boka tid</h2>
-                  <p>För att boka en tid behöver du vara inloggad.</p>
-                  <p>
-                    Har du inget konto ännu? Registrera dig gratis för att kunna
-                    boka och hantera dina tider.
-                  </p>
+                  <h2>Logga in</h2>
+                  <div className="booking-form-text">
+                    <p>För att boka en tid behöver du vara inloggad.</p>
+                    <p>
+                      Har du inget konto ännu? Registrera dig gratis för att
+                      kunna boka och hantera dina tider.
+                    </p>
+                  </div>
                   <div className="buttons">
                     <RegularButton
                       label="Logga in"
@@ -182,15 +207,34 @@ export function Booking() {
                   <label>
                     Välj datum
                     <select
-                      {...register("sessionId", {
+                      {...register("date", {
                         required: "Välj datum",
                       })}
                     >
                       <option value="">Välj datum</option>
 
-                      {filteredSessions.map((session) => (
+                      {uniqueDates.map((date) => (
+                        <option key={date} value={date}>
+                          {date}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.sessionId && (
+                      <span>{errors.sessionId.message}</span>
+                    )}
+                  </label>
+                  <label>
+                    Välj tid
+                    <select
+                      {...register("sessionId", {
+                        required: "Välj tid",
+                      })}
+                    >
+                      <option value="">Välj tid</option>
+
+                      {filteredTimes.map((session) => (
                         <option key={session._id} value={session._id}>
-                          {new Date(session.date).toLocaleDateString("sv-SE")}
+                          {session.startTime}
                         </option>
                       ))}
                     </select>
@@ -199,14 +243,10 @@ export function Booking() {
                     )}
                   </label>
 
-                  {/* <label>
-                  Meddelande
-                  <textarea
-                    name="message"
-                    rows={4}
-                   
-                  />
-                </label> */}
+                  <label>
+                    Meddelande
+                    <textarea rows={4} {...register("message")} />
+                  </label>
 
                   <RegularButton
                     onClick={() => {}}
@@ -222,11 +262,17 @@ export function Booking() {
         </main>
         <Modal isOpen={modalType !== null} onClose={() => setModalType(null)}>
           {modalType === "login" && (
-            <Login onSwitchToRegister={() => setModalType("register")} />
+            <Login
+              onSwitchToRegister={() => setModalType("register")}
+              onClose={() => setModalType(null)}
+            />
           )}
 
           {modalType === "register" && (
-            <Register onSwitchToLogin={() => setModalType("login")} />
+            <Register
+              onSwitchToLogin={() => setModalType("login")}
+              onClose={() => setModalType(null)}
+            />
           )}
         </Modal>
       </Layout>

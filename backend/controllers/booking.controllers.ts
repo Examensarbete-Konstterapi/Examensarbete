@@ -72,7 +72,7 @@ export async function getUserBookings(req: AuthRequest, res: Response) {
 
 export async function createBooking(req: AuthRequest, res: Response) {
   try {
-    const { sessionId } = req.body;
+    const { sessionId, message } = req.body;
 
     if (
       !sessionId ||
@@ -106,6 +106,7 @@ export async function createBooking(req: AuthRequest, res: Response) {
     const booking = await BookingModel.create({
       sessionId,
       userId: req.user!.id,
+      message,
     });
 
     const populatedBooking = await booking.populate([

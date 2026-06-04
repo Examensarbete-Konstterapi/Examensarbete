@@ -5,11 +5,12 @@ import mongoose from "mongoose";
 
 export async function createSession(req: Request, res: Response) {
   try {
-    const { courseId, date, maxParticipants } = req.body;
+    const { courseId, date, startTime, maxParticipants } = req.body;
 
     if (
       !courseId ||
       !date ||
+      !startTime ||
       maxParticipants === null ||
       maxParticipants === undefined
     ) {
@@ -25,6 +26,7 @@ export async function createSession(req: Request, res: Response) {
     const existingSession = await SessionModel.findOne({
       courseId,
       date,
+      startTime,
     });
 
     if (existingSession) {
@@ -42,6 +44,7 @@ export async function createSession(req: Request, res: Response) {
     const newSession = await SessionModel.create({
       courseId,
       date,
+      startTime,
       maxParticipants,
     });
 
@@ -90,7 +93,7 @@ export async function getSessionById(req: Request, res: Response) {
 export async function updateSession(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const { date, maxParticipants } = req.body;
+    const { date, startTime, maxParticipants } = req.body;
 
     if (!id || Array.isArray(id) || !mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: "Invalid SessionID" });
@@ -98,7 +101,7 @@ export async function updateSession(req: Request, res: Response) {
 
     const updatedSession = await SessionModel.findByIdAndUpdate(
       id,
-      { date, maxParticipants },
+      { date, maxParticipants, startTime },
       { new: true },
     );
     if (!updatedSession) {

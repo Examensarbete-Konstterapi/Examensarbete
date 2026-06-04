@@ -4,6 +4,8 @@ import API from "../../api/axios";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Spinner from "../../components/spinner/Spinner";
 
 type LoginForm = {
   email: string;
@@ -12,11 +14,14 @@ type LoginForm = {
 
 type LoginProps = {
   onSwitchToRegister: () => void;
+  onClose?: () => void;
 };
 
-export default function Login({ onSwitchToRegister }: LoginProps) {
+export default function Login({ onSwitchToRegister, onClose }: LoginProps) {
   const navigate = useNavigate();
   const { setUser } = useAuth();
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,6 +29,8 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
   } = useForm<LoginForm>();
 
   async function onSubmit(data: LoginForm) {
+    setIsLoading(true);
+    setErrorMessage("");
     try {
       const response = await API.post("/auth/login", {
         email: data.email,
@@ -34,8 +41,8 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
 
       const userData = {
         id: response.data.id,
-        firstName: response.data.firstName.split(" ")[0],
-        lastName: response.data.lastName.split(" ")[1],
+        firstName: response.data.name.split(" ")[0],
+        lastName: response.data.name.split(" ")[1],
         email: response.data.email,
         role: response.data.role,
       };
@@ -43,17 +50,23 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
 
+      if (onClose) onClose();
+
       navigate("/mina-sidor");
 
       console.log(response.data);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      const errorMsg = error.response?.data?.error || "Inloggning misslyckades";
+      setErrorMessage(errorMsg);
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
   return (
     <section className="login">
-      <h1>Logga in</h1>
+      <h2>Logga in</h2>
       <p>
         Är du ny på denna sida?{" "}
         <RegularButton
@@ -64,6 +77,13 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
           size="xs"
         />
       </p>
+
+      {errorMessage && (
+        <div style={{ color: "red", marginBottom: "1rem", fontWeight: "bold" }}>
+          {errorMessage}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           E-post
@@ -91,7 +111,18 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
           />
           {errors.password && <span>{errors.password.message}</span>}
         </label>
-        <RegularButton label="Logga in" color="green" size="md" type="submit" />
+        {isLoading ? (
+          <div className="spinner-container">
+            <Spinner size="md" />
+          </div>
+        ) : (
+          <RegularButton
+            label="Logga in"
+            color="green"
+            size="md"
+            type="submit"
+          />
+        )}
       </form>
     </section>
   );
