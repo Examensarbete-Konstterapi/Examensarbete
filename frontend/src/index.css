@@ -23,6 +23,9 @@ html {
   --color-pink: #fcd0d7;
   --color-error: #d32f2f;
 
+  --color-green-transparent: rgba(187, 200, 187, 0.15);
+  --color-pink-transparent: rgba(225, 192, 200, 0.15);
+
   /* Pallete */
   --color-two: #fee2e8;
   --color-three: #fff9f6;
@@ -41,11 +44,11 @@ html {
   --font-xl: 4.8rem;
 
   /* Spacing */
-  --spacing-xs: 0.4rem;
-  --spacing-sm: 0.8rem;
-  --spacing-md: 1.6rem;
-  --spacing-lg: 2.4rem;
-  --spacing-xl: 3.2rem;
+  --spacing-xs: 1rem;
+  --spacing-sm: 1.5rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 3rem;
 
   /* Border radius */
   --radius-sm: 0.8rem;
@@ -74,12 +77,16 @@ body {
 h1 {
   font-size: var(--font-xl);
   font-weight: 500;
-  /* margin-bottom: var(--spacing-sm); */
+  margin-bottom: var(--spacing-xs);
 }
 
 h2 {
   font-size: var(--font-lg);
   font-weight: 500;
+}
+
+h3 {
+  margin-bottom: var(--spacing-xs);
 }
 
 p {

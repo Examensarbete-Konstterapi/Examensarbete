@@ -1,7 +1,7 @@
 import "./regularButton.css";
 
 type RegularButtonProps = {
-  onClick: () => void;
+  onClick?: () => void;
   label: string;
   color: string;
   size: string;
@@ -16,7 +16,11 @@ export default function RegularButton({
   type,
 }: RegularButtonProps) {
   return (
-    <button className={`regular-button ${color} ${size}`} onClick={onClick} type={type}>
+    <button
+      className={`regular-button ${color} ${size}`}
+      onClick={onClick}
+      type={type}
+    >
       {label}
     </button>
   );

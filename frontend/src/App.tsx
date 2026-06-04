@@ -12,28 +12,31 @@ import { Gallery } from "./pages/gallery/Gallery.tsx";
 import { Prices } from "./pages/prices/Prices.tsx";
 import { Contact } from "./pages/contact/Contact.tsx";
 import { MyPages } from "./pages/dashboard/user/MyPages.tsx";
+import { AuthProvider } from "./context/AuthProvider.tsx";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        {/* <Layout> */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/logga-in" element={<Login />} /> */}
-          {/* <Route path="/registera" element={<Register />} /> */}
-          <Route path="/om-mig" element={<About />} />
-          <Route path="/konstterapi" element={<ArtTherapy />} />
-          <Route path="/boka-tid" element={<Booking />} />
-          <Route path="/galleri" element={<Gallery />} />
-          <Route path="/priser" element={<Prices />} />
-          <Route path="/kontakt" element={<Contact />} />
-          <Route path="/mina-sidor" element={<MyPages />} />
-        </Routes>
-        {/* </Layout> */}
-        <Footer />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          {/* <Layout> */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/logga-in" element={<Login />} /> */}
+            {/* <Route path="/registera" element={<Register />} /> */}
+            <Route path="/om-mig" element={<About />} />
+            <Route path="/konstterapi" element={<ArtTherapy />} />
+            <Route path="/boka-tid" element={<Booking />} />
+            <Route path="/galleri" element={<Gallery />} />
+            <Route path="/priser" element={<Prices />} />
+            <Route path="/kontakt" element={<Contact />} />
+            <Route path="/mina-sidor" element={<MyPages />} />
+          </Routes>
+          {/* </Layout> */}
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }

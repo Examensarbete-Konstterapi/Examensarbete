@@ -2,6 +2,8 @@ import "./register.css";
 import RegularButton from "../../components/buttons/regularButton/RegularButton";
 import API from "../../api/axios";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from "react-router-dom";
 
 type RegisterForm = {
   firstName: string;
@@ -16,6 +18,8 @@ type RegisterProps = {
 };
 
 export default function Register({ onSwitchToLogin }: RegisterProps) {
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -33,6 +37,22 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
         email: data.email,
         password: data.password,
       });
+
+      localStorage.setItem("token", response.data.token);
+
+      // Spara user
+      const userData = {
+        id: response.data.id,
+        firstName: response.data.name.split(" ")[0],
+        lastName: response.data.name.split(" ")[1],
+        email: response.data.email,
+        role: response.data.role,
+      };
+
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      navigate("/mina-sidor");
 
       console.log(response.data);
     } catch (error) {
@@ -122,7 +142,6 @@ export default function Register({ onSwitchToLogin }: RegisterProps) {
           )}
         </label>
         <RegularButton
-          onClick={() => {}}
           label="Registera"
           color="green"
           size="md"

@@ -2,11 +2,19 @@ import "./myPages.css";
 import Layout from "../../../components/layout/Layout";
 import { MiniHeroSection } from "../../../components/miniHeroSection/MiniHeroSection";
 import RegularButton from "../../../components/buttons/regularButton/RegularButton";
+import { useAuth } from "../../../context/useAuth";
 
 export function MyPages() {
+  const { user, logout } = useAuth();
+
   return (
     <>
-      <MiniHeroSection />
+      <MiniHeroSection
+        title="Mina Sidor"
+        subtitle={
+          user ? `Välkommen ${user.firstName} ${user.lastName}!` : "Välkommen!"
+        }
+      />
       <Layout>
         <section className="my-pages-section">
           <div className="menu">
@@ -25,7 +33,7 @@ export function MyPages() {
               type="button"
             />
             <RegularButton
-              onClick={() => {}}
+              onClick={logout}
               label="Logga ut"
               size="sm"
               color="green"

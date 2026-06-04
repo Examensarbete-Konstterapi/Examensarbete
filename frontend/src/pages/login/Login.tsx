@@ -2,6 +2,8 @@ import "./login.css";
 import RegularButton from "../../components/buttons/regularButton/RegularButton";
 import API from "../../api/axios";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from "react-router-dom";
 
 type LoginForm = {
   email: string;
@@ -13,6 +15,8 @@ type LoginProps = {
 };
 
 export default function Login({ onSwitchToRegister }: LoginProps) {
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -27,6 +31,19 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
       });
 
       localStorage.setItem("token", response.data.token);
+
+      const userData = {
+        id: response.data.id,
+        firstName: response.data.firstName.split(" ")[0],
+        lastName: response.data.lastName.split(" ")[1],
+        email: response.data.email,
+        role: response.data.role,
+      };
+
+      setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      navigate("/mina-sidor");
 
       console.log(response.data);
     } catch (error) {
@@ -74,13 +91,7 @@ export default function Login({ onSwitchToRegister }: LoginProps) {
           />
           {errors.password && <span>{errors.password.message}</span>}
         </label>
-        <RegularButton
-          onClick={() => {}}
-          label="Logga in"
-          color="green"
-          size="md"
-          type="submit"
-        />
+        <RegularButton label="Logga in" color="green" size="md" type="submit" />
       </form>
     </section>
   );
