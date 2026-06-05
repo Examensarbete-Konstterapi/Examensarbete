@@ -5,9 +5,10 @@ import "./profileDropdown.css";
 
 type ProfileDropdownProps = {
   name: string;
+  email: string;
 };
 
-export default function ProfileDropdown({ name }: ProfileDropdownProps) {
+export default function ProfileDropdown({ name, email }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useAuth();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -54,6 +55,10 @@ export default function ProfileDropdown({ name }: ProfileDropdownProps) {
 
       {isOpen && (
         <div className="dropdown-menu">
+          <div className="dropdown-name">
+            <p>{name}</p>
+            <p className="dropdown-email">{email}</p>
+          </div>
           <div className="dropdown-item">
             <svg
               width="18px"

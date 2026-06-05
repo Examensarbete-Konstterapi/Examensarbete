@@ -28,7 +28,7 @@ export default function Header() {
           <NavLink to="/kontakt">Kontakt</NavLink>
 
           {user ? (
-            <ProfileDropdown name={`${user.firstName} ${user.lastName}`} />
+            <ProfileDropdown name={`${user.firstName} ${user.lastName}`} email={user.email} />
           ) : (
             <button onClick={() => setModalType("login")}>
               <svg
