@@ -23,6 +23,7 @@ html {
   --color-green-light: #6c886c;
   --color-pink: #fcd0d7;
   --color-error: #d32f2f;
+  --color-border: #ddd;
 
   --color-green-transparent: rgba(187, 200, 187, 0.15);
   --color-pink-transparent: rgba(225, 192, 200, 0.15);

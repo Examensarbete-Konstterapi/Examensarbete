@@ -1,0 +1,22 @@
+.icon-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem;
+  color: var(--color-green);
+  gap: 1rem;
+  transition: background-color 0.3s, padding 0.3s, border-radius 0.3s;
+}
+
+.icon-button:hover {
+  background-color: var(--color-bg);
+  padding: 1rem 1rem;
+  border-radius: var(--radius-lg);
+}
+
+.icon-button.active {
+  background-color: var(--color-green);
+  color: var(--color-primary);
+}

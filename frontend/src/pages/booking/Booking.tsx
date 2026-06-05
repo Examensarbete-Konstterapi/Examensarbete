@@ -10,6 +10,7 @@ import Register from "../register/Register";
 import { useForm } from "react-hook-form";
 
 type BookingForm = {
+  category: string;
   courseId: string;
   sessionId: string;
   date: string;
@@ -24,6 +25,7 @@ type Session = {
     _id: string;
     title: string;
     price: number;
+    category: string;
   };
 };
 
@@ -42,12 +44,12 @@ export function Booking() {
 
   const selectedCourseId = watch("courseId");
   const selectedDate = watch("date");
+  const selectedCategory = watch("category");
 
   useEffect(() => {
     async function fetchSessions() {
       try {
         const response = await API.get("/sessions");
-        console.log(response.data);
         setSessions(response.data);
       } catch (error) {
         console.error(error);
@@ -87,9 +89,9 @@ export function Booking() {
     ).values(),
   );
 
-  // const filteredSessions = sessions.filter(
-  //   (session) => session.courseId._id === selectedCourseId,
-  // );
+  const filteredCourses = courses.filter(
+    (course) => course.category === selectedCategory
+  );
 
   const filteredDates = sessions.filter(
     (session) => session.courseId._id === selectedCourseId,
@@ -112,6 +114,7 @@ export function Booking() {
   const selectedCourse = courses.find(
   (course) => course._id === selectedCourseId
 );
+
 
   return (
     <>
@@ -194,6 +197,15 @@ export function Booking() {
                 >
                   <h2>Välj tid och typ av session</h2>
                   <label>
+                    Välj typ kurs
+                   <select {...register("category")}>
+                    <option value="">Välj typ</option>
+                     <option value="individual">Individuell terapi</option>
+                     <option value="group">Gruppterapi</option>
+                  </select>
+                    {errors.courseId && <span>{errors.courseId.message}</span>}
+                  </label>
+                  <label>
                     Välj kurs
                     <select
                       {...register("courseId", {
@@ -202,10 +214,10 @@ export function Booking() {
                     >
                       <option value="">Välj kurs</option>
 
-                      {courses.map((course) => (
-                        <option key={course._id} value={course._id}>
-                          {course.title}
-                        </option>
+                      {filteredCourses.map((course) => (
+                      <option key={course._id} value={course._id}>
+                       {course.title}
+                      </option>
                       ))}
                     </select>
                     {errors.courseId && <span>{errors.courseId.message}</span>}
