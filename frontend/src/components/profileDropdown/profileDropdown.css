@@ -44,14 +44,17 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  padding: 1.5rem 1rem;
+  gap: 1rem;
 }
 
-.dropdown-menu-navlink {
+.dropdown-menu .dropdown-item {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
-.dropdown-menu a,
+/* .dropdown-menu a,
 .dropdown-menu button {
   display: block;
   width: 100%;
@@ -63,7 +66,7 @@
   cursor: pointer;
   font-size: var(--font-sm);
   transition: background-color 0.2s;
-}
+} */
 
 /* .dropdown-menu a:hover,
 .dropdown-menu button:hover {
@@ -73,6 +76,9 @@
 .logout-btn {
   display: flex;
   align-items: center;
+  gap: 1rem;
+  background-color: transparent;
+  color: var(--color-green);
 }
 
 /* .logout-btn:hover {

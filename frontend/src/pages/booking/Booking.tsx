@@ -47,6 +47,7 @@ export function Booking() {
     async function fetchSessions() {
       try {
         const response = await API.get("/sessions");
+        console.log(response.data);
         setSessions(response.data);
       } catch (error) {
         console.error(error);
