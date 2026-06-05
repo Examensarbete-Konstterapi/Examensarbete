@@ -57,7 +57,7 @@ export async function createSession(req: Request, res: Response) {
 
 export async function getSessions(req: Request, res: Response) {
   try {
-    const sessions = await SessionModel.find().populate("courseId", "title");
+    const sessions = await SessionModel.find().populate("courseId", "title price");
 
     res.json(sessions);
   } catch (err) {

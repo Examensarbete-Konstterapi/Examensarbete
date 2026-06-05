@@ -23,6 +23,7 @@ type Session = {
   courseId: {
     _id: string;
     title: string;
+    price: number;
   };
 };
 
@@ -106,6 +107,10 @@ export function Booking() {
       session.courseId._id === selectedCourseId &&
       new Date(session.date).toLocaleDateString("sv-SE") === selectedDate,
   );
+
+  const selectedCourse = courses.find(
+  (course) => course._id === selectedCourseId
+);
 
   return (
     <>
@@ -204,6 +209,12 @@ export function Booking() {
                     </select>
                     {errors.courseId && <span>{errors.courseId.message}</span>}
                   </label>
+                  {selectedCourse && (
+                   <div className="price-box">
+                     <h3>Pris</h3>
+                     <p>{selectedCourse.price} kr</p>
+                   </div>
+                  )}
                   <label>
                     Välj datum
                     <select
