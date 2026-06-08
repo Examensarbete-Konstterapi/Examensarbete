@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UserModel } from "../models/user.model.ts";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 export async function getUsers(req: Request, res: Response) {
   try {
@@ -64,6 +65,41 @@ export async function updateUser(req: Request, res: Response) {
   } catch (err) {
     res.status(500).json({
       error: "Failed to update user",
+    });
+  }
+}
+
+export async function updatePassword(req: Request, res: Response) {
+  try {
+    const { id } = req.params;
+    const { currentPassword, newPassword } = req.body;
+
+    const user = await UserModel.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        error: "User not found",
+      });
+    }
+
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        error: "Current password is incorrect",
+      });
+    }
+
+    user.password = newPassword;
+
+    await user.save();
+
+    res.json({
+      message: "Password updated",
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Failed to update password",
     });
   }
 }

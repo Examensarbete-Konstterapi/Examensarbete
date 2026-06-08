@@ -1,63 +1,112 @@
-import RegularButton from "../../../../components/buttons/regularButton/RegularButton";
 import "./coursesTab.css";
-import { useState } from "react";
+import IconButton from "../../../../components/buttons/iconButton/IconButton";
+import RegularButton from "../../../../components/buttons/regularButton/RegularButton";
+import Modal from "../../../../components/modal/Modal";
+import CreateCourseForm, {
+  type CourseFormData,
+} from "./createCourse/CreateCourseForm";
+import { useState, useEffect } from "react";
+import API from "../../../../api/axios";
 
 export interface Course {
-  id: string;
+  _id: string;
   title: string;
   description: string;
-  dates: string[];
-  time: string;
-  spots: number;
-  spotsBooked: number;
-  price: number;
   category: string;
+  price: number;
+  sessions?: Session[];
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+interface Session {
+  _id: string;
+  courseId: string;
+  date: string;
+  startTime: string;
+  maxParticipants: number;
 }
 
 export function CoursesTab() {
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editingCourse, setEditingCourse] = useState<Course | null>(null);
-  const [courses, setCourses] = useState<Course[]>([
-    {
-      id: "1",
-      title: "Introduktion till konstterapi",
-      description: "Grundkurs i konstterapi",
-      dates: ["2026-06-10"],
-      time: "18:00",
-      spots: 8,
-      spotsBooked: 5,
-      price: 2800,
-      category: "Individuell",
-    },
-    {
-      id: "2",
-      title: "Föräldrar till kriminella",
-      description: "Möt andra föräldrar till kriminella och måla",
-      dates: ["2026-07-11"],
-      time: "20:00",
-      spots: 10,
-      spotsBooked: 6,
-      price: 800,
-      category: "Grupp",
-    },
-  ]);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleDeleteCourse(courseId: string) {
+  async function fetchCourses() {
+    try {
+      const response = await API.get(`/courses`);
+      return response.data;
+    } catch (error) {
+      console.error("Kunde inte hämta kurser:", error);
+      return [];
+    }
+  }
+
+  useEffect(() => {
+    async function loadCourses() {
+      const data = await fetchCourses();
+      setCourses(data);
+    }
+    loadCourses();
+  }, []);
+
+  async function handleCreateCourse(formData: CourseFormData) {
+    setIsLoading(true);
+    try {
+      // Extrahera datum från sessions
+      const dates = formData.sessions.map((session) => session.date);
+      const startTime = formData.sessions[0].startTime;
+      const maxParticipants = formData.sessions[0].maxParticipants;
+
+      // Skapa kurs med alla sessioner i en request
+      const response = await API.post(`/courses`, {
+        title: formData.title,
+        description: formData.description,
+        category: formData.category,
+        price: formData.price,
+        date: dates, // Array av datum
+        startTime,
+        maxParticipants,
+      });
+
+      console.log("Kurs skapad:", response.data);
+
+      // Uppdatera listan
+      const updatedCourses = await fetchCourses();
+      setCourses(updatedCourses);
+      setShowModal(false);
+      alert("Kurs skapad!");
+    } catch (error) {
+      console.error("Kunde inte skapa kurs:", error);
+      alert(`Fel när kursen skapades: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // const filteredCourses = courses.filter(
+  //   (course) =>
+  //     course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     course.category.toLowerCase().includes(searchTerm.toLowerCase()),
+  // );
+
+  async function handleDeleteCourse(courseId: string) {
     const confirmed = window.confirm(
       "Är du säker på att du vill ta bort kursen?",
     );
-
     if (!confirmed) return;
 
-    setCourses((prev) => prev.filter((course) => course.id !== courseId));
+    try {
+      await API.delete(`/courses/${courseId}`);
+      setCourses((prev) => prev.filter((course) => course._id !== courseId));
+      alert("Kurs borttagen!");
+    } catch (error) {
+      console.error("Kunde inte ta bort kurs:", error);
+      alert("Fel när kursen togs bort");
+    }
   }
-
-  const filteredCourses = courses.filter(
-    (course) =>
-      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      course.category.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
   return (
     <div className="admin-courses">
       <div className="courses-heading">
@@ -65,7 +114,7 @@ export function CoursesTab() {
 
         <RegularButton
           onClick={() => setShowModal(true)}
-          label="Skapa kurs"
+          label="+ Skapa ny kurs"
           color="green"
           size="xs"
         />
@@ -74,14 +123,14 @@ export function CoursesTab() {
         <div className="course-list-heading">
           <h3>Kurs</h3>
           <h3>Kategori</h3>
-          <h3>Datum</h3>
+          <h3>Sessioner</h3>
           <h3>Platser</h3>
           <h3>Pris</h3>
           <h3>Åtgärder</h3>
         </div>
 
-        {filteredCourses.map((course) => (
-          <div className="course-card" key={course.id}>
+        {courses.map((course) => (
+          <div className="course-card" key={course._id}>
             <div className="course-info">
               <div>
                 <h4>{course.title}</h4>
@@ -93,32 +142,106 @@ export function CoursesTab() {
               </div>
 
               <div className="date">
-                <p>{course.dates[0]}</p>
-                <small>{course.time}</small>
+                <p>{course.sessions?.length} tillfällen</p>
               </div>
 
               <div>
-                <p>
-                  {course.spotsBooked}/{course.spots}
-                </p>
+                <p>{course.sessions?.[0]?.maxParticipants} platser</p>
               </div>
 
               <div>
                 <p>{course.price} kr</p>
               </div>
               <div className="course-actions">
-                <button onClick={() => setEditingCourse(course)}>
-                  Redigera
-                </button>
-
-                <button onClick={() => handleDeleteCourse(course.id)}>
-                  Ta bort
-                </button>
+                <IconButton
+                  label=""
+                  onClick={() => setEditingCourse(course)}
+                  icon={
+                    <svg
+                      width="20px"
+                      height="20px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                          d="M11 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V13"
+                          stroke="#597059"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>{" "}
+                        <path
+                          d="M9.5 11.5L17.5 3.5C18.3284 2.67157 19.6716 2.67157 20.5 3.5C21.3284 4.32843 21.3284 5.67157 20.5 6.5L12.5 14.5L8 16L9.5 11.5Z"
+                          stroke="#597059"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>{" "}
+                      </g>
+                    </svg>
+                  }
+                />
+                <IconButton
+                  label=""
+                  onClick={() => handleDeleteCourse(course._id)}
+                  icon={
+                    <svg
+                      width="20px"
+                      height="20px"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                          d="M3 6H21M5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6"
+                          stroke="#d32f2f"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>{" "}
+                        <path
+                          d="M14 11V17"
+                          stroke="#d32f2f"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>{" "}
+                        <path
+                          d="M10 11V17"
+                          stroke="#d32f2f"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>{" "}
+                      </g>
+                    </svg>
+                  }
+                />
               </div>
             </div>
           </div>
         ))}
       </div>
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <CreateCourseForm onSubmit={handleCreateCourse} isLoading={isLoading} />
+      </Modal>
     </div>
   );
 }

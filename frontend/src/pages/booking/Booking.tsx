@@ -8,6 +8,7 @@ import Modal from "../../components/modal/Modal";
 import Login from "../login/Login";
 import Register from "../register/Register";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/useAuth";
 
 type BookingForm = {
   category: string;
@@ -32,8 +33,7 @@ type Session = {
 export function Booking() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
-
-  const token = localStorage.getItem("token");
+  const { isLoggedIn } = useAuth();
 
   const {
     register,
@@ -61,20 +61,10 @@ export function Booking() {
 
   async function onSubmit(data: BookingForm) {
     try {
-      const token = localStorage.getItem("token");
-
-      await API.post(
-        "/bookings",
-        {
-          sessionId: data.sessionId,
-          message: data.message,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await API.post("/bookings", {
+        sessionId: data.sessionId,
+        message: data.message,
+      });
 
       alert("Bokning skapad!");
     } catch (error) {
@@ -90,7 +80,7 @@ export function Booking() {
   );
 
   const filteredCourses = courses.filter(
-    (course) => course.category === selectedCategory
+    (course) => course.category === selectedCategory,
   );
 
   const filteredDates = sessions.filter(
@@ -112,9 +102,8 @@ export function Booking() {
   );
 
   const selectedCourse = courses.find(
-  (course) => course._id === selectedCourseId
-);
-
+    (course) => course._id === selectedCourseId,
+  );
 
   return (
     <>
@@ -163,7 +152,7 @@ export function Booking() {
             </aside>
 
             <div className="booking-forms">
-              {!token ? (
+              {!isLoggedIn ? (
                 <form className="booking-form">
                   <h2>Logga in</h2>
                   <div className="booking-form-text">
@@ -198,11 +187,11 @@ export function Booking() {
                   <h2>Välj tid och typ av session</h2>
                   <label>
                     Välj typ kurs
-                   <select {...register("category")}>
-                    <option value="">Välj typ</option>
-                     <option value="individual">Individuell terapi</option>
-                     <option value="group">Gruppterapi</option>
-                  </select>
+                    <select {...register("category")}>
+                      <option value="">Välj typ</option>
+                      <option value="individual">Individuell terapi</option>
+                      <option value="group">Gruppterapi</option>
+                    </select>
                     {errors.courseId && <span>{errors.courseId.message}</span>}
                   </label>
                   <label>
@@ -215,18 +204,18 @@ export function Booking() {
                       <option value="">Välj kurs</option>
 
                       {filteredCourses.map((course) => (
-                      <option key={course._id} value={course._id}>
-                       {course.title}
-                      </option>
+                        <option key={course._id} value={course._id}>
+                          {course.title}
+                        </option>
                       ))}
                     </select>
                     {errors.courseId && <span>{errors.courseId.message}</span>}
                   </label>
                   {selectedCourse && (
-                   <div className="price-box">
-                     <h3>Pris</h3>
-                     <p>{selectedCourse.price} kr</p>
-                   </div>
+                    <div className="price-box">
+                      <h3>Pris</h3>
+                      <p>{selectedCourse.price} kr</p>
+                    </div>
                   )}
                   <label>
                     Välj datum

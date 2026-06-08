@@ -14,6 +14,7 @@ type ProfileForm = {
 export default function ProfileTab() {
   const { user, setUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const {
     register,
     handleSubmit,
@@ -48,14 +49,15 @@ export default function ProfileTab() {
       });
 
       const userData = {
-        id: response.data?._id,
-        firstName: response.data.name.split(" ")[0],
-        lastName: response.data.name.split(" ")[1],
+        id: response.data._id,
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
         email: response.data.email,
       };
 
-      setIsEditing(false);
       setUser(userData);
+      setSuccessMessage("Dina ändringar har sparats!");
+      setIsEditing(false);
     } catch (error) {
       console.error(error);
     }
@@ -79,9 +81,10 @@ export default function ProfileTab() {
           <h2>Profilinformation</h2>
           <RegularButton
             onClick={() => setIsEditing(true)}
-            label={isEditing ? "Redigerar..." : "Redigera"}
+            label="Redigera"
             color="green"
             size="xs"
+            type="button"
           />
         </div>
         <div className="profile-content">
@@ -106,7 +109,9 @@ export default function ProfileTab() {
                 <path d="M54.55,56.85A22.55,22.55,0,0,0,32,34.3h0A22.55,22.55,0,0,0,9.45,56.85Z"></path>
               </g>
             </svg>
-            <div className="name-input">
+            <div
+              className={`${isEditing ? "active-name-input" : "name-input"}`}
+            >
               <div>
                 <label>Förnamn</label>
                 <input
@@ -150,7 +155,9 @@ export default function ProfileTab() {
                 ></path>{" "}
               </g>
             </svg>
-            <div className="email-input">
+            <div
+              className={`${isEditing ? "active-email-input" : "email-input"}`}
+            >
               <label>E-post</label>
               <input
                 type="email"
@@ -166,25 +173,25 @@ export default function ProfileTab() {
             </div>
           </div>
         </div>
+        {isEditing && (
+          <div className="profile-buttons">
+            <RegularButton
+              type="submit"
+              label="Spara"
+              color="green"
+              size="xs"
+            />
+            <RegularButton
+              type="button"
+              label="Avbryt"
+              color="light"
+              size="xs"
+              onClick={handleCancel}
+            />
+          </div>
+        )}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </form>
-      {isEditing && (
-        <div>
-          <RegularButton
-            type="submit"
-            label="Spara"
-            color="green"
-            size="xs"
-            onClick={handleSubmit(onSubmit)}
-          />
-          <RegularButton
-            type="submit"
-            label="Avbryt"
-            color="light"
-            size="xs"
-            onClick={handleCancel}
-          />
-        </div>
-      )}
     </>
   );
 }

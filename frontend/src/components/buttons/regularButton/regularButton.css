@@ -45,11 +45,11 @@
 }
 
 .regular-button.red {
-  background-color: rgb(143, 53, 53);
+  background-color: var(--color-error);
   color: var(--color-bg);
 }
 
 .regular-button.light {
   background-color: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-green);
 }

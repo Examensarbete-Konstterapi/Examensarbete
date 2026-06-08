@@ -1,0 +1,45 @@
+.course-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  margin: 3rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-group-row .form-group {
+  width: 100%;
+}
+
+.form-group label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group input {
+  height: 4.48rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 1.2rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+}
+
+.form-group textarea {
+  resize: none;
+}
