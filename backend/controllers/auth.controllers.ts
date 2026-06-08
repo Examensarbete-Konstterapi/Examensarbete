@@ -5,10 +5,10 @@ import jwt from "jsonwebtoken";
 //REGISTER USER
 export async function registerUser(req: Request, res: Response) {
   try {
-    const { first_name, last_name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // 1. Enkel validering
-    if (!first_name || !last_name || !email || !password) {
+    if (!firstName || !lastName || !email || !password) {
       res.status(400).json({ message: "All fields are required" });
       return;
     }
@@ -23,8 +23,8 @@ export async function registerUser(req: Request, res: Response) {
 
     // 3. Skapa user (password hashas automatiskt i schema)
     const newUser = new UserModel({
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       email,
       password,
       // role sätts automatiskt till "user"
@@ -40,7 +40,7 @@ export async function registerUser(req: Request, res: Response) {
     // 5. Response
     res.status(201).json({
       id: newUser._id,
-      name: `${newUser.first_name} ${newUser.last_name}`,
+      name: `${newUser.firstName} ${newUser.lastName}`,
       email: newUser.email,
       role: newUser.role,
       token,
@@ -81,7 +81,7 @@ export async function loginUser(req: Request, res: Response) {
 
     res.status(200).json({
       id: user._id,
-      name: `${user.first_name} ${user.last_name}`,
+      name: `${user.firstName} ${user.lastName}`,
       email: user.email,
       role: user.role,
       token,
@@ -90,21 +90,3 @@ export async function loginUser(req: Request, res: Response) {
     res.status(500).json({ error: "Failed to login user" });
   }
 }
-
-//  const { email, password } = req.body;
-
-//         const user = await UserModel.findOne({ email });
-//         if(!user) return res.status(404).json({ error: "User not found" });
-
-//         const isMatch = await user.comparePassword(password);
-//         if(!isMatch) return res.status(400).json({ error: "Invalid credentials" });
-
-//         const token = jwt.sign({
-//                 id: user!._id.toString(),
-//                 email: user.email,
-//                 role: user.role },
-//             JWT_SECRET,
-//             { expiresIn: "1h"}
-//         );
-
-//         res.json({ token });

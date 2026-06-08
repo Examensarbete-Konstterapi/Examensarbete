@@ -1,0 +1,23 @@
+.link-button {
+  font-size: var(--font-md);
+  border: none;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-button.sm {
+  height: 4rem;
+  width: 20rem;
+}
+
+.link-button.md {
+  height: 4rem;
+  width: 30rem;
+}
+
+.link-button.green {
+  background-color: var(--color-green);
+  color: var(--color-primary);
+}

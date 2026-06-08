@@ -1,0 +1,36 @@
+.my-pages-section {
+  /* display: flex;
+  gap: var(--spacing-xl); */
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+
+}
+
+.my-pages-section .menu {
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  /* width: 350px; */
+  gap: var(--spacing-md);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+}
+
+.my-pages-section .menu button {
+  width: 100%;
+}
+
+.my-pages-section .tab-section {
+  background-color: var(--color-white);
+  width: 100%;
+  padding: 3rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+

@@ -11,6 +11,10 @@ const SessionSchema = new Schema(
       type: Date,
       required: true,
     },
+    startTime: {
+      type: String,
+      required: true,
+    },
     maxParticipants: {
       type: Number,
       required: true,

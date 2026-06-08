@@ -11,10 +11,13 @@ const BookingSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    message: {
+      type: String,
+      required: false,
+    },
   },
-},
   { timestamps: true },
 );
-
 
 export const BookingModel = mongoose.model("Booking", BookingSchema);

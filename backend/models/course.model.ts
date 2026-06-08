@@ -20,6 +20,7 @@ const CourseSchema = new Schema<ICourse>(
     category: {
       type: String,
       required: true,
+      enum: ["individual", "group"]
     },
     price: {
       type: Number,

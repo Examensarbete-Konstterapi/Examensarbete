@@ -1,11 +1,15 @@
-
-
+import "./home.css";
+import { HeroSection } from "./heroSection/HeroSection";
+import Layout from "../../components/layout/Layout";
+import IntroductionCards from "./introductionCards/IntroductionCards";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page of our application.</p>
-    </div>
+    <>
+      <HeroSection />
+      <Layout>
+        <IntroductionCards />
+      </Layout>
+    </>
   );
 }

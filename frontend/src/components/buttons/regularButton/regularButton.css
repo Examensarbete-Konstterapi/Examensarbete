@@ -1,0 +1,50 @@
+.regular-button {
+  font-size: var(--font-md);
+  border: none;
+  border-radius: var(--radius-lg);
+  /* z-index: 1000; */
+}
+
+.regular-button.xxs {
+  height: auto;
+  width: auto;
+  font-size: var(--font-sm);
+  padding: 5px 10px;
+}
+
+.regular-button.xs {
+  height: auto;
+  width: auto;
+  font-size: var(--font-sm);
+  padding: 0.5rem 1rem;
+}
+
+.regular-button.sm {
+  height: 4rem;
+  width: 20rem;
+}
+
+.regular-button.md {
+  height: 4rem;
+  width: 30rem;
+}
+
+.regular-button.lg {
+  width: 100%;
+  height: 4.5rem;
+}
+
+.regular-button.transparent {
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.regular-button.green {
+  background-color: var(--color-green);
+  color: var(--color-bg);
+}
+
+.regular-button.red {
+  background-color: rgb(143, 53, 53);
+  color: var(--color-bg);
+}
