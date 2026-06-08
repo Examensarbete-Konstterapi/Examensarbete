@@ -9,9 +9,10 @@ export async function getAllBookings(req: Request, res: Response) {
     const bookings = await BookingModel.find()
       .populate({
         path: "sessionId",
+        select: "date startTime maxParticipants courseId",
         populate: {
           path: "courseId",
-          select: "title",
+          select: "title category",
         },
       })
       .populate("userId", "firstName lastName email");

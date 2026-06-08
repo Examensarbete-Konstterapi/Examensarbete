@@ -1,59 +1,53 @@
-.admin-courses .courses-heading {
+.admin-bookings .bookings-heading {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-lg);
 }
 
-.courses-list {
+.admin-bookings .bookings-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   color: var(--color-green);
 }
 
-.course-card {
+.admin-bookings .booking-card {
   background-color: var(--color-green-transparent);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
 }
 
-.course-list-heading {
+.admin-bookings .booking-list-heading {
   padding: 0 1.5rem;
   border-bottom: 1px solid var(--color-green);
 }
 
-.course-info,
-.course-list-heading {
+.admin-bookings .booking-info,
+.admin-bookings .booking-list-heading {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   flex: 1;
+  width: 100%;
 }
 
-/* .course-info > :first-child,
-.course-list-heading > :first-child {
-  width: 350px;
-} */
-
-.course-actions {
+.admin-bookings .booking-info div {
   display: flex;
-  justify-content: start !important;
-  align-items: center;
-  flex-direction: row !important;
-  gap: 1rem;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.course-info div {
+.admin-bookings .booking-actions {
   display: flex;
   justify-content: center;
-  flex-direction: column;
 }
 
-.course-actions button {
+.admin-bookings .booking-actions button {
   width: 4rem;
   height: 4rem;
 }

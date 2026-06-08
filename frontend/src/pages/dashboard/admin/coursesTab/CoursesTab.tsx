@@ -134,12 +134,6 @@ export function CoursesTab() {
     }
   }
 
-  // const filteredCourses = courses.filter(
-  //   (course) =>
-  //     course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     course.category.toLowerCase().includes(searchTerm.toLowerCase()),
-  // );
-
   async function handleDeleteCourse(courseId: string) {
     const confirmed = window.confirm(
       "Är du säker på att du vill ta bort kursen?",

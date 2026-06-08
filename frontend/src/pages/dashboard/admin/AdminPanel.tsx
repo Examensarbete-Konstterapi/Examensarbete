@@ -5,6 +5,7 @@ import IconButton from "../../../components/buttons/iconButton/IconButton";
 import { useAuth } from "../../../context/useAuth";
 import { useState } from "react";
 import { CoursesTab } from "./coursesTab/CoursesTab";
+import { BookingsTab } from "./bookingsTab/BookingsTab";
 
 export function AdminPanel() {
   const [activeTab, setActiveTab] = useState<
@@ -139,7 +140,7 @@ export function AdminPanel() {
           </div>
           <div className="tab-section">
             {activeTab === "courses" && <CoursesTab />}
-            {/* {activeTab === "bookings" && <BookingTab />} */}
+            {activeTab === "bookings" && <BookingsTab />}
           </div>
         </section>
       </Layout>

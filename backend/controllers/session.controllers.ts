@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CourseModel } from "../models/course.model.ts";
 import { SessionModel } from "../models/session.model.ts";
+import { BookingModel } from "../models/booking.model.ts";
 import mongoose from "mongoose";
 
 export async function createSession(req: Request, res: Response) {
@@ -57,7 +58,10 @@ export async function createSession(req: Request, res: Response) {
 
 export async function getSessions(req: Request, res: Response) {
   try {
-    const sessions = await SessionModel.find().populate("courseId", "title price category");
+    const sessions = await SessionModel.find().populate(
+      "courseId",
+      "title price category",
+    );
 
     res.json(sessions);
   } catch (err) {
@@ -122,13 +126,18 @@ export async function deleteSession(req: Request, res: Response) {
       return res.status(400).json({ error: "Invalid SessionID" });
     }
 
+    await BookingModel.deleteMany({
+      sessionId: id,
+    });
+
     const deletedSession = await SessionModel.findByIdAndDelete(id);
+
     if (!deletedSession) {
       return res.status(404).json({ error: "Session not found" });
     }
 
     res.json({
-      message: "Session deleted successfully",
+      message: "Session and related bookings deleted successfully",
       session: deletedSession,
     });
   } catch (err) {

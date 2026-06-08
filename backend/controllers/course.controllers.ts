@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CourseModel } from "../models/course.model.ts";
 import { SessionModel } from "../models/session.model.ts";
+import { BookingModel } from "../models/booking.model.ts";
 import mongoose from "mongoose";
 
 export async function getCourses(req: Request, res: Response) {
@@ -129,18 +130,40 @@ export async function deleteCourse(req: Request, res: Response) {
     if (!id || Array.isArray(id) || !mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: "Invalid CourseID" });
     }
+    // const deletedCourse = await CourseModel.findByIdAndDelete(id);
+
+    // if (!deletedCourse) {
+    //   return res.status(404).json({ error: "Course not found" });
+    // }
+
+    // await SessionModel.deleteMany({
+    //   courseId: id,
+    // });
+
+    // res.json({
+    //   message: "Course and related sessions deleted",
+    //   course: deletedCourse,
+    // });
+    const sessions = await SessionModel.find({ courseId: id });
+
+    const sessionIds = sessions.map((session) => session._id);
+
+    await BookingModel.deleteMany({
+      sessionId: { $in: sessionIds },
+    });
+
+    await SessionModel.deleteMany({
+      courseId: id,
+    });
+
     const deletedCourse = await CourseModel.findByIdAndDelete(id);
 
     if (!deletedCourse) {
       return res.status(404).json({ error: "Course not found" });
     }
 
-    await SessionModel.deleteMany({
-      courseId: id,
-    });
-
     res.json({
-      message: "Course and related sessions deleted",
+      message: "Course, sessions and bookings deleted",
       course: deletedCourse,
     });
   } catch (err) {
