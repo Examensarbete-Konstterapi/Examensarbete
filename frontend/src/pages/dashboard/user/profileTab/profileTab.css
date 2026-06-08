@@ -1,44 +1,54 @@
 .profile-section {
   display: flex;
-	flex-direction: column;
-	gap: var(--spacing-lg);
-	width: 100%;
-	height: auto;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  height: auto;
 }
 
 .profile-heading {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .profile-content {
-	display: flex;
-	flex-direction: column;
-	gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .profile-info-input {
-	display: flex;
-	align-items: center;
-	gap: 2rem;
-	background-color: var(--color-green-transparent);
-	padding: 1rem 1rem;
-	border-radius: var(--radius-sm);
-	color: var(--color-green-light);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--color-green-transparent);
+  padding: 1rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-green-light);
 }
 
-.name-input, .email-input {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	width: 100%;
+.email-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
 
-.name-input input, 
+.name-input {
+  display: flex;
+}
+
+.name-input div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.name-input input,
 .email-input input {
-	border: none;
-	background-color: transparent;
-	color: var(--color-green);
-	font-size: var(--font-sm);
+  border: none;
+  background-color: transparent;
+  color: var(--color-green);
+  font-size: var(--font-sm);
 }

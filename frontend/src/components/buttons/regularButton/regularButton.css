@@ -48,3 +48,8 @@
   background-color: rgb(143, 53, 53);
   color: var(--color-bg);
 }
+
+.regular-button.light {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
