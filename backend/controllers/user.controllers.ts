@@ -72,7 +72,7 @@ export async function updateUser(req: Request, res: Response) {
 export async function updatePassword(req: Request, res: Response) {
   try {
     const { id } = req.params;
-    const { newPassword, confirmPassword } = req.body;
+    const { currentPassword, newPassword } = req.body;
 
     const user = await UserModel.findById(id);
 
@@ -82,11 +82,11 @@ export async function updatePassword(req: Request, res: Response) {
       });
     }
 
-    const passwordMatch = await bcrypt.compare(newPassword, confirmPassword);
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({
-        error: "The passwords doesn't match",
+        error: "Current password is incorrect",
       });
     }
 

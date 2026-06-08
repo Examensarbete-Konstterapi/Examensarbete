@@ -87,7 +87,6 @@ export function CoursesTab() {
 
   async function handleUpdateCourse(formData: CourseFormData) {
     if (!editingCourse) return;
-
     setIsLoading(true);
 
     try {
@@ -99,9 +98,15 @@ export function CoursesTab() {
       });
 
       for (const session of formData.sessions) {
-        console.log("Session som ska uppdateras:", session);
         if (session._id) {
           await API.put(`/sessions/${session._id}`, {
+            date: session.date,
+            startTime: session.startTime,
+            maxParticipants: session.maxParticipants,
+          });
+        } else {
+          await API.post(`/sessions`, {
+            courseId: editingCourse._id,
             date: session.date,
             startTime: session.startTime,
             maxParticipants: session.maxParticipants,
@@ -110,13 +115,15 @@ export function CoursesTab() {
       }
 
       for (const sessionId of deletedSessionIds) {
+        console.log("Ta bort denna sessionen", sessionId);
         await API.delete(`/sessions/${sessionId}`);
       }
 
       const updatedCourses = await fetchCourses();
       setCourses(updatedCourses);
-
+      setDeletedSessionIds([]);
       setEditingCourse(null);
+      setShowModal(false);
 
       alert("Kurs uppdaterad!");
     } catch (error) {
@@ -288,15 +295,18 @@ export function CoursesTab() {
         onClose={() => {
           setShowModal(false);
           setEditingCourse(null);
+          setDeletedSessionIds([]);
         }}
       >
         {/* <CourseForm onSubmit={handleCreateCourse} isLoading={isLoading} /> */}
         <CourseForm
+          key={editingCourse?._id}
           mode={editingCourse ? "edit" : "create"}
           onSubmit={editingCourse ? handleUpdateCourse : handleCreateCourse}
-          onDeleteSession={(sessionId) =>
-            setDeletedSessionIds((prev) => [...prev, sessionId])
-          }
+          onDeleteSession={(sessionId) => {
+            console.log("Lägger till för borttagning:", sessionId);
+            setDeletedSessionIds((prev) => [...prev, sessionId]);
+          }}
           initialData={
             editingCourse
               ? {

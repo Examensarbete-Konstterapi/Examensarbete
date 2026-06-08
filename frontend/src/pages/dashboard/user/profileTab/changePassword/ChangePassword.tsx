@@ -47,7 +47,6 @@ export function ChangePassword() {
 
   function handleCancel() {
     if (!user) return;
-
     setIsEditing(false);
   }
 
@@ -70,10 +69,21 @@ export function ChangePassword() {
         <form onSubmit={handleSubmit(onSubmit)} className="new-password-form">
           <div className="new-password">
             <label>
-              Nytt lösenord
+              Nuvarande lösenord
               <input
                 type="password"
                 id="password"
+                {...register("currentPassword")}
+              />
+              {/* {errors.newPassword && <span>{errors.newPassword.message}</span>} */}
+            </label>
+          </div>
+          <div className="new-password">
+            <label>
+              Nytt lösenord
+              <input
+                type="password"
+                id="newPassword"
                 {...register("newPassword", {
                   minLength: {
                     value: 8,
@@ -110,7 +120,9 @@ export function ChangePassword() {
               onClick={handleCancel}
             />
           </div>
-          {successMessage && <span>{successMessage}</span>}
+          {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
         </form>
       )}
     </div>

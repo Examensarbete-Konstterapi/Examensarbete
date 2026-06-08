@@ -15,6 +15,7 @@
 .form-group-row {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
 .form-group-row .form-group {
@@ -42,4 +43,20 @@
 
 .form-group textarea {
   resize: none;
+}
+
+.sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.session-card button {
+  width: 4rem;
+  height: 4rem;
+}
+
+.course-form .error {
+  color: var(--color-error);
+  font-size: var(--font-xs);
 }

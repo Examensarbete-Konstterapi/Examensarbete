@@ -60,7 +60,7 @@ export default function CourseForm({
     if (initialData) {
       reset(initialData);
     }
-  }, [initialData, reset]);
+  }, []);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -134,92 +134,123 @@ export default function CourseForm({
       {/* Sessions */}
       <div className="sessions-section">
         <h3>Tillfällen (Sessioner)</h3>
+        <div className="sessions">
+          {fields.map((field, index) => (
+            <div key={field.id} className="session-card">
+              <div className="form-group-row">
+                <div className="form-group">
+                  <label>Datum</label>
+                  <input
+                    type="date"
+                    {...register(`sessions.${index}.date`, {
+                      required: "Datum är obligatoriskt",
+                    })}
+                  />
+                  {errors.sessions?.[index]?.date && (
+                    <span className="error">
+                      {errors.sessions[index]?.date?.message}
+                    </span>
+                  )}
+                </div>
 
-        {fields.map((field, index) => (
-          <div key={field.id} className="session-card">
-            <div className="form-group-row">
-              <div className="form-group">
-                <label>Datum</label>
-                <input
-                  type="date"
-                  {...register(`sessions.${index}.date`, {
-                    required: "Datum är obligatoriskt",
-                  })}
-                />
-                {errors.sessions?.[index]?.date && (
-                  <span className="error">
-                    {errors.sessions[index]?.date?.message}
-                  </span>
-                )}
-              </div>
+                <div className="form-group">
+                  <label>Tid</label>
+                  <input
+                    type="time"
+                    {...register(`sessions.${index}.startTime`, {
+                      required: "Tid är obligatorisk",
+                    })}
+                  />
+                  {errors.sessions?.[index]?.startTime && (
+                    <span className="error">
+                      {errors.sessions[index]?.startTime?.message}
+                    </span>
+                  )}
+                </div>
 
-              <div className="form-group">
-                <label>Tid</label>
-                <input
-                  type="time"
-                  {...register(`sessions.${index}.startTime`, {
-                    required: "Tid är obligatorisk",
-                  })}
-                />
-                {errors.sessions?.[index]?.startTime && (
-                  <span className="error">
-                    {errors.sessions[index]?.startTime?.message}
-                  </span>
-                )}
-              </div>
+                <div className="form-group">
+                  <label>Antal platser</label>
+                  <input
+                    type="number"
+                    {...register(`sessions.${index}.maxParticipants`, {
+                      required: "Antal platser är obligatoriskt",
+                      valueAsNumber: true,
+                      min: { value: 1, message: "Minst 1 plats krävs" },
+                    })}
+                  />
+                  {errors.sessions?.[index]?.maxParticipants && (
+                    <span className="error">
+                      {errors.sessions[index]?.maxParticipants?.message}
+                    </span>
+                  )}
+                </div>
 
-              <div className="form-group">
-                <label>Antal platser</label>
-                <input
-                  type="number"
-                  {...register(`sessions.${index}.maxParticipants`, {
-                    required: "Antal platser är obligatoriskt",
-                    valueAsNumber: true,
-                    min: { value: 1, message: "Minst 1 plats krävs" },
-                  })}
-                />
-                {errors.sessions?.[index]?.maxParticipants && (
-                  <span className="error">
-                    {errors.sessions[index]?.maxParticipants?.message}
-                  </span>
-                )}
-              </div>
+                {fields.length > 1 && (
+                  <IconButton
+                    label=""
+                    type="button"
+                    onClick={() => {
+                      const confirmed = window.confirm(
+                        "Är du säker på att du vill radera den här sessionen?",
+                      );
 
-              {fields.length > 1 && (
-                <IconButton
-                  label=""
-                  type="button"
-                  onClick={() => {
-                    const session = fields[index];
+                      if (!confirmed) return;
 
-                    if (session._id && onDeleteSession) {
-                      onDeleteSession(session._id);
+                      const session = fields[index];
+
+                      if (session._id && onDeleteSession) {
+                        onDeleteSession(session._id);
+                      }
+                      console.log("Tar bort index:", index);
+
+                      remove(index);
+                    }}
+                    icon={
+                      <svg
+                        width="20px"
+                        height="20px"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                        <g
+                          id="SVGRepo_tracerCarrier"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></g>
+                        <g id="SVGRepo_iconCarrier">
+                          {" "}
+                          <path
+                            d="M3 6H21M5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6"
+                            stroke="#d32f2f"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>{" "}
+                          <path
+                            d="M14 11V17"
+                            stroke="#d32f2f"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>{" "}
+                          <path
+                            d="M10 11V17"
+                            stroke="#d32f2f"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          ></path>{" "}
+                        </g>
+                      </svg>
                     }
-
-                    remove(index);
-                  }}
-                  icon={
-                    <svg
-                      width="20px"
-                      height="20px"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M3 6H21M5 6V20C5 21.1046 5.89543 22 7 22H17C18.1046 22 19 21.1046 19 20V6M8 6V4C8 2.89543 8.89543 2 10 2H14C15.1046 2 16 2.89543 16 4V6"
-                        stroke="#d32f2f"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      ></path>
-                    </svg>
-                  }
-                />
-              )}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <RegularButton
         type="button"
