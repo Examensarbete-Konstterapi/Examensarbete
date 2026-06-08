@@ -92,9 +92,7 @@ export function ChangePassword() {
                 id="confirmPassword"
                 {...register("confirmPassword")}
               />
-              {errors.confirmPassword && (
-                <span>{errors.confirmPassword.message}</span>
-              )}
+              {errors.confirmPassword && <span>{errorMessage}</span>}
             </label>
           </div>
           <div className="password-buttons">
@@ -112,6 +110,7 @@ export function ChangePassword() {
               onClick={handleCancel}
             />
           </div>
+          {successMessage && <span>{successMessage}</span>}
         </form>
       )}
     </div>

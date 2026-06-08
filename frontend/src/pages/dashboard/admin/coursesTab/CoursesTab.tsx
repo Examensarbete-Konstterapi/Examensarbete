@@ -2,9 +2,7 @@ import "./coursesTab.css";
 import IconButton from "../../../../components/buttons/iconButton/IconButton";
 import RegularButton from "../../../../components/buttons/regularButton/RegularButton";
 import Modal from "../../../../components/modal/Modal";
-import CreateCourseForm, {
-  type CourseFormData,
-} from "./createCourse/CreateCourseForm";
+import CourseForm, { type CourseFormData } from "./createCourse/CourseForm";
 import { useState, useEffect } from "react";
 import API from "../../../../api/axios";
 
@@ -19,8 +17,8 @@ export interface Course {
   updatedAt?: string;
 }
 
-interface Session {
-  _id: string;
+export interface Session {
+  _id?: string;
   courseId: string;
   date: string;
   startTime: string;
@@ -31,6 +29,7 @@ export function CoursesTab() {
   // const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editingCourse, setEditingCourse] = useState<Course | null>(null);
+  const [deletedSessionIds, setDeletedSessionIds] = useState<string[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -86,6 +85,48 @@ export function CoursesTab() {
     }
   }
 
+  async function handleUpdateCourse(formData: CourseFormData) {
+    if (!editingCourse) return;
+
+    setIsLoading(true);
+
+    try {
+      await API.put(`/courses/${editingCourse._id}`, {
+        title: formData.title,
+        description: formData.description,
+        category: formData.category,
+        price: formData.price,
+      });
+
+      for (const session of formData.sessions) {
+        console.log("Session som ska uppdateras:", session);
+        if (session._id) {
+          await API.put(`/sessions/${session._id}`, {
+            date: session.date,
+            startTime: session.startTime,
+            maxParticipants: session.maxParticipants,
+          });
+        }
+      }
+
+      for (const sessionId of deletedSessionIds) {
+        await API.delete(`/sessions/${sessionId}`);
+      }
+
+      const updatedCourses = await fetchCourses();
+      setCourses(updatedCourses);
+
+      setEditingCourse(null);
+
+      alert("Kurs uppdaterad!");
+    } catch (error) {
+      console.error(error);
+      alert("Kunde inte uppdatera kurs");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   // const filteredCourses = courses.filter(
   //   (course) =>
   //     course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -124,7 +165,7 @@ export function CoursesTab() {
           <h3>Kurs</h3>
           <h3>Kategori</h3>
           <h3>Sessioner</h3>
-          <h3>Platser</h3>
+          {/* <h3>Platser</h3> */}
           <h3>Pris</h3>
           <h3>Åtgärder</h3>
         </div>
@@ -145,9 +186,9 @@ export function CoursesTab() {
                 <p>{course.sessions?.length} tillfällen</p>
               </div>
 
-              <div>
+              {/* <div>
                 <p>{course.sessions?.[0]?.maxParticipants} platser</p>
-              </div>
+              </div> */}
 
               <div>
                 <p>{course.price} kr</p>
@@ -155,7 +196,10 @@ export function CoursesTab() {
               <div className="course-actions">
                 <IconButton
                   label=""
-                  onClick={() => setEditingCourse(course)}
+                  onClick={() => {
+                    setEditingCourse(course);
+                    setShowModal(true);
+                  }}
                   icon={
                     <svg
                       width="20px"
@@ -239,8 +283,39 @@ export function CoursesTab() {
           </div>
         ))}
       </div>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <CreateCourseForm onSubmit={handleCreateCourse} isLoading={isLoading} />
+      <Modal
+        isOpen={showModal}
+        onClose={() => {
+          setShowModal(false);
+          setEditingCourse(null);
+        }}
+      >
+        {/* <CourseForm onSubmit={handleCreateCourse} isLoading={isLoading} /> */}
+        <CourseForm
+          mode={editingCourse ? "edit" : "create"}
+          onSubmit={editingCourse ? handleUpdateCourse : handleCreateCourse}
+          onDeleteSession={(sessionId) =>
+            setDeletedSessionIds((prev) => [...prev, sessionId])
+          }
+          initialData={
+            editingCourse
+              ? {
+                  title: editingCourse.title,
+                  description: editingCourse.description,
+                  category: editingCourse.category as "group" | "individual",
+                  price: editingCourse.price,
+                  sessions:
+                    editingCourse.sessions?.map((session) => ({
+                      _id: session._id,
+                      date: session.date.split("T")[0],
+                      startTime: session.startTime,
+                      maxParticipants: session.maxParticipants,
+                    })) ?? [],
+                }
+              : undefined
+          }
+          isLoading={isLoading}
+        />
       </Modal>
     </div>
   );

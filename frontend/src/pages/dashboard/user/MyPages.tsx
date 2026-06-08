@@ -8,12 +8,20 @@ import { useState } from "react";
 import ProfileTab from "./profileTab/ProfileTab";
 import { BookingTab } from "./bookingTab/BookingTab";
 import { ChangePassword } from "./profileTab/changePassword/ChangePassword";
+import Spinner from "../../../components/spinner/Spinner";
 
 export function MyPages() {
   const [activeTab, setActiveTab] = useState<
     "profile" | "bookings" | "courses"
   >("profile");
+  const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth();
+
+  function handleLogout() {
+    setLoading(true);
+    logout();
+    window.to("/");
+  }
 
   return (
     <>
@@ -115,7 +123,7 @@ export function MyPages() {
               }
             />
             <IconButton
-              onClick={logout}
+              onClick={handleLogout}
               icon={
                 <svg
                   fill="#597059"
@@ -156,6 +164,7 @@ export function MyPages() {
           >
             {activeTab === "profile" && <ChangePassword />}
           </div>
+          {loading && <Spinner size="lg" />}
         </section>
       </Layout>
     </>

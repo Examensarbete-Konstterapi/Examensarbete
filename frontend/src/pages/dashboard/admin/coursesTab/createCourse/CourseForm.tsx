@@ -1,9 +1,11 @@
 import RegularButton from "../../../../../components/buttons/regularButton/RegularButton";
 import IconButton from "../../../../../components/buttons/iconButton/IconButton";
-import "./createCourseForm.css";
+import "./courseForm.css";
 import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect } from "react";
 
 export interface Session {
+  _id?: string;
   date: string;
   startTime: string;
   maxParticipants: number;
@@ -19,25 +21,46 @@ export interface CourseFormData {
 
 interface CourseFormProps {
   onSubmit: (data: CourseFormData) => void;
+  onDeleteSession?: (sessionId: string) => void;
   initialData?: Partial<CourseFormData>;
   isLoading?: boolean;
+  mode?: "create" | "edit";
 }
 
-export default function CreateCourseForm({
+export default function CourseForm({
   onSubmit,
+  onDeleteSession,
   initialData,
   isLoading = false,
+  mode = "create",
 }: CourseFormProps) {
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<CourseFormData>({
-    defaultValues: initialData || {
-      sessions: [{ date: "", startTime: "", maxParticipants: 10 }],
+    defaultValues: initialData ?? {
+      title: "",
+      description: "",
+      category: "group",
+      price: 0,
+      sessions: [
+        {
+          date: "",
+          startTime: "",
+          maxParticipants: 10,
+        },
+      ],
     },
   });
+
+  useEffect(() => {
+    if (initialData) {
+      reset(initialData);
+    }
+  }, [initialData, reset]);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -46,7 +69,7 @@ export default function CreateCourseForm({
 
   return (
     <form className="course-form" onSubmit={handleSubmit(onSubmit)}>
-      <h2>Skapa ny kurs</h2>
+      <h2>{mode === "edit" ? "Redigera kurs" : "Skapa ny kurs"}</h2>
       <div className="form-group">
         <label>Kursnamn</label>
         <input
@@ -166,7 +189,15 @@ export default function CreateCourseForm({
                 <IconButton
                   label=""
                   type="button"
-                  onClick={() => remove(index)}
+                  onClick={() => {
+                    const session = fields[index];
+
+                    if (session._id && onDeleteSession) {
+                      onDeleteSession(session._id);
+                    }
+
+                    remove(index);
+                  }}
                   icon={
                     <svg
                       width="20px"
@@ -199,7 +230,13 @@ export default function CreateCourseForm({
       />
 
       <RegularButton
-        label={isLoading ? "Sparar..." : "Spara kurs"}
+        label={
+          isLoading
+            ? "Sparar..."
+            : mode === "edit"
+              ? "Uppdatera kurs"
+              : "Spara kurs"
+        }
         color="green"
         size="lg"
         type="submit"
