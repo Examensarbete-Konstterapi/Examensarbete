@@ -20,20 +20,14 @@ export function ChangePassword() {
   const {
     register,
     handleSubmit,
-    // watch,
+    watch,
     reset,
     formState: { errors },
   } = useForm<PasswordForm>();
 
-  // const password = watch("newPassword");
+  const password = watch("newPassword");
 
   async function onSubmit(data: PasswordForm) {
-    setErrorMessage("");
-
-    if (data.newPassword !== data.confirmPassword) {
-      setErrorMessage("Lösenorden matchar inte");
-      return;
-    }
     try {
       await API.put(`/users/${user?.id}/password`, {
         currentPassword: data.currentPassword,
@@ -41,18 +35,22 @@ export function ChangePassword() {
       });
 
       reset();
-      
+
       setSuccessMessage("Lösenordet har uppdaterats!");
-      setErrorMessage("");
       setIsEditing(false);
     } catch (error: any) {
-      setErrorMessage("Kunde inte uppdatera lösenordet.");
-      console.error(error);
+      if (error.response?.status === 401) {
+        setErrorMessage("Nuvarande lösenord är felaktigt");
+      } else {
+        setErrorMessage("Kunde inte uppdatera lösenordet");
+      }
     }
   }
 
   function handleCancel() {
     if (!user) return;
+    setErrorMessage("");
+    reset();
     setIsEditing(false);
   }
 
@@ -61,7 +59,11 @@ export function ChangePassword() {
       <div className="password-heading">
         <h2>Ändra lösenord</h2>
         <RegularButton
-          onClick={() => setIsEditing(true)}
+          onClick={() => {
+            setSuccessMessage("");
+            setErrorMessage("");
+            setIsEditing(true)
+          }}
           label="Byt lösenord"
           color="red"
           size="xs"
@@ -84,7 +86,9 @@ export function ChangePassword() {
                 id="password"
                 {...register("currentPassword")}
               />
-              {/* {errors.newPassword && <span>{errors.newPassword.message}</span>} */}
+              {errorMessage && (
+                <span className="error-message">{errorMessage}</span>
+              )}
             </label>
           </div>
           <div className="new-password">
@@ -109,9 +113,12 @@ export function ChangePassword() {
               <input
                 type="password"
                 id="confirmPassword"
-                {...register("confirmPassword")}
+                {...register("confirmPassword", {
+                  validate: (value) =>
+                    value === password || "Lösenorden matchar inte",
+                })}
               />
-              {errorMessage && <span>{errorMessage}</span>}
+              {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
             </label>
           </div>
           <div className="password-buttons">

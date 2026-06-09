@@ -12,7 +12,7 @@ export async function getAllBookings(req: Request, res: Response) {
         select: "date startTime maxParticipants courseId",
         populate: {
           path: "courseId",
-          select: "title category",
+          select: "title category price",
         },
       })
       .populate("userId", "firstName lastName email");

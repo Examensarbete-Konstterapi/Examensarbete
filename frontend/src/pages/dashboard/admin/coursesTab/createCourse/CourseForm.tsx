@@ -39,12 +39,14 @@ export default function CourseForm({
     handleSubmit,
     control,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<CourseFormData>({
     defaultValues: initialData ?? {
       title: "",
       description: "",
-      category: "group",
+      category: "" as "group" | "individual",
       price: 0,
       sessions: [
         {
@@ -56,6 +58,8 @@ export default function CourseForm({
     },
   });
 
+  const category = watch("category");
+
   useEffect(() => {
     if (initialData) {
       reset(initialData);
@@ -66,6 +70,14 @@ export default function CourseForm({
     control,
     name: "sessions",
   });
+
+    useEffect(() => {
+  if (category === "individual") {
+    fields.forEach((_, index) => {
+      setValue(`sessions.${index}.maxParticipants`, 1);
+    });
+  }
+}, [category, fields, setValue]);
 
   return (
     <form className="course-form" onSubmit={handleSubmit(onSubmit)}>
@@ -172,6 +184,7 @@ export default function CourseForm({
                   <label>Antal platser</label>
                   <input
                     type="number"
+                    disabled={category === "individual"}
                     {...register(`sessions.${index}.maxParticipants`, {
                       required: "Antal platser är obligatoriskt",
                       valueAsNumber: true,

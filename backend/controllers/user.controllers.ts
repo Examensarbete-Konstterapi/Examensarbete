@@ -45,9 +45,9 @@ export async function updateUser(req: Request, res: Response) {
 
     const updateData: any = {};
 
-    if (firstName) updateData.firstName = firstName;
-    if (lastName) updateData.lastName = lastName;
-    if (email) updateData.email = email;
+    if (firstName !== undefined) updateData.firstName = firstName;
+    if (lastName !== undefined) updateData.lastName = lastName;
+    if (email !== undefined) updateData.email = email;
 
     if (Object.keys(updateData).length === 0) {
       return res.status(400).json({ error: "No fields to update" });
@@ -62,7 +62,12 @@ export async function updateUser(req: Request, res: Response) {
     }
 
     res.json(user);
-  } catch (err) {
+  } catch (err: any) {
+    if (err.code === 11000) {
+      return res.status(409).json({
+        error: "E-postadressen används redan",
+      });
+    }
     res.status(500).json({
       error: "Failed to update user",
     });

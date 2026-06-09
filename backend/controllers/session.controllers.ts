@@ -42,11 +42,16 @@ export async function createSession(req: Request, res: Response) {
       });
     }
 
+    const finalMaxParticipants =
+      course.category === "individual"
+      ? 1
+      : maxParticipants;
+
     const newSession = await SessionModel.create({
       courseId,
       date,
       startTime,
-      maxParticipants,
+      maxParticipants : finalMaxParticipants,
     });
 
     res.status(201).json(newSession);

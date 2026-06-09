@@ -25,6 +25,7 @@ interface Booking {
       _id: string;
       title: string;
       category: "group" | "individual";
+      price: number
     };
   };
 }
@@ -56,6 +57,7 @@ export function BookingsTab() {
           sessionId,
           title: session.courseId.title,
           category: session.courseId.category,
+          price: session.courseId.price,
           date: session.date,
           startTime: session.startTime,
           maxParticipants: session.maxParticipants,
@@ -72,13 +74,14 @@ export function BookingsTab() {
   return (
     <div className="admin-bookings">
       <div className="bookings-heading">
-        <h2>Bokningar</h2>
+        <h2>Hantera bokningar</h2>
       </div>
 
       <div className="bookings-list">
         <div className="booking-list-heading">
           <h3>Tjänst</h3>
           <h3>Datum</h3>
+          <h3>Pris</h3>
           <h3>Bokningar</h3>
           <h3>Åtgärder</h3>
         </div>
@@ -98,6 +101,10 @@ export function BookingsTab() {
               <div>
                 <p>{new Date(session.date).toLocaleDateString("sv-SE")}</p>
                 <p>{session.startTime}</p>
+              </div>
+
+              <div>
+                <p>{session.courseId.price}</p>
               </div>
 
               <div>

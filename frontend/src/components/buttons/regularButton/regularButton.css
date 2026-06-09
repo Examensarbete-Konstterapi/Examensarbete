@@ -53,3 +53,11 @@
   background-color: var(--color-bg);
   color: var(--color-green);
 }
+
+.regular-button.disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+  border: none;
+  color: var(--color-green);
+  opacity: 0.7;
+}

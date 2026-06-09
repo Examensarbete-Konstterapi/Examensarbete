@@ -176,7 +176,9 @@ export function CoursesTab() {
             <div className="course-info">
               <div>
                 <h4>{course.title}</h4>
-                <p>{course.description}</p>
+                {course.description.length > 100
+                  ? course.description.slice(0, 100) + "..."
+                  : course.description}
               </div>
 
               <div>

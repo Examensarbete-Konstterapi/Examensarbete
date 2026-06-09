@@ -249,8 +249,14 @@ export function Booking() {
                       <option value="">Välj tid</option>
 
                       {filteredTimes.map((session) => (
-                        <option key={session._id} value={session._id}>
-                          {session.startTime}
+                        <option
+                          key={session._id} 
+                          value={session._id}
+                          disabled={session.isFull}>
+                          {session.startTime}{" "}
+                          {session.courseId.category === "group" &&
+                          ` (${session.bookedParticipants} av ${session.maxParticipants} platser bokade)`}
+                          {session.isFull ? " - Fullbokad" : ""}
                         </option>
                       ))}
                     </select>

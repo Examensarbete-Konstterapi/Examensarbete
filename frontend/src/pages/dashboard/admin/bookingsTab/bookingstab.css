@@ -30,7 +30,7 @@
 .admin-bookings .booking-info,
 .admin-bookings .booking-list-heading {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
   flex: 1;
   width: 100%;
