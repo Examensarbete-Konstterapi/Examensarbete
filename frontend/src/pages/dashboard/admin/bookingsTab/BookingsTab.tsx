@@ -94,6 +94,10 @@ export function BookingsTab() {
             <div className="booking-info">
               <div>
                 <h4>{session.title}</h4>
+                <p>{session.description}</p>
+              </div>
+
+              <div>
                 <p>
                   {session.category === "group"
                     ? "Gruppkurs"
@@ -101,18 +105,10 @@ export function BookingsTab() {
                 </p>
               </div>
 
-               <div>
-                <p>
-                  {session.description}
-                </p>
-              </div>
-
               <div>
                 <p>{new Date(session.date).toLocaleDateString("sv-SE")}</p>
                 <p>{session.startTime}</p>
               </div>
-
-             
 
               <div>
                 <p>
@@ -125,7 +121,7 @@ export function BookingsTab() {
                 </p>
               </div>
 
-               <div>
+              <div>
                 <p>{session.price} kr</p>
               </div>
 

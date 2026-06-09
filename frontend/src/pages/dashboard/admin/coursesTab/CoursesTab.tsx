@@ -166,7 +166,7 @@ export function CoursesTab() {
           <h3>Kurs</h3>
           <h3>Kategori</h3>
           <h3>Sessioner</h3>
-          <h3>Platser</h3>
+          {/* <h3>Platser</h3> */}
           <h3>Pris</h3>
           <h3>Åtgärder</h3>
         </div>
@@ -189,9 +189,9 @@ export function CoursesTab() {
                 <p>{course.sessions?.length} tillfällen</p>
               </div>
 
-              <div>
+              {/* <div>
                 <p>{course.sessions?.[0]?.maxParticipants} platser</p>
-              </div>
+              </div> */}
 
               <div>
                 <p>{course.price} kr</p>
