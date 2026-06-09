@@ -1,0 +1,23 @@
+.booking-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.booking-card-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-time-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.booking-card-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

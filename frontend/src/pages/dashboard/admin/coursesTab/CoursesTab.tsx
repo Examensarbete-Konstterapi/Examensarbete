@@ -2,7 +2,7 @@ import "./coursesTab.css";
 import IconButton from "../../../../components/buttons/iconButton/IconButton";
 import RegularButton from "../../../../components/buttons/regularButton/RegularButton";
 import Modal from "../../../../components/modal/Modal";
-import CourseForm, { type CourseFormData } from "./createCourse/CourseForm";
+import CourseForm, { type CourseFormData } from "./courseForm/CourseForm";
 import { useState, useEffect } from "react";
 import API from "../../../../api/axios";
 
@@ -182,7 +182,13 @@ export function CoursesTab() {
               </div>
 
               <div>
-                <p>{course.category}</p>
+                <p>
+                  <p>
+                    {course.category === "group"
+                      ? "Gruppkurs"
+                      : "Individuell bokning"}
+                  </p>
+                </p>
               </div>
 
               <div className="date">

@@ -1,7 +1,9 @@
 import "./bookingsTab.css";
 import IconButton from "../../../../components/buttons/iconButton/IconButton";
+import Modal from "../../../../components/modal/Modal";
 import API from "../../../../api/axios";
 import { useEffect, useState } from "react";
+import BookingDetailsForm from "./bookingDetailsForm/BookingDetailsForm";
 
 interface Booking {
   _id: string;
@@ -32,6 +34,8 @@ interface Booking {
 }
 
 export function BookingsTab() {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedSession, setSelectedSession] = useState<any>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
 
   useEffect(() => {
@@ -47,6 +51,27 @@ export function BookingsTab() {
     }
     fetchBookings();
   }, []);
+
+  async function handleRemoveParticipant(bookingId: string) {
+    const confirmed = window.confirm(
+      "Är du säker på att du vill ta bort deltagaren?",
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await API.delete(`/bookings/${bookingId}`);
+
+      setBookings((prev) =>
+        prev.filter((booking) => booking._id !== bookingId),
+      );
+
+      alert("Deltagaren togs bort");
+    } catch (error) {
+      console.error(error);
+      alert("Kunde inte ta bort deltagaren");
+    }
+  }
 
   const groupedSessions = Object.values(
     bookings.reduce((acc: any, booking: any) => {
@@ -67,7 +92,11 @@ export function BookingsTab() {
         };
       }
 
-      acc[sessionId].participants.push(booking.userId);
+      acc[sessionId].participants.push({
+        bookingId: booking._id,
+        ...booking.userId,
+        message: booking.message,
+      });
 
       return acc;
     }, {}),
@@ -90,7 +119,7 @@ export function BookingsTab() {
         </div>
 
         {groupedSessions.map((session: any) => (
-          <div className="booking-card" key={session._id}>
+          <div className="booking-card" key={session.sessionId}>
             <div className="booking-info">
               <div>
                 <h4>{session.title}</h4>
@@ -126,29 +155,12 @@ export function BookingsTab() {
               </div>
 
               <div className="booking-actions">
-                {/* <IconButton
-                  label=""
-                  onClick={() => console.log("Visa bokning")}
-                  icon={
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
-                        stroke="#597059"
-                        strokeWidth="2"
-                      />
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="3"
-                        stroke="#597059"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                  }
-                /> */}
                 <IconButton
                   label=""
-                  onClick={() => {}}
+                  onClick={() => {
+                    setShowModal(true);
+                    setSelectedSession(session);
+                  }}
                   icon={
                     <svg
                       width="20px"
@@ -232,6 +244,20 @@ export function BookingsTab() {
           </div>
         ))}
       </div>
+      <Modal
+        isOpen={showModal}
+        onClose={() => {
+          setShowModal(false);
+          setSelectedSession(null);
+        }}
+      >
+        {selectedSession && (
+          <BookingDetailsForm
+            session={selectedSession}
+            onRemoveParticipant={handleRemoveParticipant}
+          />
+        )}
+      </Modal>
     </div>
   );
 }
