@@ -7,6 +7,20 @@
   justify-content: center;
 }
 
+.link-button.xxs {
+  height: auto;
+  width: fit-content;
+  font-size: var(--font-sm);
+  /* padding: 5px 10px; */
+}
+
+.link-button.xs {
+  height: auto;
+  width: auto;
+  font-size: var(--font-sm);
+  padding: 0.5rem 1rem;
+}
+
 .link-button.sm {
   height: 4rem;
   width: 20rem;
@@ -20,4 +34,9 @@
 .link-button.green {
   background-color: var(--color-green);
   color: var(--color-primary);
+}
+
+.link-button.transparent {
+  background-color: transparent;
+  color: var(--color-green);
 }

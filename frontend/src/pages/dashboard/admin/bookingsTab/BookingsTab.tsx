@@ -51,7 +51,11 @@ export function BookingsTab() {
   };
 
   useEffect(() => {
-    fetchBookings();
+    const loadBookings = async () => {
+      await fetchBookings();
+    };
+
+    loadBookings();
   }, []);
 
   async function handleDeleteSession(sessionId: string) {
