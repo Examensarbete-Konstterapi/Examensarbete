@@ -9,6 +9,7 @@ import ProfileTab from "./profileTab/ProfileTab";
 import { BookingTab } from "./bookingTab/BookingTab";
 import { ChangePassword } from "./profileTab/changePassword/ChangePassword";
 import Spinner from "../../../components/spinner/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export function MyPages() {
   const [activeTab, setActiveTab] = useState<
@@ -16,11 +17,12 @@ export function MyPages() {
   >("profile");
   const [loading, setLoading] = useState(false);
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   function handleLogout() {
     setLoading(true);
     logout();
-    window.to("/");
+    navigate("/")
   }
 
   return (

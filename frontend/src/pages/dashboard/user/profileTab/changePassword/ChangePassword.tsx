@@ -21,12 +21,15 @@ export function ChangePassword() {
     register,
     handleSubmit,
     // watch,
+    reset,
     formState: { errors },
   } = useForm<PasswordForm>();
 
   // const password = watch("newPassword");
 
   async function onSubmit(data: PasswordForm) {
+    setErrorMessage("");
+
     if (data.newPassword !== data.confirmPassword) {
       setErrorMessage("Lösenorden matchar inte");
       return;
@@ -36,7 +39,10 @@ export function ChangePassword() {
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
       });
-      setSuccessMessage("Lösenordet har uppdaterats.");
+
+      reset();
+      
+      setSuccessMessage("Lösenordet har uppdaterats!");
       setErrorMessage("");
       setIsEditing(false);
     } catch (error: any) {
@@ -64,6 +70,9 @@ export function ChangePassword() {
       </div>
       <div className={`${isEditing ? "no-password-text" : "password-text"}`}>
         <p>Klicka på "byt lösenord" för att ändra ditt lösenord</p>
+        {successMessage && (
+            <p className="success-message">{successMessage}</p>
+          )}
       </div>
       {isEditing && (
         <form onSubmit={handleSubmit(onSubmit)} className="new-password-form">
@@ -102,7 +111,7 @@ export function ChangePassword() {
                 id="confirmPassword"
                 {...register("confirmPassword")}
               />
-              {errors.confirmPassword && <span>{errorMessage}</span>}
+              {errorMessage && <span>{errorMessage}</span>}
             </label>
           </div>
           <div className="password-buttons">
@@ -120,9 +129,6 @@ export function ChangePassword() {
               onClick={handleCancel}
             />
           </div>
-          {successMessage && (
-            <p className="success-message">{successMessage}</p>
-          )}
         </form>
       )}
     </div>

@@ -6,12 +6,19 @@ import { useAuth } from "../../../context/useAuth";
 import { useState } from "react";
 import { CoursesTab } from "./coursesTab/CoursesTab";
 import { BookingsTab } from "./bookingsTab/BookingsTab";
+import { useNavigate } from "react-router-dom";
 
 export function AdminPanel() {
   const [activeTab, setActiveTab] = useState<
     "overview" | "bookings" | "courses"
   >("overview");
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
 
   return (
     <>
@@ -106,7 +113,7 @@ export function AdminPanel() {
               }
             />
             <IconButton
-              onClick={logout}
+              onClick={handleLogout}
               icon={
                 <svg
                   fill="#597059"

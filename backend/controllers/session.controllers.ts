@@ -63,7 +63,21 @@ export async function getSessions(req: Request, res: Response) {
       "title price category",
     );
 
-    res.json(sessions);
+    const sessionsWithBookingInfo = await Promise.all(
+      sessions.map(async (session) => {
+        const bookingCount = await BookingModel.countDocuments({
+          sessionId: session._id,
+        });
+
+        return {
+          ...session.toObject(),
+          bookedParticipants: bookingCount,
+          isFull: bookingCount >= session.maxParticipants,
+        };
+      }),
+    );
+
+    res.json(sessionsWithBookingInfo);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch sessions" });

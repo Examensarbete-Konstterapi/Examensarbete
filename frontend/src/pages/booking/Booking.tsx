@@ -22,6 +22,9 @@ type Session = {
   _id: string;
   date: string;
   startTime: string;
+  maxParticipants: number;
+  bookedParticipants: number;
+  isFull: boolean;
   courseId: {
     _id: string;
     title: string;

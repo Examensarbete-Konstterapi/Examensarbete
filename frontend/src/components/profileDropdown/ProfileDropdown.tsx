@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/useAuth";
 import IconButton from "../buttons/iconButton/IconButton";
+import { useNavigate } from "react-router-dom";
 import "./profileDropdown.css";
 
 type ProfileDropdownProps = {
@@ -13,6 +14,7 @@ export default function ProfileDropdown({ name, email }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { user, logout } = useAuth();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   // Stäng dropdown när man klickar utanför
   useEffect(() => {
@@ -32,6 +34,7 @@ export default function ProfileDropdown({ name, email }: ProfileDropdownProps) {
   const handleLogout = () => {
     setIsOpen(false);
     logout();
+    navigate("/");
   };
 
   return (
