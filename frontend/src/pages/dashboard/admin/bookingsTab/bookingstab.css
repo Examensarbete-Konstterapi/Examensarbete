@@ -30,24 +30,28 @@
 .admin-bookings .booking-info,
 .admin-bookings .booking-list-heading {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 2rem;
   flex: 1;
   width: 100%;
+}
+
+.booking-info .booking-actions {
+  display: flex;
+  justify-content: start !important;
+  align-items: center;
+  flex-direction: row !important;
+  gap: 1rem;
 }
 
 .admin-bookings .booking-info div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
 }
 
-.admin-bookings .booking-actions {
-  display: flex;
-  justify-content: center;
-}
-
-.admin-bookings .booking-actions button {
+.booking-card .booking-actions button {
   width: 4rem;
   height: 4rem;
 }
