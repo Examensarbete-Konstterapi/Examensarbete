@@ -54,7 +54,7 @@ export async function getUserBookings(req: AuthRequest, res: Response) {
       path: "sessionId",
       populate: {
         path: "courseId",
-        select: "title",
+        select: "title category price",
       },
     });
 
