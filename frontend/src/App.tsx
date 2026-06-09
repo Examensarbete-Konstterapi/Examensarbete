@@ -14,6 +14,8 @@ import { Contact } from "./pages/contact/Contact.tsx";
 import { MyPages } from "./pages/dashboard/user/MyPages.tsx";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import { AdminPanel } from "./pages/dashboard/admin/AdminPanel.tsx";
+import ProtectedRoute from "./routes/ProtectedRoute.tsx";
+import AdminRoute from "./routes/AdminRoute.tsx";
 
 function App() {
   return (
@@ -32,8 +34,22 @@ function App() {
             <Route path="/galleri" element={<Gallery />} />
             <Route path="/priser" element={<Prices />} />
             <Route path="/kontakt" element={<Contact />} />
-            <Route path="/mina-sidor" element={<MyPages />} />
-            <Route path="/admin-panel" element={<AdminPanel />} />
+            <Route
+              path="/mina-sidor"
+              element={
+                <ProtectedRoute>
+                  <MyPages />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin-panel"
+              element={
+                <AdminRoute>
+                  <AdminPanel />
+                </AdminRoute>
+              }
+            />
           </Routes>
           {/* </Layout> */}
           <Footer />

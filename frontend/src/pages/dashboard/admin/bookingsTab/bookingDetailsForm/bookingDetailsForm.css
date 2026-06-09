@@ -1,17 +1,11 @@
 .booking-details {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  min-height: 35rem;
   gap: 2rem;
   color: var(--color-green);
-  /* width: 600px; */
-  /* padding: 3rem; */
 }
-
-/* .booking-summary {
-  background: var(--color-green-transparent);
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-} */
 
 .summary-grid {
   margin-top: 1rem;

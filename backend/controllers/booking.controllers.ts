@@ -54,15 +54,9 @@ export async function getUserBookings(req: AuthRequest, res: Response) {
       path: "sessionId",
       populate: {
         path: "courseId",
-        select: "title category price",
+        select: "title category price description",
       },
     });
-
-    if (bookings.length === 0) {
-      return res.status(404).json({
-        error: "No bookings found for this user",
-      });
-    }
 
     res.json(bookings);
   } catch (err) {

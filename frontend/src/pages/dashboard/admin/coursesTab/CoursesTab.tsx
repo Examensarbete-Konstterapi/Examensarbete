@@ -2,6 +2,7 @@ import "./coursesTab.css";
 import IconButton from "../../../../components/buttons/iconButton/IconButton";
 import RegularButton from "../../../../components/buttons/regularButton/RegularButton";
 import Modal from "../../../../components/modal/Modal";
+import ConfirmModal from "../../../../components/confirmModal/ConfirmModal";
 import CourseForm, { type CourseFormData } from "./courseForm/CourseForm";
 import { useState, useEffect } from "react";
 import API from "../../../../api/axios";
@@ -32,6 +33,8 @@ export function CoursesTab() {
   const [deletedSessionIds, setDeletedSessionIds] = useState<string[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [courseToDelete, setCourseToDelete] = useState<string | null>(null);
 
   async function fetchCourses() {
     try {
@@ -76,7 +79,6 @@ export function CoursesTab() {
       const updatedCourses = await fetchCourses();
       setCourses(updatedCourses);
       setShowModal(false);
-      alert("Kurs skapad!");
     } catch (error) {
       console.error("Kunde inte skapa kurs:", error);
       alert(`Fel när kursen skapades: ${error}`);
@@ -124,8 +126,6 @@ export function CoursesTab() {
       setDeletedSessionIds([]);
       setEditingCourse(null);
       setShowModal(false);
-
-      alert("Kurs uppdaterad!");
     } catch (error) {
       console.error(error);
       alert("Kunde inte uppdatera kurs");
@@ -135,15 +135,9 @@ export function CoursesTab() {
   }
 
   async function handleDeleteCourse(courseId: string) {
-    const confirmed = window.confirm(
-      "Är du säker på att du vill ta bort kursen?",
-    );
-    if (!confirmed) return;
-
     try {
       await API.delete(`/courses/${courseId}`);
       setCourses((prev) => prev.filter((course) => course._id !== courseId));
-      alert("Kurs borttagen!");
     } catch (error) {
       console.error("Kunde inte ta bort kurs:", error);
       alert("Fel när kursen togs bort");
@@ -176,18 +170,18 @@ export function CoursesTab() {
             <div className="course-info">
               <div>
                 <h4>{course.title}</h4>
-                {course.description.length > 100
-                  ? course.description.slice(0, 100) + "..."
-                  : course.description}
+                <p>
+                  {course.description.length > 50
+                    ? course.description.slice(0, 50) + "..."
+                    : course.description}
+                </p>
               </div>
 
               <div>
                 <p>
-                  <p>
-                    {course.category === "group"
-                      ? "Gruppkurs"
-                      : "Individuell bokning"}
-                  </p>
+                  {course.category === "group"
+                    ? "Gruppkurs"
+                    : "Individuell bokning"}
                 </p>
               </div>
 
@@ -245,7 +239,10 @@ export function CoursesTab() {
                 />
                 <IconButton
                   label=""
-                  onClick={() => handleDeleteCourse(course._id)}
+                  onClick={() => {
+                    setCourseToDelete(course._id);
+                    setShowDeleteModal(true);
+                  }}
                   icon={
                     <svg
                       width="20px"
@@ -329,6 +326,25 @@ export function CoursesTab() {
           isLoading={isLoading}
         />
       </Modal>
+      <ConfirmModal
+        isOpen={showDeleteModal}
+        title="Ta bort kurs"
+        message="Är du säker på att du vill ta bort kursen?"
+        confirmText="Radera"
+        cancelText="Avbryt"
+        onCancel={() => {
+          setShowDeleteModal(false);
+          setCourseToDelete(null);
+        }}
+        onConfirm={async () => {
+          if (!courseToDelete) return;
+
+          await handleDeleteCourse(courseToDelete);
+
+          setShowDeleteModal(false);
+          setCourseToDelete(null);
+        }}
+      />
     </div>
   );
 }

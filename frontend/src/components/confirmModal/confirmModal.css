@@ -1,0 +1,31 @@
+.confirm-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirm-modal-content {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 500px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: 1.5rem; */
+}
+
+.confirm-modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}

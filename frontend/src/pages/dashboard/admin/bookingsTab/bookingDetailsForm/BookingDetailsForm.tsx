@@ -1,5 +1,8 @@
 import "./bookingDetailsForm.css";
+import { useState } from "react";
+import ConfirmModal from "../../../../../components/confirmModal/ConfirmModal";
 import IconButton from "../../../../../components/buttons/iconButton/IconButton";
+import RegularButton from "../../../../../components/buttons/regularButton/RegularButton";
 import API from "../../../../../api/axios";
 
 interface Participant {
@@ -24,62 +27,91 @@ interface BookingSession {
 
 interface BookingDetailsFormProps {
   session: BookingSession;
-  onRemoveParticipant: (participantId: string) => void;
+  onClose: () => void;
+  refreshBookings: () => Promise<void>;
 }
 
 export default function BookingDetailsForm({
   session,
-  onRemoveParticipant,
+  onClose,
+  refreshBookings,
 }: BookingDetailsFormProps) {
+  const [participants, setParticipants] = useState(session.participants);
+  const [removedBookingIds, setRemovedBookingIds] = useState<string[]>([]);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
+  const [bookingToRemove, setBookingToRemove] = useState<string | null>(null);
+
+  const handleRemoveParticipant = (bookingId: string) => {
+    setParticipants((prev) =>
+      prev.filter((participant) => participant.bookingId !== bookingId),
+    );
+
+    setRemovedBookingIds((prev) => [...prev, bookingId]);
+  };
+
+  const handleSave = async () => {
+    try {
+      await Promise.all(
+        removedBookingIds.map((id) => API.delete(`/bookings/${id}`)),
+      );
+
+      // alert("Bokningen uppdaterad!");
+      await refreshBookings();
+      onClose();
+    } catch (error) {
+      console.error(error);
+      alert("Kunde inte uppdatera bokningen");
+    }
+  };
   return (
     <div className="booking-details">
-      <h2>Hantera bokning</h2>
+      <div>
+        <h2>Hantera bokning</h2>
+        <div className="booking-summary">
+          <h3>{session.title}</h3>
+          <p>{session.description}</p>
 
-      <div className="booking-summary">
-        <h3>{session.title}</h3>
-        <p>{session.description}</p>
+          <div className="summary-grid">
+            <div>
+              <h4>Kategori</h4>
+              <p>
+                {session.category === "group"
+                  ? "Gruppkurs"
+                  : "Individuell bokning"}
+              </p>
+            </div>
 
-        <div className="summary-grid">
-          <div>
-            <h4>Kategori</h4>
-            <p>
-              {session.category === "group"
-                ? "Gruppkurs"
-                : "Individuell bokning"}
-            </p>
-          </div>
+            <div>
+              <h4>Datum</h4>
+              <p>{new Date(session.date).toLocaleDateString("sv-SE")}</p>
+            </div>
 
-          <div>
-            <h4>Datum</h4>
-            <p>{new Date(session.date).toLocaleDateString("sv-SE")}</p>
-          </div>
+            <div>
+              <h4>Tid</h4>
+              <p>{session.startTime}</p>
+            </div>
 
-          <div>
-            <h4>Tid</h4>
-            <p>{session.startTime}</p>
-          </div>
+            <div>
+              <h4>Pris</h4>
+              <p>{session.price} kr</p>
+            </div>
 
-          <div>
-            <h4>Pris</h4>
-            <p>{session.price} kr</p>
-          </div>
-
-          <div>
-            <h4>Platser</h4>
-            <p>
-              {session.participants.length} / {session.maxParticipants}
-            </p>
+            <div>
+              <h4>Platser</h4>
+              <p>
+                {session.participants.length} / {session.maxParticipants}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-
       <div className="participants-section">
         <h3>Deltagare</h3>
 
-        {session.participants.length === 0 ? (
+        {participants.length === 0 ? (
           <p>Inga deltagare anmälda.</p>
         ) : (
-          session.participants.map((participant) => (
+          participants.map((participant) => (
             <div className="participant-card" key={participant._id}>
               <div className="participant-info">
                 <h4>
@@ -100,7 +132,10 @@ export default function BookingDetailsForm({
               <div className="button-container">
                 <IconButton
                   label=""
-                  onClick={() => onRemoveParticipant(participant.bookingId)}
+                  onClick={() => {
+                    setBookingToRemove(participant.bookingId);
+                    setShowRemoveModal(true);
+                  }}
                   icon={
                     <svg
                       width="20px"
@@ -146,7 +181,33 @@ export default function BookingDetailsForm({
             </div>
           ))
         )}
+        <RegularButton
+          onClick={handleSave}
+          label="Uppdatera bokning"
+          color="green"
+          size="lg"
+          type="submit"
+        />
       </div>
+      <ConfirmModal
+        isOpen={showRemoveModal}
+        title="Ta bort deltagare"
+        message="Är du säker på att du vill ta bort denna deltagare?"
+        confirmText="Ta bort"
+        cancelText="Avbryt"
+        onCancel={() => {
+          setShowRemoveModal(false);
+          setBookingToRemove(null);
+        }}
+        onConfirm={() => {
+          if (!bookingToRemove) return;
+
+          handleRemoveParticipant(bookingToRemove);
+
+          setShowRemoveModal(false);
+          setBookingToRemove(null);
+        }}
+      />
     </div>
   );
 }

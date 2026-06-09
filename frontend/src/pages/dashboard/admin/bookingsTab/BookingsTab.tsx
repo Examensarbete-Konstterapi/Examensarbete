@@ -1,6 +1,7 @@
 import "./bookingsTab.css";
 import IconButton from "../../../../components/buttons/iconButton/IconButton";
 import Modal from "../../../../components/modal/Modal";
+import ConfirmModal from "../../../../components/confirmModal/ConfirmModal";
 import API from "../../../../api/axios";
 import { useEffect, useState } from "react";
 import BookingDetailsForm from "./bookingDetailsForm/BookingDetailsForm";
@@ -37,39 +38,32 @@ export function BookingsTab() {
   const [showModal, setShowModal] = useState(false);
   const [selectedSession, setSelectedSession] = useState<any>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [sessionToDelete, setSessionToDelete] = useState<string | null>(null);
+
+  const fetchBookings = async () => {
+    try {
+      const response = await API.get("/bookings");
+      setBookings(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    async function fetchBookings() {
-      try {
-        const response = await API.get(`/bookings`);
-        console.log(response);
-        setBookings(response.data);
-      } catch (error) {
-        console.error("Kunde inte hämta kurser:", error);
-        return [];
-      }
-    }
     fetchBookings();
   }, []);
 
-  async function handleRemoveParticipant(bookingId: string) {
-    const confirmed = window.confirm(
-      "Är du säker på att du vill ta bort deltagaren?",
-    );
-
-    if (!confirmed) return;
-
+  async function handleDeleteSession(sessionId: string) {
     try {
-      await API.delete(`/bookings/${bookingId}`);
+      await API.delete(`/sessions/${sessionId}`);
 
       setBookings((prev) =>
-        prev.filter((booking) => booking._id !== bookingId),
+        prev.filter((booking) => booking.sessionId._id !== sessionId),
       );
-
-      alert("Deltagaren togs bort");
     } catch (error) {
       console.error(error);
-      alert("Kunde inte ta bort deltagaren");
+      alert("Kunde inte ta bort kurstillfället");
     }
   }
 
@@ -123,7 +117,11 @@ export function BookingsTab() {
             <div className="booking-info">
               <div>
                 <h4>{session.title}</h4>
-                <p>{session.description}</p>
+                <p>
+                  {session.description.length > 50
+                    ? session.description.slice(0, 50) + "..."
+                    : session.description}
+                </p>
               </div>
 
               <div>
@@ -141,9 +139,6 @@ export function BookingsTab() {
 
               <div>
                 <p>
-                  {/* {booking.sessionId.courseId.category === "group"
-                    ? `${booking.sessionId.maxParticipants} platser`
-                    : `${booking.userId.firstName} ${booking.userId.lastName}`} */}
                   {session.category === "group"
                     ? `${session.participants.length} / ${session.maxParticipants} deltagare`
                     : `${session.participants[0]?.firstName} ${session.participants[0]?.lastName}`}
@@ -197,7 +192,10 @@ export function BookingsTab() {
                 />
                 <IconButton
                   label=""
-                  onClick={() => {}}
+                  onClick={() => {
+                    setSessionToDelete(session.sessionId);
+                    setShowDeleteModal(true);
+                  }}
                   icon={
                     <svg
                       width="20px"
@@ -254,10 +252,33 @@ export function BookingsTab() {
         {selectedSession && (
           <BookingDetailsForm
             session={selectedSession}
-            onRemoveParticipant={handleRemoveParticipant}
+            onClose={() => {
+              setShowModal(false);
+              setSelectedSession(null);
+            }}
+            refreshBookings={fetchBookings}
           />
         )}
       </Modal>
+      <ConfirmModal
+        isOpen={showDeleteModal}
+        title="Ta bort kurstillfälle"
+        message="Alla bokningar för detta tillfälle kommer också att tas bort."
+        confirmText="Radera"
+        cancelText="Avbryt"
+        onCancel={() => {
+          setShowDeleteModal(false);
+          setSessionToDelete(null);
+        }}
+        onConfirm={async () => {
+          if (!sessionToDelete) return;
+
+          await handleDeleteSession(sessionToDelete);
+
+          setShowDeleteModal(false);
+          setSessionToDelete(null);
+        }}
+      />
     </div>
   );
 }

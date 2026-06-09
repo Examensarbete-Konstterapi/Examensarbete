@@ -1,10 +1,17 @@
 import "./artTherapy.css";
+import Layout from "../../components/layout/Layout";
+import { MiniHeroSection } from "../../components/miniHeroSection/MiniHeroSection";
 
 export function ArtTherapy() {
   return (
     <>
-      <h1>Välkommen till sidan om konstterapi</h1>
-      <p>HEJ HEJ </p>
+      <MiniHeroSection
+        title="Konstterapi"
+        subtitle="En terapiform där kreativitet och självuttryck blir verktyg för läkning och utveckling"
+      />
+      <Layout>
+        <h2>hej</h2>
+      </Layout>
     </>
   );
 }
