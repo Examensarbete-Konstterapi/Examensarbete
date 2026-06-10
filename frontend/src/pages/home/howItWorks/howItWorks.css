@@ -1,0 +1,29 @@
+.how-it-works-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+}
+
+.how-it-works-section > .steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.how-it-works-section .step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background-color: var(--color-green-transparent);
+  border-radius: 100px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.how-it-works-section .step > p {
+  font-size: var(--font-lg);
+  color: var(--color-green);
+}

@@ -89,13 +89,15 @@ export async function createBooking(req: AuthRequest, res: Response) {
     if (existingBooking) {
       return res
         .status(400)
-        .json({ error: "User have already booked this session" });
+        .json({ error: "Du är redan anmäld till den här sessionen." });
     }
     // Kolla antal bokningar på sessionen
     const bookingCount = await BookingModel.countDocuments({ sessionId });
 
     if (bookingCount >= session.maxParticipants) {
-      return res.status(400).json({ error: "Session is fully booked" });
+      return res
+        .status(400)
+        .json({ error: "Tyvärr är den här tiden fullbokad." });
     }
     // Skapa bokning
     const booking = await BookingModel.create({

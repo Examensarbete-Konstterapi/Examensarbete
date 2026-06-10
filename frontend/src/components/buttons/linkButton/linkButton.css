@@ -1,7 +1,7 @@
 .link-button {
   font-size: var(--font-md);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,7 @@
 
 .link-button.green {
   background-color: var(--color-green);
-  color: var(--color-primary);
+  color: var(--color-white);
 }
 
 .link-button.transparent {

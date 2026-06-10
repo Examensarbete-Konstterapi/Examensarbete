@@ -6,7 +6,6 @@ type LinkButtonProps = {
   color: string;
   size: string;
   href: string;
-
 };
 
 export default function LinkButton({
@@ -14,12 +13,9 @@ export default function LinkButton({
   color,
   size,
   href,
-}: LinkButtonProps ) {
+}: LinkButtonProps) {
   return (
-    <Link
-      className={`link-button ${color} ${size}`}
-      to={href}
-    >
+    <Link className={`link-button ${color} ${size}`} to={href}>
       {label}
     </Link>
   );
