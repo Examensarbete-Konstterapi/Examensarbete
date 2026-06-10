@@ -126,6 +126,12 @@ export function Booking() {
       setSuccessModalOpen(true);
     } catch (error: any) {
       console.error(error);
+      if (error.response?.status === 401) {
+        setBookingError(
+          "Din inloggning har gått ut. Logga in igen för att fortsätta.",
+        );
+        return;
+      }
       setBookingError(
         error.response?.data?.error || "Något gick fel vid bokningen.",
       );
@@ -368,20 +374,17 @@ export function Booking() {
           cancelText="Avbryt"
           onConfirm={handleConfirmBooking}
           onCancel={() => setConfirmModalOpen(false)}
+          size="lg"
         >
           <div className="booking-confirm-modal-info">
             <p>Kurs: {selectedSession?.courseId.title}</p>
-
             <p>
               Datum:
               {selectedSession &&
                 new Date(selectedSession.date).toLocaleDateString("sv-SE")}
             </p>
-
             <p>Tid: {selectedSession?.startTime}</p>
-
             <p>Pris: {selectedSession?.courseId.price} kr</p>
-
             {pendingBooking?.message && (
               <p>Meddelande: {pendingBooking.message}</p>
             )}
@@ -397,6 +400,7 @@ export function Booking() {
           colorCancel="light"
           onConfirm={() => navigate("/mina-sidor")}
           onCancel={() => setSuccessModalOpen(false)}
+          size="md"
         />
 
         <ConfirmModal
@@ -405,7 +409,7 @@ export function Booking() {
           message={bookingError}
           confirmText="OK"
           onConfirm={() => setBookingError("")}
-          onCancel={() => setBookingError("")}
+          size="md"
         />
       </Layout>
     </>

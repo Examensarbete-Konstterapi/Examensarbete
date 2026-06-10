@@ -101,17 +101,6 @@
   color: var(--color-error);
 }
 
-.booking-confirm-modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  background-color: var(--color-pink-transparent);
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  width: 100%;
-}
-
 .booking-confirm-modal-info {
   display: flex;
   flex-direction: column;

@@ -1,4 +1,5 @@
 import RegularButton from "../buttons/regularButton/RegularButton";
+import { type ReactNode } from "react";
 import "./confirmModal.css";
 
 interface ConfirmModalProps {
@@ -11,6 +12,8 @@ interface ConfirmModalProps {
   onConfirm: () => void;
   onCancel?: () => void;
   colorCancel?: string;
+
+  size?: "sm" | "md" | "lg";
 }
 
 export default function ConfirmModal({
@@ -23,12 +26,13 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
   colorCancel,
+  size,
 }: ConfirmModalProps) {
   if (!isOpen) return null;
 
   return (
     <div className="confirm-modal-backdrop">
-      <div className="confirm-modal-content">
+      <div className={`confirm-modal-content confirm-modal-${size}`}>
         <h2>{title}</h2>
         {message && <p>{message}</p>}
 
@@ -41,12 +45,14 @@ export default function ConfirmModal({
             size="sm"
             onClick={onConfirm}
           />
-          <RegularButton
+          {onCancel && (
+            <RegularButton
             label={cancelText}
             color={`${colorCancel ?? "red"}`}
             size="sm"
             onClick={onCancel}
           />
+          )}
         </div>
       </div>
     </div>

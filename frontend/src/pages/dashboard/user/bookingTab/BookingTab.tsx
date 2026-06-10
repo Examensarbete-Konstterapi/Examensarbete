@@ -140,6 +140,7 @@ export function BookingTab() {
           cancelText="Avbryt"
           onConfirm={handleDeleteBooking}
           onCancel={() => setIsModalOpen(false)}
+          size="md"
         />
       </div>
     </>

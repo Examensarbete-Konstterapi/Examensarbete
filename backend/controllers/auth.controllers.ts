@@ -76,7 +76,7 @@ export async function loginUser(req: Request, res: Response) {
         role: user.role,
       },
       process.env.JWT_SECRET!,
-      { expiresIn: "1h" },
+      { expiresIn: "7d" },
     );
 
     res.status(200).json({
