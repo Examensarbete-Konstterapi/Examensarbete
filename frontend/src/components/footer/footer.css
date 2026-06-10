@@ -21,7 +21,7 @@
 .footer-column li,
 .footer-column a {
   color: var(--color-text);
-  opacity: 0.8;
+  /* opacity: 0.8; */
   line-height: 1.7;
   font-size: 1.4rem;
 }
@@ -35,7 +35,7 @@
 }
 
 .footer-column a:hover {
-  color: var(--color-green);
+  color: var(--color-hover);
 }
 
 .social-links {

@@ -4,10 +4,10 @@
 
 .profile-button {
   background: var(--color-green);
-  color: var(--color-primary);
+  color: var(--color-bg);
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-md);
+  padding: 1rem 1rem;
+  border-radius: var(--radius-lg);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@
 }
 
 .profile-button:hover {
-  background-color: #749474;
+  background-color: var(--color-hover);
 }
 
 .dropdown-arrow {

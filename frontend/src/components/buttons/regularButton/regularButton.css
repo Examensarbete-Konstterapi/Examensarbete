@@ -2,7 +2,7 @@
   font-size: var(--font-md);
   border: none;
   border-radius: var(--radius-lg);
-  /* z-index: 1000; */
+  transition: 0.3s ease-in-out;
 }
 
 .regular-button.xxs {
@@ -36,7 +36,7 @@
 
 .regular-button.transparent {
   background-color: transparent;
-  color: var(--color-text);
+  color: var(--color-green-light);
   text-decoration: underline;
 }
 
@@ -61,4 +61,21 @@
   border: none;
   color: var(--color-green);
   opacity: 0.7;
+}
+.regular-button.disabled:hover{
+  background-color: var(--color-border);
+}
+
+.regular-button.green:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.02);
+}
+
+.regular-button.red:hover {
+  background-color: var(--color-error-hover);
+  transform: scale(1.02);
+}
+
+.regular-button.transparent:hover {
+  color: var(--color-hover);
 }

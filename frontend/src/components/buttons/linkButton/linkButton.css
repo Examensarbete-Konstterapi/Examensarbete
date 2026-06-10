@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s ease-in-out;
 }
 
 .link-button.xxs {
@@ -33,10 +34,19 @@
 
 .link-button.green {
   background-color: var(--color-green);
-  color: var(--color-white);
+  color: var(--color-bg);
 }
 
 .link-button.transparent {
   background-color: transparent;
   color: var(--color-green);
+}
+
+.link-button.link-button.transparent:hover {
+  color: var(--color-hover);
+}
+
+.link-button.green:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.02);
 }

@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   /* background-color: var(--color-primary); */
-  color: var(--color-secondary);
+  color: var(--color-green);
   gap: var(--spacing-sm);
 }
 
