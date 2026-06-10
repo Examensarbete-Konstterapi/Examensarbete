@@ -18,7 +18,7 @@ export default function GallerySection() {
         <GalleryCard art={art4} />
       </div>
       <LinkButton
-        href="/gallery"
+        href="/galleri"
         label="Visa hela galleriet"
         color="transparent"
         size="xxs"
