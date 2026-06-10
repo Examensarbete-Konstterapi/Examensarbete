@@ -187,7 +187,33 @@ export function ArtTherapy() {
 
             <div className="therapy-benefits-grid">
               <article className="benefit-card">
-                <h3>Stress & Utmattning</h3>
+                <h3>
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Stress & Utmattning
+                </h3>
                 <p>
                   Hitta vägar till avslappning och återhämtning genom kreativt
                   uttryck.
@@ -195,7 +221,34 @@ export function ArtTherapy() {
               </article>
 
               <article className="benefit-card">
-                <h3>Ångest & Depression</h3>
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Ångest & Depression
+                </h3>
                 <p>
                   Utforska känslor och tankar på ett sätt som känns säkert och
                   stödjande.
@@ -203,26 +256,134 @@ export function ArtTherapy() {
               </article>
 
               <article className="benefit-card">
-                <h3>Livskriser & Förändringar</h3>
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Livskriser & Förändringar
+                </h3>
                 <p>
                   Bearbeta förlust, separation eller stora livsförändringar.
                 </p>
               </article>
 
               <article className="benefit-card">
-                <h3>Självutveckling</h3>
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Självutveckling
+                </h3>
                 <p>
                   Fördjupa självkännedom och utforska din kreativa potential.
                 </p>
               </article>
 
               <article className="benefit-card">
-                <h3>Relationer</h3>
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Relationer
+                </h3>
                 <p>Utforska relationsmönster och kommunikation på nya sätt.</p>
               </article>
 
               <article className="benefit-card">
-                <h3>Trauma</h3>
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Trauma
+                </h3>
                 <p>
                   Bearbeta svåra upplevelser i din egen takt med traumamedveten
                   terapi.

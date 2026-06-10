@@ -40,7 +40,8 @@ html {
   --color-beige: #dfd1be;
   --color-blue: #cedae4;
 
-  --color-hover: #22532b;
+  /* --color-hover: #22532b; */
+  --color-hover: #526a52;
 
   /* Pallete */
   /* --color-two: #fee2e8;

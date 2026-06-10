@@ -48,6 +48,10 @@
   color: var(--color-hover);
 }
 
+.link-button.link-button.transparent:hover {
+  gap: 0.8rem;
+}
+
 .link-button.green:hover {
   background-color: var(--color-hover);
   transform: scale(1.02);

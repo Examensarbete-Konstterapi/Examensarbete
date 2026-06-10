@@ -1,16 +1,9 @@
-/* .art-therapy-page {
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-} */
-
 .art-therapy-page section {
   width: 100%;
 }
 
 .art-therapy-page h2 {
   text-align: center;
-  /* margin-bottom: 2rem; */
 }
 
 .art-therapy-intro {
@@ -98,6 +91,11 @@
   padding: 1.5rem;
   border-radius: var(--radius-lg);
   height: 11rem;
+}
+
+.benefit-card h3 {
+  display: flex;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
