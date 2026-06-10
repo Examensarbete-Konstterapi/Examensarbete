@@ -8,6 +8,9 @@ import Modal from "../../components/modal/Modal";
 import Login from "../login/Login";
 import Register from "../register/Register";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../../context/useAuth";
+import { useNavigate } from "react-router-dom";
+// import ConfirmModal from "../../components/confirmModal/ConfirmModal";
 
 type BookingForm = {
   category: string;
@@ -21,24 +24,34 @@ type Session = {
   _id: string;
   date: string;
   startTime: string;
+  maxParticipants: number;
+  bookedParticipants: number;
+  isFull: boolean;
   courseId: {
     _id: string;
     title: string;
     price: number;
     category: string;
+    description: string;
   };
 };
 
 export function Booking() {
+  const navigate = useNavigate();
+  const [pendingBooking, setPendingBooking] = useState<BookingForm | null>(
+    null,
+  );
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [sessions, setSessions] = useState<Session[]>([]);
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
-
-  const token = localStorage.getItem("token");
+  const { isLoggedIn } = useAuth();
 
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<BookingForm>();
 
@@ -59,28 +72,9 @@ export function Booking() {
     fetchSessions();
   }, []);
 
-  async function onSubmit(data: BookingForm) {
-    try {
-      const token = localStorage.getItem("token");
-
-      await API.post(
-        "/bookings",
-        {
-          sessionId: data.sessionId,
-          message: data.message,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      alert("Bokning skapad!");
-    } catch (error) {
-      console.error(error);
-      alert("Något gick fel");
-    }
+  function onSubmit(data: BookingForm) {
+    setPendingBooking(data);
+    setConfirmModalOpen(true);
   }
 
   const courses = Array.from(
@@ -90,7 +84,7 @@ export function Booking() {
   );
 
   const filteredCourses = courses.filter(
-    (course) => course.category === selectedCategory
+    (course) => course.category === selectedCategory,
   );
 
   const filteredDates = sessions.filter(
@@ -112,9 +106,28 @@ export function Booking() {
   );
 
   const selectedCourse = courses.find(
-  (course) => course._id === selectedCourseId
-);
+    (course) => course._id === selectedCourseId,
+  );
 
+  const selectedSession = sessions.find(
+    (session) => session._id === pendingBooking?.sessionId,
+  );
+  async function handleConfirmBooking() {
+    if (!pendingBooking) return;
+
+    try {
+      await API.post("/bookings", {
+        sessionId: pendingBooking.sessionId,
+        message: pendingBooking.message,
+      });
+      reset();
+      setConfirmModalOpen(false);
+      setSuccessModalOpen(true);
+    } catch (error) {
+      console.error(error);
+      setConfirmModalOpen(false);
+    }
+  }
 
   return (
     <>
@@ -163,7 +176,7 @@ export function Booking() {
             </aside>
 
             <div className="booking-forms">
-              {!token ? (
+              {!isLoggedIn ? (
                 <form className="booking-form">
                   <h2>Logga in</h2>
                   <div className="booking-form-text">
@@ -198,11 +211,11 @@ export function Booking() {
                   <h2>Välj tid och typ av session</h2>
                   <label>
                     Välj typ kurs
-                   <select {...register("category")}>
-                    <option value="">Välj typ</option>
-                     <option value="individual">Individuell terapi</option>
-                     <option value="group">Gruppterapi</option>
-                  </select>
+                    <select {...register("category")}>
+                      <option value="">Välj typ</option>
+                      <option value="individual">Individuell terapi</option>
+                      <option value="group">Gruppterapi</option>
+                    </select>
                     {errors.courseId && <span>{errors.courseId.message}</span>}
                   </label>
                   <label>
@@ -215,18 +228,18 @@ export function Booking() {
                       <option value="">Välj kurs</option>
 
                       {filteredCourses.map((course) => (
-                      <option key={course._id} value={course._id}>
-                       {course.title}
-                      </option>
+                        <option key={course._id} value={course._id}>
+                          {course.title}
+                        </option>
                       ))}
                     </select>
                     {errors.courseId && <span>{errors.courseId.message}</span>}
                   </label>
                   {selectedCourse && (
-                   <div className="price-box">
-                     <h3>Pris</h3>
-                     <p>{selectedCourse.price} kr</p>
-                   </div>
+                    <div className="price-box">
+                      <h3>Pris</h3>
+                      <p>{selectedCourse.price} kr</p>
+                    </div>
                   )}
                   <label>
                     Välj datum
@@ -257,8 +270,15 @@ export function Booking() {
                       <option value="">Välj tid</option>
 
                       {filteredTimes.map((session) => (
-                        <option key={session._id} value={session._id}>
-                          {session.startTime}
+                        <option
+                          key={session._id}
+                          value={session._id}
+                          disabled={session.isFull}
+                        >
+                          {session.startTime}{" "}
+                          {session.courseId.category === "group" &&
+                            ` (${session.bookedParticipants} av ${session.maxParticipants} platser bokade)`}
+                          {session.isFull ? " - Fullbokad" : ""}
                         </option>
                       ))}
                     </select>
@@ -298,6 +318,61 @@ export function Booking() {
               onClose={() => setModalType(null)}
             />
           )}
+        </Modal>
+        {/* Bekräfta bokning */}
+        <Modal
+          isOpen={confirmModalOpen}
+          onClose={() => setConfirmModalOpen(false)}
+        >
+          <div className="booking-confirm-modal">
+            <h2>Bekräfta bokning</h2>
+            <div className="booking-confirm-modal-info ">
+              <p>Kurs: {selectedSession?.courseId.title}</p>
+              <p>
+                Datum:{" "}
+                {selectedSession &&
+                  new Date(selectedSession.date).toLocaleDateString("sv-SE")}
+              </p>
+              <p>Tid: {selectedSession?.startTime}</p>
+              <p>Pris: {selectedSession?.courseId.price} kr</p>
+              {pendingBooking?.message && (
+                <p>Meddelande: {pendingBooking.message}</p>
+              )}
+            </div>
+            <div className="booking-confirm-buttons">
+              <RegularButton
+                label="Ja, boka"
+                color="green"
+                size="xs"
+                onClick={handleConfirmBooking}
+              />
+              <RegularButton
+                label="Avbryt"
+                color="red"
+                size="xs"
+                onClick={() => setConfirmModalOpen(false)}
+              />
+            </div>
+          </div>
+        </Modal>
+
+        {/* Bokning skapad */}
+        <Modal
+          isOpen={successModalOpen}
+          onClose={() => setSuccessModalOpen(false)}
+        >
+          <div className="booking-success-modal">
+            <h2>Bokning skapad!</h2>
+            <p>
+              Din bokning har registrerats och du hittar den under Mina sidor.
+            </p>
+            <RegularButton
+              label="Till Mina sidor"
+              color="green"
+              size="sm"
+              onClick={() => navigate("/mina-sidor")}
+            />
+          </div>
         </Modal>
       </Layout>
     </>

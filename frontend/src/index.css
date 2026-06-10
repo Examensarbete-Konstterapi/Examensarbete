@@ -25,6 +25,8 @@ html {
   --color-error: #d32f2f;
   --color-border: #ddd;
 
+  --color-green-extra-light: rgb(226, 232, 226);
+
   --color-green-transparent: rgba(187, 200, 187, 0.15);
   --color-pink-transparent: rgba(225, 192, 200, 0.15);
 
@@ -96,9 +98,16 @@ h3 {
   margin-bottom: var(--spacing-xs);
 }
 
+h4 {
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--color-green);
+  margin-bottom: var(--spacing-xs);
+}
+
 p {
   font-size: var(--font-sm);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 a {

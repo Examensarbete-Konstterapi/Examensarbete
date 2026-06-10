@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CourseModel } from "../models/course.model.ts";
 import { SessionModel } from "../models/session.model.ts";
+import { BookingModel } from "../models/booking.model.ts";
 import mongoose from "mongoose";
 
 export async function createSession(req: Request, res: Response) {
@@ -41,11 +42,16 @@ export async function createSession(req: Request, res: Response) {
       });
     }
 
+    const finalMaxParticipants =
+      course.category === "individual"
+      ? 1
+      : maxParticipants;
+
     const newSession = await SessionModel.create({
       courseId,
       date,
       startTime,
-      maxParticipants,
+      maxParticipants : finalMaxParticipants,
     });
 
     res.status(201).json(newSession);
@@ -57,9 +63,26 @@ export async function createSession(req: Request, res: Response) {
 
 export async function getSessions(req: Request, res: Response) {
   try {
-    const sessions = await SessionModel.find().populate("courseId", "title price category");
+    const sessions = await SessionModel.find().populate(
+      "courseId",
+      "title price category",
+    );
 
-    res.json(sessions);
+    const sessionsWithBookingInfo = await Promise.all(
+      sessions.map(async (session) => {
+        const bookingCount = await BookingModel.countDocuments({
+          sessionId: session._id,
+        });
+
+        return {
+          ...session.toObject(),
+          bookedParticipants: bookingCount,
+          isFull: bookingCount >= session.maxParticipants,
+        };
+      }),
+    );
+
+    res.json(sessionsWithBookingInfo);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch sessions" });
@@ -122,13 +145,18 @@ export async function deleteSession(req: Request, res: Response) {
       return res.status(400).json({ error: "Invalid SessionID" });
     }
 
+    await BookingModel.deleteMany({
+      sessionId: id,
+    });
+
     const deletedSession = await SessionModel.findByIdAndDelete(id);
+
     if (!deletedSession) {
       return res.status(404).json({ error: "Session not found" });
     }
 
     res.json({
-      message: "Session deleted successfully",
+      message: "Session and related bookings deleted successfully",
       session: deletedSession,
     });
   } catch (err) {

@@ -7,6 +7,7 @@ import {
   getUserById,
   updateUser,
   deleteUser,
+  updatePassword,
 } from "../controllers/user.controllers.ts";
 
 const router = Router();
@@ -19,6 +20,7 @@ router.post("/auth/register", registerUser);
 router.get("/users", adminOnly, getUsers);
 router.get("/users/:id", auth, getUserById);
 router.put("/users/:id", auth, updateUser);
+router.put("/users/:id/password", auth, updatePassword);
 router.delete("/users/:id", auth, deleteUser);
 // //Auth
 // router.post("/auth/register", registerUser);

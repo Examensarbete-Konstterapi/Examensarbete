@@ -19,7 +19,7 @@ type LoginProps = {
 
 export default function Login({ onSwitchToRegister, onClose }: LoginProps) {
   const navigate = useNavigate();
-  const { setUser } = useAuth();
+  const { user, setUser } = useAuth();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -52,7 +52,11 @@ export default function Login({ onSwitchToRegister, onClose }: LoginProps) {
 
       if (onClose) onClose();
 
-      navigate("/mina-sidor");
+      if (userData.role === "admin") {
+        navigate("/admin-panel", { replace: true });
+      } else {
+        navigate("/mina-sidor", { replace: true });
+      }
 
       console.log(response.data);
     } catch (error: any) {

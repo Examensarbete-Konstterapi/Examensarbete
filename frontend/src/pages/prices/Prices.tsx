@@ -1,10 +1,14 @@
 import "./prices.css";
+import Layout from "../../components/layout/Layout";
+import { MiniHeroSection } from "../../components/miniHeroSection/MiniHeroSection";
 
 export function Prices() {
   return (
     <>
-      <h1>Välkommen till sidan om priser</h1>
-      <p>HEJ HEJ </p>
+      <MiniHeroSection title="Priser" subtitle="" />
+      <Layout>
+        <h2>hej</h2>
+      </Layout>
     </>
   );
 }

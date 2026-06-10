@@ -81,6 +81,7 @@
 .booking-form label {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .booking-form input,
@@ -94,6 +95,46 @@
 
 .booking-form textarea {
   resize: none;
+}
+
+.booking-form span {
+  color: var(--color-error);
+}
+
+.booking-confirm-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-pink-transparent);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  width: 100%;
+}
+
+.booking-confirm-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--color-green-light);
+}
+.booking-confirm-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.booking-success-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-pink-transparent);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  width: 100%;
 }
 
 @media (max-width: 768px) {

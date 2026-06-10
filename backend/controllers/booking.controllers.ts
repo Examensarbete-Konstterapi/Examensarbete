@@ -9,9 +9,10 @@ export async function getAllBookings(req: Request, res: Response) {
     const bookings = await BookingModel.find()
       .populate({
         path: "sessionId",
+        select: "date startTime maxParticipants courseId",
         populate: {
           path: "courseId",
-          select: "title",
+          select: "title category price description",
         },
       })
       .populate("userId", "firstName lastName email");
@@ -53,15 +54,9 @@ export async function getUserBookings(req: AuthRequest, res: Response) {
       path: "sessionId",
       populate: {
         path: "courseId",
-        select: "title",
+        select: "title category price description",
       },
     });
-
-    if (bookings.length === 0) {
-      return res.status(404).json({
-        error: "No bookings found for this user",
-      });
-    }
 
     res.json(bookings);
   } catch (err) {

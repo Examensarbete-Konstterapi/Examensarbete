@@ -6,6 +6,7 @@ type RegularButtonProps = {
   color: string;
   size: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
 export default function RegularButton({
@@ -14,12 +15,16 @@ export default function RegularButton({
   color,
   size,
   type,
+  disabled,
 }: RegularButtonProps) {
   return (
     <button
-      className={`regular-button ${color} ${size}`}
+      className={`regular-button ${color} ${size} ${
+        disabled ? "disabled" : ""
+      }`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {label}
     </button>

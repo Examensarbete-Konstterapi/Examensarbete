@@ -5,15 +5,24 @@ type IconButtonProps = {
   icon: React.ReactNode;
   label: string;
   active?: boolean;
+  type?: "button" | "submit" | "reset";
 };
 
-export default function IconButton({ onClick, icon, label, active }: IconButtonProps) {
+export default function IconButton({
+  onClick,
+  icon,
+  label,
+  active,
+  type,
+}: IconButtonProps) {
   return (
-    <button 
+    <button
       className={`icon-button ${active ? "active" : ""}`}
-      onClick={onClick}>
+      onClick={onClick}
+      type={type}
+    >
       {icon}
       {label}
     </button>
-  )
-};
+  );
+}

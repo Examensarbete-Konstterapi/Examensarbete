@@ -1,0 +1,66 @@
+.booking-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 35rem;
+  gap: 2rem;
+  color: var(--color-green);
+}
+
+.summary-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+}
+
+.summary-grid strong {
+  font-size: var(--font-xs);
+}
+
+.summary-grid p {
+  margin-top: 0.3rem;
+}
+
+.participants-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.participant-card {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-green-transparent);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.participant-info {
+  width: 100%;
+}
+
+.participant-message {
+  margin-top: 1rem;
+}
+
+.participant-message label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.participant-message textarea {
+  width: 100%;
+  min-height: 100px;
+  resize: none;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+
+.booking-details > .button-container {
+  display: flex;
+}

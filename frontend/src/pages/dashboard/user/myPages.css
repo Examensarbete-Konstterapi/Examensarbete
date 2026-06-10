@@ -4,7 +4,6 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 2rem;
-
 }
 
 .my-pages-section .menu {
@@ -34,3 +33,15 @@
   box-shadow: var(--shadow-md);
 }
 
+.my-pages-section .tab-password-section {
+  grid-column: 2/2;
+  background-color: var(--color-white);
+  width: 100%;
+  padding: 3rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.no-tab-section {
+  display: none;
+}
