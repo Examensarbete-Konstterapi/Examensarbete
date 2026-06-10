@@ -18,7 +18,10 @@
   justify-content: center;
   width: 72px;
   height: 72px;
-  background-color: var(--color-green-extra-light);
   border-radius: 100px;
   flex-shrink: 0;
 }
+
+/* .introduction-card > :nth-child(1) > .icon {
+  background-color: var(--color-green-transparent);
+} */

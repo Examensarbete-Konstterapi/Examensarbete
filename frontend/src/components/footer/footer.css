@@ -1,5 +1,5 @@
 .footer {
-  background-color: var(--color-beige);
+  /* background-color: var(--color-beige); */
   border-top: 1px solid var(--color-border);
   margin-top: 6rem;
 }

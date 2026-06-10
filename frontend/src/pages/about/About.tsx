@@ -101,38 +101,38 @@ export function About() {
                       id="Layer_1"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 32 32"
-                      enable-background="new 0 0 32 32"
+                      enableBackground="new 0 0 32 32"
                       width="32px"
                       height="32px"
                       fill="#adbcad"
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                       <g
                         id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></g>
                       <g id="SVGRepo_iconCarrier">
                         {" "}
                         <polyline
                           fill="none"
                           stroke="#adbcad"
-                          stroke-width="2"
-                          stroke-miterlimit="10"
+                          strokeWidth="2"
+                          strokeMiterlimit="10"
                           points="17.4,21 21.3,26.9 22.7,23.6 26.3,23.6 22.6,18 "
                         ></polyline>{" "}
                         <polyline
                           fill="none"
                           stroke="#adbcad"
-                          stroke-width="2"
-                          stroke-miterlimit="10"
+                          strokeWidth="2"
+                          strokeMiterlimit="10"
                           points="14.6,21 10.7,26.9 9.3,23.6 5.7,23.6 9.4,18 "
                         ></polyline>{" "}
                         <path
                           fill="none"
                           stroke="#adbcad"
-                          stroke-width="2"
-                          stroke-miterlimit="10"
+                          strokeWidth="2"
+                          strokeMiterlimit="10"
                           d="M17.2,4.4L19,5.7L21.2,6c0.9,0.1,1.6,0.8,1.7,1.7 l0.4,2.2l1.3,1.8c0.5,0.7,0.5,1.7,0,2.5L23.3,16L23,18.2c-0.1,0.9-0.8,1.6-1.7,1.7L19,20.3l-1.8,1.3c-0.7,0.5-1.7,0.5-2.5,0L13,20.3 L10.8,20c-0.9-0.1-1.6-0.8-1.7-1.7L8.7,16l-1.3-1.8c-0.5-0.7-0.5-1.7,0-2.5L8.7,10L9,7.8C9.2,6.9,9.9,6.2,10.8,6L13,5.7l1.8-1.3 C15.5,3.9,16.5,3.9,17.2,4.4z"
                         ></path>{" "}
                       </g>
@@ -190,7 +190,7 @@ export function About() {
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                       <g
                         id="SVGRepo_tracerCarrier"
                         strokeLinecap="round"
@@ -233,7 +233,7 @@ export function About() {
                       ></g>
                       <g id="SVGRepo_iconCarrier">
                         <path
-                          fill-rule="evenodd"
+                          fillRule="evenodd"
                           d="M3.5 8a5.5 5.5 0 118.596 4.547 9.005 9.005 0 015.9 8.18.75.75 0 01-1.5.045 7.5 7.5 0 00-14.993 0 .75.75 0 01-1.499-.044 9.005 9.005 0 015.9-8.181A5.494 5.494 0 013.5 8zM9 4a4 4 0 100 8 4 4 0 000-8z"
                         ></path>
                         <path d="M17.29 8c-.148 0-.292.01-.434.03a.75.75 0 11-.212-1.484 4.53 4.53 0 013.38 8.097 6.69 6.69 0 013.956 6.107.75.75 0 01-1.5 0 5.193 5.193 0 00-3.696-4.972l-.534-.16v-1.676l.41-.209A3.03 3.03 0 0017.29 8z"></path>
