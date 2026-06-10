@@ -6,6 +6,7 @@ type LinkButtonProps = {
   color: string;
   size: string;
   href: string;
+  icon?: React.ReactNode;
 };
 
 export default function LinkButton({
@@ -13,10 +14,12 @@ export default function LinkButton({
   color,
   size,
   href,
+  icon,
 }: LinkButtonProps) {
   return (
     <Link className={`link-button ${color} ${size}`} to={href}>
       {label}
+      {icon}
     </Link>
   );
 }

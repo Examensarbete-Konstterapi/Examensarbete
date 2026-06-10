@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600&family=Inter:wght@400;500;600&display=swap");
 
 * {
   box-sizing: border-box;
@@ -30,10 +30,15 @@ html {
   --color-border: #ddd;
   --color-text: rgb(126, 132, 124);
 
-  --color-green-extra-light: rgb(226, 232, 226);
-
   --color-green-transparent: rgba(187, 200, 187, 0.15);
   --color-pink-transparent: rgba(225, 192, 200, 0.15);
+  --color-beige-transparent: rgba(225, 211, 192, 0.15);
+  --color-blue-transparent: rgba(206, 218, 228, 0.15);
+
+  --color-green-extra-light: #adbcad;
+  --color-pink-dark: #c598ae;
+  --color-beige: #dfd1be;
+  --color-blue: #cedae4;
 
   /* Pallete */
   --color-two: #fee2e8;
@@ -64,6 +69,7 @@ html {
   --radius-sm: 0.8rem;
   --radius-md: 1.6rem;
   --radius-lg: 2rem;
+  --radius-xl: 3rem;
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);

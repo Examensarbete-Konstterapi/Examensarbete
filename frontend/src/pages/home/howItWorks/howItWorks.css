@@ -12,13 +12,24 @@
   text-align: center;
 }
 
+.how-it-works-section > :nth-child(1) > .step {
+  background-color: var(--color-beige-transparent);
+}
+
+.how-it-works-section > :nth-child(2) > .step {
+  background-color: var(--color-green-transparent);
+}
+
+.how-it-works-section > :nth-child(3) > .step {
+  background-color: var(--color-pink-transparent);
+}
+
 .how-it-works-section .step {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 72px;
   height: 72px;
-  background-color: var(--color-green-transparent);
   border-radius: 100px;
   margin-bottom: var(--spacing-sm);
 }

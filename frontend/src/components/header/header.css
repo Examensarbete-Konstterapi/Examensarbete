@@ -15,7 +15,7 @@
 .header-scrolled {
   background: var(--color-bg);
   /* backdrop-filter: blur(10px); */
-  box-shadow: var(--shadow-md)
+  box-shadow: var(--shadow-md);
 }
 
 .header nav {
@@ -25,6 +25,9 @@
   font-size: var(--font-sm);
 }
 
+.desktop-nav a:hover {
+  color: var(--color-hover);
+}
 .header > nav > button {
   background-color: transparent;
 }

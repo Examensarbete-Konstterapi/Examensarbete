@@ -1,8 +1,9 @@
 import "./artTherapy.css";
 import Layout from "../../components/layout/Layout";
 import { MiniHeroSection } from "../../components/miniHeroSection/MiniHeroSection";
-import LinkButton from "../../components/buttons/linkButton/LinkButton";
+// import LinkButton from "../../components/buttons/linkButton/LinkButton";
 import { FAQSection } from "./faqSection/FaqSection";
+import CTASection from "../../components/CTASection/CTASection";
 
 export function ArtTherapy() {
   return (
@@ -103,9 +104,7 @@ export function ArtTherapy() {
 
               <article className="benefit-card">
                 <h3>Relationer</h3>
-                <p>
-                  Utforska relationsmönster och kommunikation på nya sätt.
-                </p>
+                <p>Utforska relationsmönster och kommunikation på nya sätt.</p>
               </article>
 
               <article className="benefit-card">
@@ -119,22 +118,13 @@ export function ArtTherapy() {
           </section>
 
           <FAQSection />
-
-          <section className="therapy-cta">
-            <h2>Redo att utforska konstterapi?</h2>
-
-            <p>
-              Boka ett kostnadsfritt första samtal så kan vi prata om dina behov
-              och förväntningar.
-            </p>
-
-            <LinkButton
-              href="/boka-tid"
-              label="Boka tid"
-              color="green"
-              size="sm"
-            />
-          </section>
+          <CTASection
+            title="Redo att utforska konstterapi?"
+            text="Boka ett kostnadsfritt första samtal så kan vi prata om dina behov
+              och förväntningar."
+            btnLabel="Boka tid"
+            href="/boka-tid"
+          />
         </main>
       </Layout>
     </>

@@ -1,0 +1,25 @@
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  /* margin: 3rem 0; */
+}
+
+.about-gallery-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-gallery-section > .about-gallery {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 3rem;
+  text-align: center;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}

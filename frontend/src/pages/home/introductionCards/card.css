@@ -4,7 +4,7 @@
   box-shadow: var(--shadow-md);
   padding: 5rem 2.5rem;
   text-align: center;
-  width: 350px;
+  /* width: 350px; */
   height: 300px;
   display: flex;
   flex-direction: column;
@@ -20,4 +20,5 @@
   height: 72px;
   background-color: var(--color-green-extra-light);
   border-radius: 100px;
+  flex-shrink: 0;
 }

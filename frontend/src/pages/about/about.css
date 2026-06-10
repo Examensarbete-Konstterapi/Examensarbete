@@ -37,42 +37,72 @@
   gap: 1.5rem;
 }
 
-.about-cards {
+.about-cards,
+.education-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
-.about-card-pink {
-  background: var(--color-pink-transparent);
+.about-card {
+  display: flex;
+  flex-direction: column;
   padding: 1.5rem;
   border-radius: var(--radius-lg);
 }
 
-.about-card-green {
-  background: var(--color-green-transparent);
+.education-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
   padding: 1.5rem;
   border-radius: var(--radius-lg);
+}
+
+.education-card > .education-card-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 100px;
+}
+
+.education-cards > :nth-child(1) > .education-card-icon {
+  background-color: var(--color-green-transparent);
+}
+
+.education-cards > :nth-child(2) > .education-card-icon {
+  background-color: var(--color-pink-transparent);
+}
+
+.education-cards > :nth-child(3) > .education-card-icon {
+  background-color: var(--color-beige-transparent);
+}
+
+.education-cards > :nth-child(4) > .education-card-icon {
+  background-color: var(--color-blue-transparent);
+}
+
+.about-cards > :first-child {
+  background: var(--color-beige-transparent);
+}
+
+.about-cards > :nth-child(2) {
+  background: var(--color-green-transparent);
+}
+
+.about-cards > :nth-child(3) {
+  background: var(--color-blue-transparent);
+}
+
+.about-cards > :nth-child(4) {
+  background: var(--color-pink-transparent);
 }
 
 .about-card h3 {
   margin-bottom: 0.5rem;
-}
-
-.about-cta {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: var(--color-pink-transparent);
-  padding: 4rem 2rem;
-  border-radius: var(--radius-lg);
-}
-
-.about-cta p {
-  margin: 1rem auto 2rem;
-  max-width: 600px;
 }
 
 @media (max-width: 768px) {

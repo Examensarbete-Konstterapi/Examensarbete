@@ -1,10 +1,10 @@
 import "./galleryCard.css";
 
-interface GalleryProps {
+interface GalleryCardProps {
   art: string;
 }
 
-export default function GallerySection({ art }: GalleryProps) {
+export default function GalleryCard({ art }: GalleryCardProps) {
   return (
     <article className="home-gallery-img">
       <img src={art} alt="art1"></img>

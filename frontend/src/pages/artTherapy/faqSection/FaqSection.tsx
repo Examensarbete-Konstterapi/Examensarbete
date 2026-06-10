@@ -1,4 +1,4 @@
-import "./faqSection.css";
+// import "./faqSection.css";
 import { useState } from "react";
 
 type FAQ = {
@@ -14,8 +14,7 @@ const faqs: FAQ[] = [
   },
   {
     question: "Hur lång är en session?",
-    answer:
-      "En session är vanligtvis 60–90 minuter lång beroende på upplägg.",
+    answer: "En session är vanligtvis 60–90 minuter lång beroende på upplägg.",
   },
   {
     question: "Vad händer med det jag skapar?",
@@ -41,9 +40,7 @@ export function FAQSection() {
           <article key={index} className="faq-item">
             <button
               className="faq-button"
-              onClick={() =>
-                setOpenFaq(openFaq === index ? null : index)
-              }
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
             >
               <span>{faq.question}</span>
               <span>{openFaq === index ? "−" : "+"}</span>
@@ -60,7 +57,3 @@ export function FAQSection() {
     </section>
   );
 }
-
-
-
-
