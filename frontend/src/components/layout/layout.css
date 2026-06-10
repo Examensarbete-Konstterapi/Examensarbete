@@ -1,6 +1,6 @@
 .layout-container {
-  padding: 3rem 18rem;
+  padding: 8rem 18rem;
   display: flex;
   flex-direction: column;
-  gap: 13rem;
+  gap: 10rem;
 }

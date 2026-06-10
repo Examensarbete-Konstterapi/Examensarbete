@@ -71,13 +71,13 @@ export default function CourseForm({
     name: "sessions",
   });
 
-    useEffect(() => {
-  if (category === "individual") {
-    fields.forEach((_, index) => {
-      setValue(`sessions.${index}.maxParticipants`, 1);
-    });
-  }
-}, [category, fields, setValue]);
+  useEffect(() => {
+    if (category === "individual") {
+      fields.forEach((_, index) => {
+        setValue(`sessions.${index}.maxParticipants`, 1);
+      });
+    }
+  }, [category, fields, setValue]);
 
   return (
     <form className="course-form" onSubmit={handleSubmit(onSubmit)}>
@@ -214,7 +214,6 @@ export default function CourseForm({
                       if (session._id && onDeleteSession) {
                         onDeleteSession(session._id);
                       }
-                      console.log("Tar bort index:", index);
 
                       remove(index);
                     }}

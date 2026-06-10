@@ -36,9 +36,13 @@
   font-weight: 600;
 }
 
-.hero-section p{
+.hero-section p {
   font-size: var(--font-md);
   color: var(--color-text);
   text-align: center;
   max-width: 800px;
+}
+
+.hero-section h1 {
+  margin: 0;
 }

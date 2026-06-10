@@ -1,9 +1,8 @@
-.about-page {
+/* .about-page {
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  padding: 4rem 0;
-}
+} */
 
 .about-intro {
   display: grid;
@@ -41,7 +40,7 @@
 .education-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .about-card {
@@ -101,9 +100,9 @@
   background: var(--color-pink-transparent);
 }
 
-.about-card h3 {
+/* .about-card h3 {
   margin-bottom: 0.5rem;
-}
+} */
 
 @media (max-width: 768px) {
   .about-intro {

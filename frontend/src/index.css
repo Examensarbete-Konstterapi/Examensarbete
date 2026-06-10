@@ -14,7 +14,6 @@ html {
 :root {
   --font-family-heading: "Crimson Pro", serif;
   --font-family-body: "Inter", sans-serif;
-  --font-family-secondary: "Caveat", cursive;
   /* colors */
   /* --color-primary: #DEDBD2; */
   /* --color-primary: #ACC3AE; */
@@ -22,6 +21,7 @@ html {
   /* --color-secondary: #4A5759; */
   /* --color-secondary: #566257; */
   --color-bg: #fef1eb;
+  --color-white: #fff;
   --color-green: #597059;
   --color-green-light: #6c886c;
   --color-pink: #fcd0d7;
@@ -40,21 +40,21 @@ html {
   --color-beige: #dfd1be;
   --color-blue: #cedae4;
 
+  --color-hover: #22532b;
+
   /* Pallete */
-  --color-two: #fee2e8;
+  /* --color-two: #fee2e8;
   --color-three: #fff9f6;
   --color-four: #fbf2f5;
-  --color-primary: #fbe7e6;
+  --color-primary: #fbe7e6; */
 
-  --color-hover: #22532b;
-  --color-white: #fff;
-  --color-success: #2e7d32;
+  /* --color-success: #2e7d32; */
 
   /* Fontsize */
   --font-xs: 1.3rem;
   --font-sm: 1.6rem;
   --font-md: 2rem;
-  --font-lg: 3rem;
+  --font-lg: 3.5rem;
   --font-xl: 5rem;
   --font-xxl: 6.5rem;
 
@@ -101,7 +101,7 @@ h2 {
   font-size: var(--font-lg);
   font-weight: 600;
   color: var(--color-green);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
   font-family: var(--font-family-heading);
 }
 
@@ -139,6 +139,7 @@ button {
   cursor: pointer;
   border: none;
   font: inherit;
+  font-family: var(--font-family-heading);
 }
 
 img {

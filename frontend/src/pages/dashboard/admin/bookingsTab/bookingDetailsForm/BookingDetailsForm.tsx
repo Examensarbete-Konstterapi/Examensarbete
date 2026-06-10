@@ -195,6 +195,7 @@ export default function BookingDetailsForm({
         message="Är du säker på att du vill ta bort denna deltagare?"
         confirmText="Ta bort"
         cancelText="Avbryt"
+        size="md"
         onCancel={() => {
           setShowRemoveModal(false);
           setBookingToRemove(null);

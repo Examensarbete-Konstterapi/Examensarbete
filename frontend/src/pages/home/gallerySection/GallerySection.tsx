@@ -1,5 +1,5 @@
 import "./gallerySection.css";
-import GalleryCard from "../../gallery/galleryCard/GalleryCard";
+import GalleryCard from "./galleryCard/GalleryCard";
 import LinkButton from "../../../components/buttons/linkButton/LinkButton";
 import art1 from "../../../assets/gallery/art1.jpg";
 import art2 from "../../../assets/gallery/art2.jpg";

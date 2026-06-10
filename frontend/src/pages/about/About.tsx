@@ -11,8 +11,8 @@ export function About() {
         title="Om mig"
         subtitle="Välkommen! Jag är Jessicka, konstterapeut med passion för kreativ läkning och personlig utveckling."
       />
-      <Layout>
-        <main className="about-page">
+      <main className="about-page">
+        <Layout>
           <section className="about-intro">
             <div className="about-image">
               <img src={portratt} alt="Jessicka konstterapeut" />
@@ -25,7 +25,6 @@ export function About() {
                 Min väg till konstterapi började med en livslång passion för
                 konst och en djup fascination för människans inre landskap.
               </p>
-
               <p>
                 Genom min utbildning i konstterapi har jag fått verktyg att
                 hjälpa andra att utforska sina känslor och tankar genom
@@ -45,12 +44,14 @@ export function About() {
 
             <p>
               Jag tror på att varje människa har en inneboende kreativ förmåga
-              som kan användas för läkning och utveckling.
+              som kan användas för läkning och utveckling. Konsten behöver inte
+              vara "bra" eller "fin" – det viktiga är processen och vad den
+              väcker inom dig.
             </p>
-
             <p>
-              Konsten behöver inte vara perfekt. Det viktiga är processen och
-              vad den väcker inom dig.
+              I mitt arbete skapar jag en trygg, icke-dömande miljö där du får
+              vara precis den du är. Tillsammans utforskar vi dina tankar och
+              känslor genom olika konstnärliga uttrycksformer.
             </p>
           </section>
 
@@ -61,41 +62,6 @@ export function About() {
               <article className="education-card">
                 <div className="education-card-icon">
                   {
-                    // <svg
-                    //   fill="#597059"
-                    //   version="1.1"
-                    //   id="Capa_1"
-                    //   xmlns="http://www.w3.org/2000/svg"
-                    //   viewBox="0 0 364.346 364.346"
-                    //   width="30px"
-                    //   height="30px"
-                    //   stroke="#597059"
-                    //   strokeWidth="0.0036434600000000003"
-                    // >
-                    //   <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                    //   <g
-                    //     id="SVGRepo_tracerCarrier"
-                    //     strokeLinecap="round"
-                    //     strokeLinejoin="round"
-                    //   ></g>
-                    //   <g id="SVGRepo_iconCarrier">
-                    //     {" "}
-                    //     <g id="XMLID_518_">
-                    //       {" "}
-                    //       <rect
-                    //         id="XMLID_519_"
-                    //         x="106.501"
-                    //         y="70"
-                    //         width="130"
-                    //         height="30"
-                    //       ></rect>{" "}
-                    //       <path
-                    //         id="XMLID_520_"
-                    //         d="M326.501,170.788V43.338C326.501,19.441,307.06,0,283.163,0H59.84C35.943,0,16.501,19.441,16.501,43.338 v202.583c0,23.896,19.441,43.338,43.338,43.338h159.691v58.287c0,4.718,1.864,9.057,5.248,12.217 c3.119,2.913,7.352,4.584,11.614,4.583c4.412,0,8.594-1.753,11.778-4.938l19.882-19.882c1.28-1.28,2.982-1.985,4.792-1.985 s3.512,0.705,4.792,1.984l19.883,19.883c3.184,3.185,7.367,4.938,11.778,4.938c9.297,0,16.861-7.536,16.861-16.8v-71.743 c13.397-13.555,21.687-32.169,21.687-52.688C347.844,202.775,339.693,184.312,326.501,170.788z M205.574,190H89.001v30h108.922 c-0.043,1.034-0.079,2.07-0.079,3.115c0,13.098,3.383,25.417,9.309,36.144H59.84c-7.355,0-13.338-5.983-13.338-13.338V43.338 C46.501,35.983,52.485,30,59.84,30h223.323c7.355,0,13.338,5.983,13.338,13.338V151.96c-7.443-2.481-15.391-3.845-23.657-3.845 c-6.506,0-12.82,0.835-18.843,2.4V130h-165v30h143.406C220.963,167.358,211.638,177.73,205.574,190z M272.844,263.115 c0,0-42.153-22.833-42.153-51.914c0-12.979,10.521-23.5,23.5-23.5c7.601,0,14.358,3.609,18.653,9.207 c4.296-5.598,11.052-9.207,18.653-9.207c12.979,0,23.5,10.521,23.5,23.5C314.997,240.547,272.844,263.115,272.844,263.115z"
-                    //       ></path>{" "}
-                    //     </g>{" "}
-                    //   </g>
-                    // </svg>
                     <svg
                       version="1.1"
                       id="Layer_1"
@@ -281,8 +247,8 @@ export function About() {
             btnLabel="Boka tid"
             href="/boka-tid"
           />
-        </main>
-      </Layout>
+        </Layout>
+      </main>
     </>
   );
 }

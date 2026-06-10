@@ -270,6 +270,7 @@ export function BookingsTab() {
         message="Alla bokningar för detta tillfälle kommer också att tas bort."
         confirmText="Radera"
         cancelText="Avbryt"
+        size="md"
         onCancel={() => {
           setShowDeleteModal(false);
           setSessionToDelete(null);

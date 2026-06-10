@@ -113,10 +113,10 @@ export default function Footer() {
                 <Link to="/kontakt">Kontakt</Link>
               </li>
               <li>
-                <Link to="/integritetspolicy">Integritetspolicy</Link>
+                <Link to="/">Integritetspolicy</Link>
               </li>
               <li>
-                <Link to="/villkor">Villkor</Link>
+                <Link to="/">Villkor</Link>
               </li>
             </ul>
           </div>

@@ -46,7 +46,6 @@ export function BookingTab() {
     async function loadBookings() {
       try {
         const response = await API.get("/bookings/my-bookings");
-        console.log(response.data);
         setBookings(response.data);
       } catch {
         setError("Något gick fel. Försök igen senare.");

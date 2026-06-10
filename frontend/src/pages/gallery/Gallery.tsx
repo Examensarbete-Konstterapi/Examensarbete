@@ -2,7 +2,7 @@ import "./gallery.css";
 import Layout from "../../components/layout/Layout";
 import { MiniHeroSection } from "../../components/miniHeroSection/MiniHeroSection";
 import LinkButton from "../../components/buttons/linkButton/LinkButton";
-import GalleryCard from "./galleryCard/GalleryCard";
+import GalleryCard from "../home/gallerySection/galleryCard/GalleryCard";
 import art1 from "../../assets/gallery/art1.jpg";
 import art2 from "../../assets/gallery/art2.jpg";
 import art3 from "../../assets/gallery/art3.jpg";

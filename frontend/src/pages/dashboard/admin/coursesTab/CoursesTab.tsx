@@ -73,8 +73,6 @@ export function CoursesTab() {
         maxParticipants,
       });
 
-      console.log("Kurs skapad:", response.data);
-
       // Uppdatera listan
       const updatedCourses = await fetchCourses();
       setCourses(updatedCourses);
@@ -117,7 +115,6 @@ export function CoursesTab() {
       }
 
       for (const sessionId of deletedSessionIds) {
-        console.log("Ta bort denna sessionen", sessionId);
         await API.delete(`/sessions/${sessionId}`);
       }
 
@@ -303,7 +300,6 @@ export function CoursesTab() {
           mode={editingCourse ? "edit" : "create"}
           onSubmit={editingCourse ? handleUpdateCourse : handleCreateCourse}
           onDeleteSession={(sessionId) => {
-            console.log("Lägger till för borttagning:", sessionId);
             setDeletedSessionIds((prev) => [...prev, sessionId]);
           }}
           initialData={
@@ -332,6 +328,7 @@ export function CoursesTab() {
         message="Är du säker på att du vill ta bort kursen?"
         confirmText="Radera"
         cancelText="Avbryt"
+        size="md"
         onCancel={() => {
           setShowDeleteModal(false);
           setCourseToDelete(null);

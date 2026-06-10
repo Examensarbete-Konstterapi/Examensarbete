@@ -6,7 +6,7 @@
   background: var(--color-green);
   color: var(--color-bg);
   border: none;
-  padding: 1rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: var(--radius-lg);
   cursor: pointer;
   display: flex;
@@ -66,10 +66,14 @@
   gap: 1rem;
   padding: 1rem 1rem;
   margin-top: 1rem;
-  transition: background-color 0.3s, padding 0.3s, border-radius 0.3s;
+  transition:
+    background-color 0.3s,
+    padding 0.3s,
+    border-radius 0.3s;
 }
 
-.dropdown-item:hover, .logout-btn:hover {
+.dropdown-item:hover,
+.logout-btn:hover {
   background-color: var(--color-bg);
   padding: 1rem 1rem;
   border-radius: var(--radius-lg);

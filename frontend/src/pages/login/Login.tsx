@@ -57,8 +57,6 @@ export default function Login({ onSwitchToRegister, onClose }: LoginProps) {
       } else {
         navigate("/mina-sidor", { replace: true });
       }
-
-      console.log(response.data);
     } catch (error: any) {
       const errorMsg = error.response?.data?.error || "Inloggning misslyckades";
       setErrorMessage(errorMsg);
@@ -82,11 +80,7 @@ export default function Login({ onSwitchToRegister, onClose }: LoginProps) {
         />
       </p>
 
-      {errorMessage && (
-        <div style={{ color: "red", marginBottom: "1rem", fontWeight: "bold" }}>
-          {errorMessage}
-        </div>
-      )}
+      {errorMessage && <span>{errorMessage}</span>}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>

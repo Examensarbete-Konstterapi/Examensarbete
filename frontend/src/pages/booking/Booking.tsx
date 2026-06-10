@@ -331,42 +331,6 @@ export function Booking() {
             />
           )}
         </Modal>
-        {/* Bekräfta bokning */}
-        {/* <Modal
-          isOpen={confirmModalOpen}
-          onClose={() => setConfirmModalOpen(false)}
-        >
-          <div className="booking-confirm-modal">
-            <h2>Bekräfta bokning</h2>
-            <div className="booking-confirm-modal-info ">
-              <p>Kurs: {selectedSession?.courseId.title}</p>
-              <p>
-                Datum:{" "}
-                {selectedSession &&
-                  new Date(selectedSession.date).toLocaleDateString("sv-SE")}
-              </p>
-              <p>Tid: {selectedSession?.startTime}</p>
-              <p>Pris: {selectedSession?.courseId.price} kr</p>
-              {pendingBooking?.message && (
-                <p>Meddelande: {pendingBooking.message}</p>
-              )}
-            </div>
-            <div className="booking-confirm-buttons">
-              <RegularButton
-                label="Ja, boka"
-                color="green"
-                size="xs"
-                onClick={handleConfirmBooking}
-              />
-              <RegularButton
-                label="Avbryt"
-                color="red"
-                size="xs"
-                onClick={() => setConfirmModalOpen(false)}
-              />
-            </div>
-          </div>
-        </Modal> */}
         <ConfirmModal
           isOpen={confirmModalOpen}
           title="Bekräfta bokning"
