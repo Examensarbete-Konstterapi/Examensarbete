@@ -364,7 +364,7 @@ export function Booking() {
           colorCancel="light"
           onConfirm={() => navigate("/mina-sidor")}
           onCancel={() => setSuccessModalOpen(false)}
-          size="md"
+          size="lg"
         />
 
         <ConfirmModal
@@ -373,7 +373,7 @@ export function Booking() {
           message={bookingError}
           confirmText="OK"
           onConfirm={() => setBookingError("")}
-          size="md"
+          size="lg"
         />
       </Layout>
     </>

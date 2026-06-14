@@ -203,12 +203,6 @@ export default function CourseForm({
                     label=""
                     type="button"
                     onClick={() => {
-                      const confirmed = window.confirm(
-                        "Är du säker på att du vill radera den här sessionen?",
-                      );
-
-                      if (!confirmed) return;
-
                       const session = fields[index];
 
                       if (session._id && onDeleteSession) {
@@ -277,7 +271,7 @@ export default function CourseForm({
           isLoading
             ? "Sparar..."
             : mode === "edit"
-              ? "Uppdatera kurs"
+              ? "Spara ändringar"
               : "Spara kurs"
         }
         color="green"
