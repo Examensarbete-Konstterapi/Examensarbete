@@ -20,6 +20,32 @@ export default function AboutMe() {
           label="Läs mer om mig"
           color="transparent"
           size="xxs"
+          icon={
+            <svg
+              width="22px"
+              height="22px"
+              viewBox="0 0 22 22"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {" "}
+                <path
+                  d="M6 12H18M18 12L13 7M18 12L13 17"
+                  stroke="#597059"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>{" "}
+              </g>
+            </svg>
+          }
         />
       </div>
       <div className="about-me-img">

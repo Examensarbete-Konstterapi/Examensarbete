@@ -12,8 +12,8 @@
   background-color: var(--color-white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  width: 500px;
-  height: 200px;
+  /* width: 500px;
+  height: 200px; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -28,4 +28,19 @@
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
+}
+
+.confirm-modal-sm {
+  width: 350px;
+  min-height: 180px;
+}
+
+.confirm-modal-md {
+  width: 500px;
+  min-height: 220px;
+}
+
+.confirm-modal-lg {
+  width: 700px;
+  min-height: 300px;
 }

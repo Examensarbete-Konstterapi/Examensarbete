@@ -63,8 +63,6 @@ export default function Register({ onSwitchToLogin, onClose }: RegisterProps) {
       if (onClose) onClose();
 
       navigate("/mina-sidor");
-
-      console.log(response.data);
     } catch (error: any) {
       const errorMsg =
         error.response?.data?.message || "Registrering misslyckades";
@@ -169,7 +167,7 @@ export default function Register({ onSwitchToLogin, onClose }: RegisterProps) {
           </div>
         ) : (
           <RegularButton
-            label="Logga in"
+            label="Registrera"
             color="green"
             size="md"
             type="submit"

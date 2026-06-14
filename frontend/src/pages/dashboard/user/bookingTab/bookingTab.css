@@ -13,7 +13,7 @@
 
 .user-booking-tab-section .booking-tab-tabs button {
   background-color: transparent;
-  color: var(--color-green);
+  color: var(--color-text);
   font-size: var(--font-md);
   padding-bottom: 0.75rem;
   border-bottom: 2px solid transparent;
@@ -21,6 +21,8 @@
 
 .user-booking-tab-section .booking-tab-tabs button.active {
   border-bottom-color: var(--color-green);
+  color: var(--color-green);
+  font-weight: 500;
 }
 
 .user-booking-tab-section .booking-tab-info {

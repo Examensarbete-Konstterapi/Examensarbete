@@ -1,16 +1,19 @@
 .link-button {
   font-size: var(--font-md);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+  transition: 0.3s ease-in-out;
+  font-family: var(--font-family-heading);
 }
 
 .link-button.xxs {
   height: auto;
   width: fit-content;
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
   /* padding: 5px 10px; */
 }
 
@@ -33,10 +36,23 @@
 
 .link-button.green {
   background-color: var(--color-green);
-  color: var(--color-primary);
+  color: var(--color-bg);
 }
 
 .link-button.transparent {
   background-color: transparent;
   color: var(--color-green);
+}
+
+.link-button.link-button.transparent:hover {
+  color: var(--color-hover);
+}
+
+.link-button.link-button.transparent:hover {
+  gap: 0.8rem;
+}
+
+.link-button.green:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.02);
 }

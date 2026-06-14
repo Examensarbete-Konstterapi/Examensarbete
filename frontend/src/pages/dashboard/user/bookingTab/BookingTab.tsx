@@ -33,19 +33,6 @@ export function BookingTab() {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // async function fetchBookings() {
-  //   try {
-  //     const response = await API.get("/bookings/my-bookings");
-
-  //     setBookings(response.data);
-  //     setLoading(false);
-  //   } catch (error: any) {
-  //     setError("Kunde inte hämta bokningar");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
   const upcomingBookings = bookings.filter(
     (booking) => new Date(booking.sessionId.date) > new Date(),
   );
@@ -59,7 +46,6 @@ export function BookingTab() {
     async function loadBookings() {
       try {
         const response = await API.get("/bookings/my-bookings");
-        console.log(response.data);
         setBookings(response.data);
       } catch {
         setError("Något gick fel. Försök igen senare.");
@@ -140,6 +126,7 @@ export function BookingTab() {
           cancelText="Avbryt"
           onConfirm={handleDeleteBooking}
           onCancel={() => setIsModalOpen(false)}
+          size="md"
         />
       </div>
     </>

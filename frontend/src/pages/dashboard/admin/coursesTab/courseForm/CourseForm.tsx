@@ -71,13 +71,13 @@ export default function CourseForm({
     name: "sessions",
   });
 
-    useEffect(() => {
-  if (category === "individual") {
-    fields.forEach((_, index) => {
-      setValue(`sessions.${index}.maxParticipants`, 1);
-    });
-  }
-}, [category, fields, setValue]);
+  useEffect(() => {
+    if (category === "individual") {
+      fields.forEach((_, index) => {
+        setValue(`sessions.${index}.maxParticipants`, 1);
+      });
+    }
+  }, [category, fields, setValue]);
 
   return (
     <form className="course-form" onSubmit={handleSubmit(onSubmit)}>
@@ -203,18 +203,11 @@ export default function CourseForm({
                     label=""
                     type="button"
                     onClick={() => {
-                      const confirmed = window.confirm(
-                        "Är du säker på att du vill radera den här sessionen?",
-                      );
-
-                      if (!confirmed) return;
-
                       const session = fields[index];
 
                       if (session._id && onDeleteSession) {
                         onDeleteSession(session._id);
                       }
-                      console.log("Tar bort index:", index);
 
                       remove(index);
                     }}
@@ -278,7 +271,7 @@ export default function CourseForm({
           isLoading
             ? "Sparar..."
             : mode === "edit"
-              ? "Uppdatera kurs"
+              ? "Spara ändringar"
               : "Spara kurs"
         }
         color="green"

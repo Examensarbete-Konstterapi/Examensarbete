@@ -16,6 +16,7 @@
   width: 650px;
   min-height: 60rem;
   max-height: 95vh;
+  /* height: auto; */
   position: relative;
   display: flex;
   flex-direction: column;

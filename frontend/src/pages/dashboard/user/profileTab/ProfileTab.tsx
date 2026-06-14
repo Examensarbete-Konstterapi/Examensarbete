@@ -15,15 +15,12 @@ export default function ProfileTab() {
   const { user, setUser } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-	const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     register,
     handleSubmit,
     reset,
-    formState: { 
-			errors,
-			isDirty,
-	  },
+    formState: { errors, isDirty },
   } = useForm<ProfileForm>({
     defaultValues: {
       firstName: user?.firstName ?? "",
@@ -43,10 +40,8 @@ export default function ProfileTab() {
   }, [user, reset]);
 
   async function onSubmit(data: ProfileForm) {
-		setErrorMessage("");
+    setErrorMessage("");
     try {
-      console.log(data);
-
       const response = await API.put(`/users/${user?.id}`, {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -58,6 +53,7 @@ export default function ProfileTab() {
         firstName: response.data.firstName,
         lastName: response.data.lastName,
         email: response.data.email,
+        role: response.data.role,
       };
 
       setUser(userData);
@@ -65,12 +61,11 @@ export default function ProfileTab() {
       setIsEditing(false);
     } catch (error: any) {
       setErrorMessage(
-				error.response?.data?.error ||
-				"Kunde inte spara ändringarna"
-			);
-			if (error.response?.status === 409) {
-  			setErrorMessage("E-postadressen används redan");
-			}
+        error.response?.data?.error || "Kunde inte spara ändringarna",
+      );
+      if (error.response?.status === 409) {
+        setErrorMessage("E-postadressen används redan");
+      }
     }
   }
   function handleCancel() {
@@ -81,8 +76,8 @@ export default function ProfileTab() {
       lastName: user.lastName,
       email: user.email,
     });
-		setSuccessMessage("");
-  	setErrorMessage("");
+    setSuccessMessage("");
+    setErrorMessage("");
     setIsEditing(false);
   }
 
@@ -93,10 +88,10 @@ export default function ProfileTab() {
           <h2>Profilinformation</h2>
           <RegularButton
             onClick={() => {
-							setIsEditing(true)
-							setSuccessMessage("")
-							setErrorMessage("")
-						}}
+              setIsEditing(true);
+              setSuccessMessage("");
+              setErrorMessage("");
+            }}
             label="Redigera"
             color="green"
             size="xs"
@@ -133,22 +128,22 @@ export default function ProfileTab() {
                 <input
                   type="text"
                   {...register("firstName", {
-										required: "Vänligen ange förnamn"
-									})}
+                    required: "Vänligen ange förnamn",
+                  })}
                   disabled={!isEditing}
                 />
-          		  {errors.firstName && <span>{errors.firstName.message}</span>}
+                {errors.firstName && <span>{errors.firstName.message}</span>}
               </div>
               <div>
                 <label>Efternamn</label>
                 <input
                   type="text"
                   {...register("lastName", {
-										required: "Vänligen ange efternamn"
-									})}
+                    required: "Vänligen ange efternamn",
+                  })}
                   disabled={!isEditing}
                 />
-          			{errors.lastName && <span>{errors.lastName.message}</span>}
+                {errors.lastName && <span>{errors.lastName.message}</span>}
               </div>
             </div>
           </div>
@@ -184,7 +179,7 @@ export default function ProfileTab() {
               <input
                 type="email"
                 {...register("email", {
-									required: "Vänligen ange en giltig e-postaddress",
+                  required: "Vänligen ange en giltig e-postaddress",
                   pattern: {
                     value: /^\S+@\S+\.\S+$/,
                     message: "Ogiltig e-postadress",
@@ -197,27 +192,25 @@ export default function ProfileTab() {
           </div>
         </div>
         {isEditing && (
-					<>
-					{errorMessage && (
-						<span>{errorMessage}</span>
-					)}
-          <div className="profile-buttons">
-            <RegularButton
-              type="submit"
-              label="Spara"
-              color="green"
-              size="xs"
-							disabled={!isDirty}
-            />
-            <RegularButton
-              type="button"
-              label="Avbryt"
-              color="light"
-              size="xs"
-              onClick={handleCancel}
-            />
-          </div>
-					</>
+          <>
+            {errorMessage && <span>{errorMessage}</span>}
+            <div className="profile-buttons">
+              <RegularButton
+                type="submit"
+                label="Spara"
+                color="green"
+                size="xs"
+                disabled={!isDirty}
+              />
+              <RegularButton
+                type="button"
+                label="Avbryt"
+                color="light"
+                size="xs"
+                onClick={handleCancel}
+              />
+            </div>
+          </>
         )}
         {successMessage && <p className="success-message">{successMessage}</p>}
       </form>

@@ -18,4 +18,20 @@ API.interceptors.request.use(
   },
 );
 
+// Interceptor för att automatiskt loggas ut när token är expired
+API.interceptors.response.use(
+  (response) => response,
+
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      window.dispatchEvent(new Event("logout"));
+    }
+
+    return Promise.reject(error);
+  },
+);
+
 export default API;

@@ -10,7 +10,7 @@ import Register from "../register/Register";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
-// import ConfirmModal from "../../components/confirmModal/ConfirmModal";
+import ConfirmModal from "../../components/confirmModal/ConfirmModal";
 
 type BookingForm = {
   category: string;
@@ -43,6 +43,7 @@ export function Booking() {
   );
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [bookingError, setBookingError] = useState("");
   const [sessions, setSessions] = useState<Session[]>([]);
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
   const { isLoggedIn } = useAuth();
@@ -123,8 +124,17 @@ export function Booking() {
       reset();
       setConfirmModalOpen(false);
       setSuccessModalOpen(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      if (error.response?.status === 401) {
+        setBookingError(
+          "Din inloggning har gått ut. Logga in igen för att fortsätta.",
+        );
+        return;
+      }
+      setBookingError(
+        error.response?.data?.error || "Något gick fel vid bokningen.",
+      );
       setConfirmModalOpen(false);
     }
   }
@@ -211,18 +221,22 @@ export function Booking() {
                   <h2>Välj tid och typ av session</h2>
                   <label>
                     Välj typ kurs
-                    <select {...register("category")}>
+                    <select
+                      {...register("category", {
+                        required: "Välj vilken typ av kurs",
+                      })}
+                    >
                       <option value="">Välj typ</option>
                       <option value="individual">Individuell terapi</option>
                       <option value="group">Gruppterapi</option>
                     </select>
-                    {errors.courseId && <span>{errors.courseId.message}</span>}
+                    {errors.category && <span>{errors.category.message}</span>}
                   </label>
                   <label>
                     Välj kurs
                     <select
                       {...register("courseId", {
-                        required: "Välj kurs",
+                        required: "Välj vilken kurs",
                       })}
                     >
                       <option value="">Välj kurs</option>
@@ -256,9 +270,7 @@ export function Booking() {
                         </option>
                       ))}
                     </select>
-                    {errors.sessionId && (
-                      <span>{errors.sessionId.message}</span>
-                    )}
+                    {errors.date && <span>{errors.date.message}</span>}
                   </label>
                   <label>
                     Välj tid
@@ -319,61 +331,50 @@ export function Booking() {
             />
           )}
         </Modal>
-        {/* Bekräfta bokning */}
-        <Modal
+        <ConfirmModal
           isOpen={confirmModalOpen}
-          onClose={() => setConfirmModalOpen(false)}
+          title="Bekräfta bokning"
+          confirmText="Ja, boka"
+          cancelText="Avbryt"
+          onConfirm={handleConfirmBooking}
+          onCancel={() => setConfirmModalOpen(false)}
+          size="lg"
         >
-          <div className="booking-confirm-modal">
-            <h2>Bekräfta bokning</h2>
-            <div className="booking-confirm-modal-info ">
-              <p>Kurs: {selectedSession?.courseId.title}</p>
-              <p>
-                Datum:{" "}
-                {selectedSession &&
-                  new Date(selectedSession.date).toLocaleDateString("sv-SE")}
-              </p>
-              <p>Tid: {selectedSession?.startTime}</p>
-              <p>Pris: {selectedSession?.courseId.price} kr</p>
-              {pendingBooking?.message && (
-                <p>Meddelande: {pendingBooking.message}</p>
-              )}
-            </div>
-            <div className="booking-confirm-buttons">
-              <RegularButton
-                label="Ja, boka"
-                color="green"
-                size="xs"
-                onClick={handleConfirmBooking}
-              />
-              <RegularButton
-                label="Avbryt"
-                color="red"
-                size="xs"
-                onClick={() => setConfirmModalOpen(false)}
-              />
-            </div>
-          </div>
-        </Modal>
-
-        {/* Bokning skapad */}
-        <Modal
-          isOpen={successModalOpen}
-          onClose={() => setSuccessModalOpen(false)}
-        >
-          <div className="booking-success-modal">
-            <h2>Bokning skapad!</h2>
+          <div className="booking-confirm-modal-info">
+            <p>Kurs: {selectedSession?.courseId.title}</p>
             <p>
-              Din bokning har registrerats och du hittar den under Mina sidor.
+              Datum:
+              {selectedSession &&
+                new Date(selectedSession.date).toLocaleDateString("sv-SE")}
             </p>
-            <RegularButton
-              label="Till Mina sidor"
-              color="green"
-              size="sm"
-              onClick={() => navigate("/mina-sidor")}
-            />
+            <p>Tid: {selectedSession?.startTime}</p>
+            <p>Pris: {selectedSession?.courseId.price} kr</p>
+            {pendingBooking?.message && (
+              <p>Meddelande: {pendingBooking.message}</p>
+            )}
           </div>
-        </Modal>
+        </ConfirmModal>
+
+        <ConfirmModal
+          title="Bokning skapad!"
+          message="Din bokning har registrerats och du hittar den under Mina sidor."
+          isOpen={successModalOpen}
+          confirmText="Till mina sidor"
+          cancelText="Tillbaka"
+          colorCancel="light"
+          onConfirm={() => navigate("/mina-sidor")}
+          onCancel={() => setSuccessModalOpen(false)}
+          size="lg"
+        />
+
+        <ConfirmModal
+          isOpen={!!bookingError}
+          title="Bokningen kunde inte genomföras"
+          message={bookingError}
+          confirmText="OK"
+          onConfirm={() => setBookingError("")}
+          size="lg"
+        />
       </Layout>
     </>
   );

@@ -7,22 +7,34 @@
   position: fixed;
   width: 100%;
   z-index: 10;
-
   background: transparent;
   transition: all 0.5s ease;
+  font-family: var(--font-family-heading);
 }
 
 .header-scrolled {
   background: var(--color-bg);
-  /* backdrop-filter: blur(10px); */
-  box-shadow: var(--shadow-md)
+  box-shadow: var(--shadow-md);
 }
+
+/* .header :first-child {
+  font-family: var(--font-family-heading);
+} */
 
 .header nav {
   display: flex;
   align-items: center;
   gap: var(--spacing-lg);
-  font-size: var(--font-sm);
+  font-size: var(--font-md);
+  font-family: var(--font-family-heading);
+}
+
+.desktop-nav a:hover {
+  color: var(--color-hover);
+}
+
+.header > :first-child {
+  font-size: 2.8rem;
 }
 
 .header > nav > button {

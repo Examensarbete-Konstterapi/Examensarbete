@@ -11,12 +11,12 @@ import ProfileDropdown from "../profileDropdown/ProfileDropdown";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
   const [modalType, setModalType] = useState<"login" | "register" | null>(null);
   const { user } = useAuth();
   const isMobile = useCheckIfMobile();
 
-    useEffect(() => {
+  useEffect(() => {
     function handleScroll() {
       setScrolled(window.scrollY > 10);
     }
@@ -30,18 +30,21 @@ export default function Header() {
 
   return (
     <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
-      <NavLink to="/">LOGGA</NavLink>
+      <NavLink to="/">Jessickas konstterapi</NavLink>
       {!isMobile && (
         <nav className="desktop-nav">
           <NavLink to="/om-mig">Om mig</NavLink>
           <NavLink to="/konstterapi">Konstterapi</NavLink>
           <NavLink to="/boka-tid">Boka tid</NavLink>
           <NavLink to="/galleri">Galleri</NavLink>
-          <NavLink to="/priser">Priser</NavLink>
-          <NavLink to="/kontakt">Kontakt</NavLink>
+          {/* <NavLink to="/priser">Priser</NavLink> */}
+          {/* <NavLink to="/kontakt">Kontakt</NavLink> */}
 
           {user ? (
-            <ProfileDropdown name={`${user.firstName} ${user.lastName}`} email={user.email} />
+            <ProfileDropdown
+              name={`${user.firstName} ${user.lastName}`}
+              email={user.email}
+            />
           ) : (
             <button onClick={() => setModalType("login")}>
               <svg
