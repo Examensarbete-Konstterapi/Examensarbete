@@ -1,0 +1,48 @@
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-green);
+  position: relative;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* opacity: 0.5; */
+}
+
+.hero-section div {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  z-index: 1;
+}
+
+.hero-section .hero-section-creativity-text {
+  font-size: var(--font-lg);
+  color: var(--color-green);
+  font-family: var(--font-family-heading);
+  font-weight: 600;
+}
+
+.hero-section p {
+  font-size: var(--font-md);
+  color: var(--color-text);
+  text-align: center;
+  max-width: 800px;
+}
+
+.hero-section h1 {
+  margin: 0;
+}

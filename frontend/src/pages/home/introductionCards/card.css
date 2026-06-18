@@ -1,0 +1,27 @@
+.introduction-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 3rem;
+  text-align: center;
+  /* width: 350px; */
+  /* height: 300px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.introduction-card .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+/* .introduction-card > :nth-child(1) > .icon {
+  background-color: var(--color-green-transparent);
+} */

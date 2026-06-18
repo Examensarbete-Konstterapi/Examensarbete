@@ -1,0 +1,110 @@
+.art-therapy-page section {
+  width: 100%;
+}
+
+.art-therapy-page h2 {
+  text-align: center;
+}
+
+.art-therapy-intro {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.art-therapy-intro p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.therapy-process-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+}
+
+.therapy-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.therapy-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.therapy-process-cards > :nth-child(1) > .therapy-icon {
+  background-color: var(--color-blue-transparent);
+}
+
+.therapy-process-cards > :nth-child(2) > .therapy-icon {
+  background-color: var(--color-pink-transparent);
+}
+
+.therapy-process-cards > :nth-child(3) > .therapy-icon {
+  background-color: var(--color-green-transparent);
+}
+
+.therapy-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.therapy-benefits-grid > :nth-child(1) {
+  background: var(--color-pink-transparent);
+}
+
+.therapy-benefits-grid > :nth-child(2) {
+  background: var(--color-blue-transparent);
+}
+
+.therapy-benefits-grid > :nth-child(3) {
+  background: var(--color-green-transparent);
+}
+
+.therapy-benefits-grid > :nth-child(4) {
+  background: var(--color-beige-transparent);
+}
+
+.therapy-benefits-grid > :nth-child(5) {
+  background: var(--color-blue-transparent);
+}
+
+.therapy-benefits-grid > :nth-child(6) {
+  background: var(--color-pink-transparent);
+}
+
+.benefit-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  height: 11rem;
+}
+
+.benefit-card h3 {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .therapy-process-cards,
+  .therapy-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .art-therapy-page {
+    gap: 4rem;
+  }
+}

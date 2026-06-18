@@ -1,0 +1,407 @@
+import "./artTherapy.css";
+import Layout from "../../components/layout/Layout";
+import { MiniHeroSection } from "../../components/miniHeroSection/MiniHeroSection";
+import { FAQSection } from "./faqSection/FaqSection";
+import CTASection from "../../components/CTASection/CTASection";
+
+export function ArtTherapy() {
+  return (
+    <>
+      <MiniHeroSection
+        title="Konstterapi"
+        subtitle="En terapiform där kreativitet och självuttryck blir verktyg för läkning och utveckling"
+      />
+      <main className="art-therapy-page">
+        <Layout>
+          <section className="art-therapy-intro">
+            <h2>Vad är konstterapi?</h2>
+
+            <p>
+              Konstterapi är en terapiform som använder kreativa processer för
+              att främja läkning, självförståelse och personlig utveckling.
+            </p>
+
+            <p>
+              Genom att skapa konst – måla, teckna, skulptera eller använda
+              andra material – får du tillgång till känslor och tankar som kan
+              vara svåra att sätta ord på.
+            </p>
+
+            <p>
+              I en trygg och stödjande miljö får du utforska ditt inre landskap
+              genom skapande. Konsten blir ett språk som kompletterar ord och
+              öppnar nya vägar till insikt och förändring.
+            </p>
+          </section>
+
+          <section className="therapy-process">
+            <h2>Hur går en session till?</h2>
+
+            <div className="therapy-process-cards">
+              <article className="therapy-card">
+                <div className="therapy-icon">
+                  <svg
+                    width="48px"
+                    height="48px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                        stroke="#cedae4"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                </div>
+                <h3>Incheckning</h3>
+                <p>
+                  Vi börjar med att prata om hur du mår och vad som är aktuellt
+                  för dig just nu.
+                </p>
+              </article>
+
+              <article className="therapy-card">
+                <div className="therapy-icon">
+                  <svg
+                    height="48px"
+                    width="48px"
+                    version="1.1"
+                    id="_x32_"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    fill="#c598ae"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <style type="text/css"> </style>{" "}
+                      <g>
+                        {" "}
+                        <path
+                          className="st0"
+                          d="M231.137,410.58c-37.33,0-71.105-10.204-96.871-28.027c-25.832-17.955-43.85-43.075-50.826-74.464 c-2.002-9.037-2.971-18.214-2.971-27.447c0-30.676,10.785-62.316,30.481-90.672c-8.524-6.136-16.53-13.754-23.571-22.729 c-24.669,34.031-39.136,73.36-39.2,113.401c0,11.498,1.227,22.994,3.746,34.359c8.653,39.65,32.095,72.136,63.934,94.09 c31.903,21.96,72.073,33.779,115.277,33.779c23.506,0,47.982-3.488,72.588-10.848l-21.31-27.643 C264.913,408.58,247.671,410.58,231.137,410.58z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M452.068,133.078c-15.824-23.638-38.298-41.852-64.647-54.055c-26.412-12.21-56.637-18.473-88.41-18.536 c-24.54,0-50.05,3.746-75.558,11.56c-10.788,3.292-21.184,7.17-31.193,11.686c0.129,0.196,0.258,0.328,0.388,0.517 c6.328,8.912,11.431,18.34,15.048,27.838c8.072-3.488,16.467-6.528,25.12-9.17c22.54-6.849,44.885-10.142,66.195-10.142 c27.576,0,53.216,5.487,74.785,15.565c21.698,10.009,39.265,24.476,51.406,42.684c4.585,6.849,6.329,12.79,6.329,17.312 c-0.063,2.97-0.646,5.424-2.194,8.136c-1.164,2-2.907,4.2-5.62,6.395c-4.005,3.356-10.204,6.906-19.05,9.814 c-8.785,2.908-20.15,5.234-34.163,6.458c-16.792,1.425-30.805,7.555-40.558,17.242c-9.75,9.561-14.723,22.414-14.723,34.939 c0,13.755,5.812,27.384,16.533,37.329c10.655,10.009,26.091,16.013,43.914,15.95c1.097,0,2.194,0,3.358-0.062h0.129 c1.034-0.064,2.132-0.064,3.163-0.064c6.587,0,11.431,0.839,14.855,2c5.102,1.747,7.105,3.746,8.46,5.682 c1.29,1.936,2.066,4.522,2.066,7.624c0,2.384-0.451,4.907-1.227,6.969c-0.709,2.132-1.744,3.746-2.132,4.2 c-10.525,12.204-22.732,23.574-36.424,33.647l17.889,26.866c16.082-11.623,30.484-24.993,43.012-39.461 c3.68-4.326,6.266-9.233,8.202-14.594c1.807-5.423,2.97-11.302,2.97-17.627c0-5.493-0.905-11.371-3.1-17.116 c-3.292-8.652-9.946-16.984-19.438-22.344c-9.495-5.487-21.184-8.136-35.134-8.136c-1.486,0-3.034,0.063-4.714,0.126h-1.936 c-10.913-0.062-17.63-3.355-21.893-7.296c-4.26-4.006-6.2-8.975-6.263-13.692c0.063-4.326,1.549-8.394,5.165-12.008 c3.617-3.557,9.817-7.045,20.667-8.01c28.349-2.522,49.792-8.848,65.483-19.374c7.817-5.297,14.146-11.756,18.472-19.311 c4.39-7.492,6.521-15.95,6.521-24.281C463.82,155.744,459.235,143.799,452.068,133.078z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M393.485,176.72c5.291-5.298,8.325-12.607,8.325-20.093c0-7.486-3.034-14.802-8.325-20.1 c-5.298-5.285-12.608-8.318-20.093-8.318c-7.486,0-14.802,3.033-20.094,8.318c-5.291,5.298-8.324,12.613-8.324,20.1 c0,7.486,3.033,14.795,8.324,20.093c5.292,5.291,12.608,8.324,20.094,8.324C380.877,185.045,388.187,182.012,393.485,176.72z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M159.79,245.262c4.27-12.859-2.699-26.747-15.565-31.023c-12.859-4.27-26.747,2.692-31.022,15.558 c-4.27,12.859,2.699,26.747,15.565,31.029C141.62,265.09,155.514,258.128,159.79,245.262z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M160.137,342.631c8.823-9.327,8.413-24.041-0.908-32.864c-9.328-8.829-24.041-8.419-32.864,0.909 c-8.83,9.321-8.426,24.035,0.902,32.864C136.587,352.362,151.307,351.952,160.137,342.631z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M281.932,162.915c14.877-1.728,25.542-15.193,23.808-30.071c-1.728-14.878-15.193-25.536-30.071-23.808 c-14.884,1.728-25.542,15.187-23.808,30.071C253.589,153.985,267.048,164.649,281.932,162.915z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M99.435,151.078c15.133,21.096,36.721,35.172,56.348,36.762l0.823,0.075l36.85-26.438l0.195-0.801 c4.774-19.103-1.646-44.071-16.772-65.155c-14.357-20.004-31.076-33.728-47.253-47.01c-11.037-9.056-22.459-18.434-33.117-29.78 C87.685,9.334,84.715,4.692,84.705,4.68L81.845,0l-2.4,2.826c-11.14,13.156-15.593,36.869-12.238,65.048 C70.723,97.464,82.179,127.024,99.435,151.078z M107.649,116.056c12.018,13.598,17.631,4.692,10.4-9.17 c-9.079-17.388,0.097-18.012,5.682-12.601c5.566,5.392,12.541,17.476,18.548,14.014c3.61-2.081-0.268-9.568-5.38-20.913 c-2.933-6.496-0.4-16.24,14.701-3.236c5.515,5.544,10.747,11.523,15.619,18.309c10.563,14.707,15.564,32.428,13.121,46.329 l-31.55,22.642c-13.963-2.132-29.121-12.551-39.697-27.284c-4.049-5.651-7.761-11.768-11.078-18.201 c-0.356-0.921-0.763-1.904-1.236-2.946C91.51,111.402,95.632,102.472,107.649,116.056z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M215.431,183.86c-7.707-3.147-15.038-2.794-20.266,0.952l-16.993,12.197 c-5.235,3.746-7.909,10.589-7.408,18.888c0.511,8.306,4.156,17.363,10.078,25.05l26.851,34.813l52.614-37.746l-24.375-36.579 C230.551,193.351,223.137,187.007,215.431,183.86z"
+                        ></path>{" "}
+                        <path
+                          className="st0"
+                          d="M268.971,251.026l-51.722,37.103l160.229,207.73c11.109,14.411,27.509,20.182,37.323,13.156l0.116-0.101 c9.807-7.032,9.586-24.42-0.501-39.562L268.971,251.026z"
+                        ></path>{" "}
+                      </g>{" "}
+                    </g>
+                  </svg>
+                </div>
+                <h3>Skapande</h3>
+                <p>
+                  Du arbetar med konst utifrån det som känns rätt för dig. Jag
+                  finns här som stöd.
+                </p>
+              </article>
+
+              <article className="therapy-card">
+                <div className="therapy-icon">
+                  <svg
+                    fill="#adbcad"
+                    height="42px"
+                    width="42px"
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="-20.67 -20.67 385.91 385.91"
+                    stroke="#adbcad"
+                    strokeWidth="13.0"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <g>
+                        {" "}
+                        <path d="M335.206,144.552c-4.142,0-7.5,3.357-7.5,7.5c0,19.183-15.606,34.789-34.79,34.789c-3.645,0-7.276-0.582-10.793-1.73 c-2.249-0.733-4.714-0.364-6.648,0.999c-1.934,1.363-3.112,3.56-3.176,5.926c-0.52,18.968-15.776,33.826-34.733,33.826 c-10.105,0-19.706-4.415-26.341-12.114c-1.425-1.653-3.499-2.604-5.681-2.604c-2.182,0-4.256,0.95-5.681,2.604 c-6.635,7.699-16.236,12.114-26.341,12.114c-10.725,0-20.696-4.868-27.358-13.356c-1.422-1.812-3.597-2.869-5.9-2.869 c-2.303,0-4.478,1.058-5.9,2.869c-6.662,8.488-16.634,13.356-27.358,13.356c-6.999,0-13.741-2.069-19.499-5.985 c-3.425-2.331-8.09-1.442-10.419,1.983c-2.33,3.425-1.441,8.09,1.984,10.419c8.255,5.615,17.915,8.583,27.934,8.583 c12.451,0,24.187-4.572,33.258-12.768c9.071,8.195,20.807,12.768,33.258,12.768c11.795,0,23.105-4.193,32.022-11.703 c8.917,7.51,20.227,11.703,32.022,11.703c13.057,0,25.391-5.021,34.731-14.14c7.141-6.973,11.938-15.753,13.948-25.334 c2.211,0.302,4.439,0.453,6.672,0.453c27.454,0,49.79-22.335,49.79-49.789C342.706,147.909,339.348,144.552,335.206,144.552z"></path>{" "}
+                        <path d="M67.102,199.37c3.938-1.286,6.087-5.52,4.802-9.458c-1.286-3.937-5.521-6.086-9.457-4.802 c-3.517,1.148-7.148,1.73-10.793,1.73c-19.183,0-34.79-15.606-34.79-34.789c0-9.908,4.283-19.388,11.752-26.009 c1.605-1.424,2.524-3.467,2.524-5.612s-0.919-4.188-2.524-5.611c-7.468-6.623-11.752-16.103-11.752-26.01 c0-19.184,15.606-34.79,34.79-34.79c3.643,0,7.274,0.582,10.794,1.73c2.25,0.734,4.713,0.363,6.647-1s3.111-3.56,3.176-5.925 C72.792,29.858,88.048,15,107.005,15c10.725,0,20.697,4.868,27.358,13.355c1.422,1.813,3.597,2.87,5.9,2.87 c2.303,0,4.479-1.059,5.9-2.87C152.824,19.868,162.795,15,173.521,15c4.142,0,7.5-3.357,7.5-7.5s-3.358-7.5-7.5-7.5 c-12.452,0-24.187,4.572-33.258,12.767C131.191,4.572,119.457,0,107.005,0c-13.057,0-25.391,5.021-34.73,14.14 c-7.141,6.972-11.938,15.753-13.948,25.333c-2.211-0.302-4.439-0.453-6.672-0.453c-27.454,0-49.79,22.336-49.79,49.79 c0,11.587,4.08,22.758,11.387,31.621c-7.307,8.862-11.387,20.033-11.387,31.621c0,27.454,22.335,49.789,49.79,49.789 C56.882,201.841,62.08,201.01,67.102,199.37z"></path>{" "}
+                        <path d="M200.647,27.899c3.138,2.704,7.874,2.352,10.578-0.785C217.859,19.415,227.46,15,237.565,15 c18.958,0,34.214,14.857,34.733,33.825c0.064,2.365,1.242,4.562,3.176,5.925s4.397,1.734,6.647,1 c3.52-1.148,7.152-1.73,10.794-1.73c19.183,0,34.79,15.606,34.79,34.79c0,9.907-4.284,19.387-11.752,26.01 c-3.1,2.748-3.384,7.488-0.636,10.587c1.482,1.672,3.543,2.524,5.615,2.524c1.769,0,3.545-0.622,4.973-1.889 c10.677-9.467,16.801-23.037,16.801-37.232c0-27.454-22.335-49.79-49.79-49.79c-2.233,0-4.46,0.151-6.672,0.453 c-2.01-9.58-6.807-18.361-13.948-25.333C262.957,5.021,250.622,0,237.565,0c-14.475,0-28.217,6.313-37.704,17.321 C197.158,20.46,197.51,25.195,200.647,27.899z"></path>{" "}
+                        <path d="M129.319,251.899c-20.541,0-36.63,10.801-36.63,24.59s16.09,24.59,36.63,24.59c20.54,0,36.63-10.801,36.63-24.59 S149.859,251.899,129.319,251.899z M129.319,286.079c-13.003,0-21.63-5.772-21.63-9.59s8.627-9.59,21.63-9.59 c13.003,0,21.63,5.772,21.63,9.59S142.322,286.079,129.319,286.079z"></path>{" "}
+                        <path d="M95.528,312.818c-4.142,0-7.5,3.357-7.5,7.5c0,4.367-7.423,9.252-17.358,9.252s-17.358-4.885-17.358-9.252 c0-4.368,7.423-9.253,17.358-9.253c4.142,0,7.5-3.357,7.5-7.5s-3.358-7.5-7.5-7.5c-18.145,0-32.358,10.653-32.358,24.253 S52.526,344.57,70.67,344.57s32.358-10.652,32.358-24.252C103.028,316.176,99.67,312.818,95.528,312.818z"></path>{" "}
+                      </g>{" "}
+                    </g>
+                  </svg>
+                </div>
+                <h3>Reflektion</h3>
+                <p>
+                  Tillsammans utforskar vi vad som uppstod under skapandet och
+                  vad det kan betyda.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <section className="therapy-target-group">
+            <h2>Vem är konstterapi för?</h2>
+
+            <div className="therapy-benefits-grid">
+              <article className="benefit-card">
+                <h3>
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Stress & Utmattning
+                </h3>
+                <p>
+                  Hitta vägar till avslappning och återhämtning genom kreativt
+                  uttryck.
+                </p>
+              </article>
+
+              <article className="benefit-card">
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Ångest & Depression
+                </h3>
+                <p>
+                  Utforska känslor och tankar på ett sätt som känns säkert och
+                  stödjande.
+                </p>
+              </article>
+
+              <article className="benefit-card">
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Livskriser & Förändringar
+                </h3>
+                <p>
+                  Bearbeta förlust, separation eller stora livsförändringar.
+                </p>
+              </article>
+
+              <article className="benefit-card">
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Självutveckling
+                </h3>
+                <p>
+                  Fördjupa självkännedom och utforska din kreativa potential.
+                </p>
+              </article>
+
+              <article className="benefit-card">
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Relationer
+                </h3>
+                <p>Utforska relationsmönster och kommunikation på nya sätt.</p>
+              </article>
+
+              <article className="benefit-card">
+                <h3>
+                  {" "}
+                  <svg
+                    width="22px"
+                    height="22px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      {" "}
+                      <path
+                        d="M6 12H18M18 12L13 7M18 12L13 17"
+                        stroke="#597059"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></path>{" "}
+                    </g>
+                  </svg>
+                  Trauma
+                </h3>
+                <p>
+                  Bearbeta svåra upplevelser i din egen takt med traumamedveten
+                  terapi.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <FAQSection />
+          <CTASection
+            title="Redo att utforska konstterapi?"
+            text="Boka ett kostnadsfritt första samtal så kan vi prata om dina behov
+              och förväntningar."
+            btnLabel="Boka tid"
+            href="/boka-tid"
+          />
+        </Layout>
+      </main>
+    </>
+  );
+}

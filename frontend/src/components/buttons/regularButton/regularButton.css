@@ -1,0 +1,81 @@
+.regular-button {
+  font-size: var(--font-md);
+  border: none;
+  border-radius: var(--radius-lg);
+  transition: 0.3s ease-in-out;
+}
+
+.regular-button.xxs {
+  height: auto;
+  width: auto;
+  font-size: var(--font-sm);
+  padding: 5px 10px;
+}
+
+.regular-button.xs {
+  height: auto;
+  width: auto;
+  font-size: var(--font-sm);
+  padding: 0.5rem 1rem;
+}
+
+.regular-button.sm {
+  height: 4rem;
+  width: 20rem;
+}
+
+.regular-button.md {
+  height: 4rem;
+  width: 30rem;
+}
+
+.regular-button.lg {
+  width: 100%;
+  height: 4.5rem;
+}
+
+.regular-button.transparent {
+  background-color: transparent;
+  color: var(--color-green-light);
+  text-decoration: underline;
+}
+
+.regular-button.green {
+  background-color: var(--color-green);
+  color: var(--color-bg);
+}
+
+.regular-button.red {
+  background-color: var(--color-error);
+  color: var(--color-bg);
+}
+
+.regular-button.light {
+  background-color: var(--color-bg);
+  color: var(--color-green);
+}
+
+.regular-button.disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+  border: none;
+  color: var(--color-green);
+  opacity: 0.7;
+}
+.regular-button.disabled:hover{
+  background-color: var(--color-border);
+}
+
+.regular-button.green:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.02);
+}
+
+.regular-button.red:hover {
+  background-color: var(--color-error-hover);
+  transform: scale(1.02);
+}
+
+.regular-button.transparent:hover {
+  color: var(--color-hover);
+}

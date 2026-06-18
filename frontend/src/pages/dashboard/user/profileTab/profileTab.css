@@ -1,0 +1,82 @@
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+  height: auto;
+}
+
+.profile-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.profile-info-input {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: var(--color-green-transparent);
+  padding: 1rem 1rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-green-light);
+}
+
+.email-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.name-input,
+.active-name-input {
+  display: flex;
+  gap: 1rem;
+}
+
+.name-input div,
+.email-input,
+.active-name-input div,
+.active-email-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.name-input input,
+.email-input input {
+  border: none;
+  background-color: transparent;
+  color: var(--color-green);
+  font-size: var(--font-sm);
+  padding: 1rem;
+}
+
+.active-name-input input,
+.active-email-input input {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-green);
+  font-size: var(--font-sm);
+  padding: 1rem;
+}
+
+.profile-section span {
+  color: var(--color-error);
+}
+
+.profile-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.success-message {
+  color: var(--color-green);
+}

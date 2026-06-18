@@ -1,0 +1,22 @@
+import { Router } from "express";
+import { adminOnly, auth } from "../middlewares/auth.middleware.ts";
+import {
+  getCourses,
+  getCourseById,
+  createCourse,
+  updateCourse,
+  deleteCourse,
+} from "../controllers/course.controllers.ts";
+
+const router = Router();
+
+// Course
+router.get("/courses", getCourses);
+router.get("/courses/:id", getCourseById);
+
+//Admin only
+router.post("/courses", auth, adminOnly, createCourse);
+router.delete("/courses/:id", auth, adminOnly, deleteCourse);
+router.put("/courses/:id", auth, adminOnly, updateCourse);
+
+export default router;

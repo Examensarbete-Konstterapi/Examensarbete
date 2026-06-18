@@ -1,0 +1,59 @@
+.admin-courses .courses-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* color: var(--color-green); */
+}
+
+.course-card {
+  background-color: var(--color-green-transparent);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.course-list-heading {
+  padding: 0 1.5rem;
+  border-bottom: 1px solid var(--color-green);
+}
+
+.course-info,
+.course-list-heading {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  flex: 1;
+}
+
+.course-info > :first-child,
+.course-list-heading > :first-child {
+  width: 300px;
+}
+
+.course-actions {
+  display: flex;
+  justify-content: start !important;
+  align-items: center;
+  flex-direction: row !important;
+  gap: 1rem;
+}
+
+.course-info div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.course-actions button {
+  width: 4rem;
+  height: 4rem;
+}

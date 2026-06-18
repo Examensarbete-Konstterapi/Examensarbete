@@ -1,0 +1,6 @@
+.layout-container {
+  padding: 8rem 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+}
